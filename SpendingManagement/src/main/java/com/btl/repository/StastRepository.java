@@ -8,6 +8,6 @@ package com.btl.repository;
  *
  * @author trant
  */
-public class StastRepository {
+public interface StastRepository {
     
 }

@@ -4,10 +4,21 @@
  */
 package com.btl.service.impl;
 
+import com.btl.pojo.Subcategory;
+import com.btl.service.SubcategoryService;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
+
 /**
  *
  * @author trant
  */
-public class SubcategoryServiceImpl {
-    
+@Service
+public class SubcategoryServiceImpl implements SubcategoryService {
+    @Override
+    public List<Subcategory> getSubcategory(Map<String, String> params) {
+        return null;
+    }
 }

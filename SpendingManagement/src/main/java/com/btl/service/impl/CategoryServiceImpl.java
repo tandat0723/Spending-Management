@@ -5,6 +5,7 @@
 package com.btl.service.impl;
 
 import com.btl.pojo.Category;
+import com.btl.repository.CategoryRepository;
 import com.btl.service.CategoryService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CategoryServiceImpl implements CategoryService{
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Override
     public List<Category> getCategories() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return this.categoryRepository.getCategories();
     }
   
 }

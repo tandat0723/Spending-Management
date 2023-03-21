@@ -4,10 +4,15 @@
  */
 package com.btl.repository;
 
+import com.btl.pojo.Subcategory;
+
+import java.util.List;
+import java.util.Map;
+
 /**
  *
  * @author trant
  */
-public class SubcategoryRepository {
-    
+public interface SubcategoryRepository {
+    List<Subcategory> getSubcategories(Map<String, String> params);
 }
