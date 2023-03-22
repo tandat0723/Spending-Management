@@ -22,7 +22,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -32,16 +31,15 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author trant
  */
 @Entity
-@Table(name = "subcategory")
+@Table(name = "groups")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Subcategory.findAll", query = "SELECT s FROM Subcategory s"),
-    @NamedQuery(name = "Subcategory.findById", query = "SELECT s FROM Subcategory s WHERE s.id = :id"),
-    @NamedQuery(name = "Subcategory.findByName", query = "SELECT s FROM Subcategory s WHERE s.name = :name"),
-    @NamedQuery(name = "Subcategory.findByImage", query = "SELECT s FROM Subcategory s WHERE s.image = :image"),
-    @NamedQuery(name = "Subcategory.findByCreatedDate", query = "SELECT s FROM Subcategory s WHERE s.createdDate = :createdDate"),
-    @NamedQuery(name = "Subcategory.findByActive", query = "SELECT s FROM Subcategory s WHERE s.active = :active")})
-public class Subcategory implements Serializable {
+    @NamedQuery(name = "Groups.findAll", query = "SELECT g FROM Groups g"),
+    @NamedQuery(name = "Groups.findById", query = "SELECT g FROM Groups g WHERE g.id = :id"),
+    @NamedQuery(name = "Groups.findByName", query = "SELECT g FROM Groups g WHERE g.name = :name"),
+    @NamedQuery(name = "Groups.findByCreatedDate", query = "SELECT g FROM Groups g WHERE g.createdDate = :createdDate"),
+    @NamedQuery(name = "Groups.findByUpdatedDate", query = "SELECT g FROM Groups g WHERE g.updatedDate = :updatedDate")})
+public class Groups implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -49,35 +47,26 @@ public class Subcategory implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 45)
     @Column(name = "name")
     private String name;
-    @Size(max = 255)
-    @Column(name = "image")
-    private String image;
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @Column(name = "active")
-    private Boolean active;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subcategoryId")
-    private Set<FeatureDetail> featureDetailSet;
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    @Column(name = "updated_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedDate;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Category categoryId;
+    private User userId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "groupId")
+    private Set<GroupMember> groupMemberSet;
 
-    public Subcategory() {
+    public Groups() {
     }
 
-    public Subcategory(Integer id) {
+    public Groups(Integer id) {
         this.id = id;
-    }
-
-    public Subcategory(Integer id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public Integer getId() {
@@ -96,14 +85,6 @@ public class Subcategory implements Serializable {
         this.name = name;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public Date getCreatedDate() {
         return createdDate;
     }
@@ -112,29 +93,29 @@ public class Subcategory implements Serializable {
         this.createdDate = createdDate;
     }
 
-    public Boolean getActive() {
-        return active;
+    public Date getUpdatedDate() {
+        return updatedDate;
     }
 
-    public void setActive(Boolean active) {
-        this.active = active;
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public User getUserId() {
+        return userId;
+    }
+
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
     @XmlTransient
-    public Set<FeatureDetail> getFeatureDetailSet() {
-        return featureDetailSet;
+    public Set<GroupMember> getGroupMemberSet() {
+        return groupMemberSet;
     }
 
-    public void setFeatureDetailSet(Set<FeatureDetail> featureDetailSet) {
-        this.featureDetailSet = featureDetailSet;
-    }
-
-    public Category getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Category categoryId) {
-        this.categoryId = categoryId;
+    public void setGroupMemberSet(Set<GroupMember> groupMemberSet) {
+        this.groupMemberSet = groupMemberSet;
     }
 
     @Override
@@ -147,10 +128,10 @@ public class Subcategory implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Subcategory)) {
+        if (!(object instanceof Groups)) {
             return false;
         }
-        Subcategory other = (Subcategory) object;
+        Groups other = (Groups) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -159,7 +140,7 @@ public class Subcategory implements Serializable {
 
     @Override
     public String toString() {
-        return "com.btl.pojo.Subcategory[ id=" + id + " ]";
+        return "com.btl.pojo.Groups[ id=" + id + " ]";
     }
     
 }

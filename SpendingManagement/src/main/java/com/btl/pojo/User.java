@@ -5,7 +5,9 @@
 package com.btl.pojo;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,10 +15,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -83,6 +87,12 @@ public class User implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name = "user_role")
     private String userRole;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    private Set<FeatureDetail> featureDetailSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    private Set<Groups> groupsSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    private Set<GroupMember> groupMemberSet;
 
     public User() {
     }
@@ -172,6 +182,33 @@ public class User implements Serializable {
 
     public void setUserRole(String userRole) {
         this.userRole = userRole;
+    }
+
+    @XmlTransient
+    public Set<FeatureDetail> getFeatureDetailSet() {
+        return featureDetailSet;
+    }
+
+    public void setFeatureDetailSet(Set<FeatureDetail> featureDetailSet) {
+        this.featureDetailSet = featureDetailSet;
+    }
+
+    @XmlTransient
+    public Set<Groups> getGroupsSet() {
+        return groupsSet;
+    }
+
+    public void setGroupsSet(Set<Groups> groupsSet) {
+        this.groupsSet = groupsSet;
+    }
+
+    @XmlTransient
+    public Set<GroupMember> getGroupMemberSet() {
+        return groupMemberSet;
+    }
+
+    public void setGroupMemberSet(Set<GroupMember> groupMemberSet) {
+        this.groupMemberSet = groupMemberSet;
     }
 
     @Override

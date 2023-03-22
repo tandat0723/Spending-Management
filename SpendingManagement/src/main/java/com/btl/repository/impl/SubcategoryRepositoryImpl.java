@@ -22,12 +22,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * @author trant
  */
 @Repository
 @Transactional
 public class SubcategoryRepositoryImpl implements SubcategoryRepository {
+
     @Autowired
     private LocalSessionFactoryBean factory;
 
@@ -36,7 +36,8 @@ public class SubcategoryRepositoryImpl implements SubcategoryRepository {
         Session s = factory.getObject().getCurrentSession();
         CriteriaBuilder b = s.getCriteriaBuilder();
         CriteriaQuery<Subcategory> q = b.createQuery(Subcategory.class);
-        Root<Subcategory> root = q.from(Subcategory.class);
+        Root root = q.from(Subcategory.class);
+        q.select(root);
 
         List<Predicate> predicates = new ArrayList<>();
         String kw = params.get("kw");
@@ -48,15 +49,23 @@ public class SubcategoryRepositoryImpl implements SubcategoryRepository {
 
         String cateId = params.get("categoryId");
         if (cateId != null) {
-            Predicate p = b.lessThanOrEqualTo(root.get("categoryId"), Integer.parseInt(cateId));
+            Predicate p = b.lessThanOrEqualTo(root.get("categoryId"),
+                    Integer.parseInt(cateId));
             predicates.add(p);
         }
 
         q.where(predicates.toArray(Predicate[]::new));
         q.orderBy(b.desc(root.get("id")));
-        Query query = s.createQuery(String.valueOf(q));
+        Query query = s.createQuery(q);
         List<Subcategory> subcategories = query.getResultList();
 
         return subcategories;
+    }
+
+    @Override
+    public Subcategory getSubcategoryById(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+
+        return s.get(Subcategory.class, id);
     }
 }

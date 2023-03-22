@@ -5,13 +5,15 @@
 package com.btl.service;
 
 import com.btl.pojo.Subcategory;
+
 import java.util.List;
 import java.util.Map;
 
 /**
- *
  * @author trant
  */
 public interface SubcategoryService {
-    List<Subcategory> getSubcategory(Map<String, String> params);
+    List<Subcategory> getSubcategories(Map<String, String> params);
+
+    Subcategory getSubcategoryById(int id);
 }

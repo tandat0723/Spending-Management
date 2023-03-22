@@ -6,6 +6,9 @@
     <class>com.btl.pojo.Product</class>
     <class>com.btl.pojo.User</class>
     <class>com.btl.pojo.Subcategory</class>
+    <class>com.btl.pojo.Groups</class>
+    <class>com.btl.pojo.GroupMember</class>
+    <class>com.btl.pojo.FeatureDetail</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/spenddb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

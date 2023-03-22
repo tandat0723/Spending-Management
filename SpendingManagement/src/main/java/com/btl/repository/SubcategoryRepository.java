@@ -10,9 +10,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * @author trant
  */
 public interface SubcategoryRepository {
     List<Subcategory> getSubcategories(Map<String, String> params);
+
+    Subcategory getSubcategoryById(int id);
 }

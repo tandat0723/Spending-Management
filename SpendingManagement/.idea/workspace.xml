@@ -5,15 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92278259-1573-4f28-a786-5d16afdd4c93" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/btl/formatter/CategoryFormatter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/btl/configs/TilesConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/btl/pojo/FeatureDetail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/btl/pojo/GroupMember.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/btl/pojo/Groups.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/tiles.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/configs/DispatcherServletInit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/configs/DispatcherServletInit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/configs/HibernateConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/configs/HibernateConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/configs/WebAppContextConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/configs/WebAppContextConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/repository/StastRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/repository/StastRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/controllers/AdminController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/controllers/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/controllers/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/formatter/CategoryFormatter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/pojo/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/pojo/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/pojo/Subcategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/pojo/Subcategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/pojo/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/pojo/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/repository/CategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/repository/CategoryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/repository/StastRepository.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/repository/SubcategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/repository/SubcategoryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/repository/impl/CategoryRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/repository/impl/CategoryRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/repository/impl/StatsRepositoryImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/repository/impl/SubcategoryRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/repository/impl/SubcategoryRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/service/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/service/SubcategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/service/SubcategoryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/service/impl/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/service/impl/CategoryServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/service/impl/SubcategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/service/impl/SubcategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/databases.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/databases.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/layout/base.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/layout/base.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/layout/footer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/layout/footer.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/layout/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/layout/header.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/index.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,6 +142,9 @@
       <updated>1679214539284</updated>
       <workItem from="1679214541268" duration="3460000" />
       <workItem from="1679413871980" duration="3480000" />
+      <workItem from="1679464790079" duration="6001000" />
+      <workItem from="1679501535507" duration="2666000" />
+      <workItem from="1679506660026" duration="67000" />
     </task>
     <servers />
   </component>

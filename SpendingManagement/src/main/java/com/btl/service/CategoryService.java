@@ -5,10 +5,10 @@
 package com.btl.service;
 
 import com.btl.pojo.Category;
+
 import java.util.List;
 
 /**
- *
  * @author trant
  */
 public interface CategoryService {
