@@ -1,1 +1,3 @@
 # Spending-Management
+- Tạo database
+- 
