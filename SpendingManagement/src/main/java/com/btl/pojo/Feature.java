@@ -32,16 +32,16 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author trant
  */
 @Entity
-@Table(name = "subcategory")
+@Table(name = "feature")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Subcategory.findAll", query = "SELECT s FROM Subcategory s"),
-    @NamedQuery(name = "Subcategory.findById", query = "SELECT s FROM Subcategory s WHERE s.id = :id"),
-    @NamedQuery(name = "Subcategory.findByName", query = "SELECT s FROM Subcategory s WHERE s.name = :name"),
-    @NamedQuery(name = "Subcategory.findByImage", query = "SELECT s FROM Subcategory s WHERE s.image = :image"),
-    @NamedQuery(name = "Subcategory.findByCreatedDate", query = "SELECT s FROM Subcategory s WHERE s.createdDate = :createdDate"),
-    @NamedQuery(name = "Subcategory.findByActive", query = "SELECT s FROM Subcategory s WHERE s.active = :active")})
-public class Subcategory implements Serializable {
+    @NamedQuery(name = "Feature.findAll", query = "SELECT f FROM Feature f"),
+    @NamedQuery(name = "Feature.findById", query = "SELECT f FROM Feature f WHERE f.id = :id"),
+    @NamedQuery(name = "Feature.findByName", query = "SELECT f FROM Feature f WHERE f.name = :name"),
+    @NamedQuery(name = "Feature.findByImage", query = "SELECT f FROM Feature f WHERE f.image = :image"),
+    @NamedQuery(name = "Feature.findByCreatedDate", query = "SELECT f FROM Feature f WHERE f.createdDate = :createdDate"),
+    @NamedQuery(name = "Feature.findByActive", query = "SELECT f FROM Feature f WHERE f.active = :active")})
+public class Feature implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -62,20 +62,20 @@ public class Subcategory implements Serializable {
     private Date createdDate;
     @Column(name = "active")
     private Boolean active;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subcategoryId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "featureId")
     private Set<FeatureDetail> featureDetailSet;
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Category categoryId;
 
-    public Subcategory() {
+    public Feature() {
     }
 
-    public Subcategory(Integer id) {
+    public Feature(Integer id) {
         this.id = id;
     }
 
-    public Subcategory(Integer id, String name) {
+    public Feature(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -147,10 +147,10 @@ public class Subcategory implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Subcategory)) {
+        if (!(object instanceof Feature)) {
             return false;
         }
-        Subcategory other = (Subcategory) object;
+        Feature other = (Feature) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -159,7 +159,7 @@ public class Subcategory implements Serializable {
 
     @Override
     public String toString() {
-        return "com.btl.pojo.Subcategory[ id=" + id + " ]";
+        return "com.btl.pojo.Feature[ id=" + id + " ]";
     }
     
 }

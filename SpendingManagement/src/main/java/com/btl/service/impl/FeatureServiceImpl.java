@@ -4,9 +4,9 @@
  */
 package com.btl.service.impl;
 
-import com.btl.pojo.Subcategory;
-import com.btl.repository.SubcategoryRepository;
-import com.btl.service.SubcategoryService;
+import com.btl.pojo.Feature;
+import com.btl.repository.FeatureRepository;
+import com.btl.service.FeatureService;
 import com.cloudinary.Cloudinary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,20 +18,20 @@ import java.util.Map;
  * @author trant
  */
 @Service
-public class SubcategoryServiceImpl implements SubcategoryService {
+public class FeatureServiceImpl implements FeatureService {
     @Autowired
     private Cloudinary cloudinary;
 
     @Autowired
-    private SubcategoryRepository subcategoryRepository;
+    private FeatureRepository featureRepository;
 
     @Override
-    public List<Subcategory> getSubcategories(Map<String, String> params) {
-        return this.subcategoryRepository.getSubcategories(params);
+    public List<Feature> getFeatures(Map<String, String> params) {
+        return this.featureRepository.getFeatures(params);
     }
 
-    @Override
-    public Subcategory getSubcategoryById(int id) {
-        return this.subcategoryRepository.getSubcategoryById(id);
+    public Feature getFeatureById(int id) {
+        return this.featureRepository.getFeatureById(id);
     }
+
 }

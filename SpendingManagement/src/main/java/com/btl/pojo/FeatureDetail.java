@@ -51,9 +51,9 @@ public class FeatureDetail implements Serializable {
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
-    @JoinColumn(name = "subcategory_id", referencedColumnName = "id")
+    @JoinColumn(name = "feature_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Subcategory subcategoryId;
+    private Feature featureId;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User userId;
@@ -97,12 +97,12 @@ public class FeatureDetail implements Serializable {
         this.createdDate = createdDate;
     }
 
-    public Subcategory getSubcategoryId() {
-        return subcategoryId;
+    public Feature getFeatureId() {
+        return featureId;
     }
 
-    public void setSubcategoryId(Subcategory subcategoryId) {
-        this.subcategoryId = subcategoryId;
+    public void setFeatureId(Feature featureId) {
+        this.featureId = featureId;
     }
 
     public User getUserId() {

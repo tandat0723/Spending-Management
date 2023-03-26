@@ -40,6 +40,36 @@ INSERT INTO `category` VALUES (1,'Quản lý thu chi '),(2,'Quản lý nhóm'),(
 UNLOCK TABLES;
 
 --
+-- Table structure for table `feature`
+--
+
+DROP TABLE IF EXISTS `feature`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `feature` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `active` bit(1) DEFAULT b'1',
+  `category_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_PRODUCE_CATEGORY_idx` (`category_id`),
+  CONSTRAINT `FK_PRODUCE_CATEGORY` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `feature`
+--
+
+LOCK TABLES `feature` WRITE;
+/*!40000 ALTER TABLE `feature` DISABLE KEYS */;
+INSERT INTO `feature` VALUES (1,'Thêm thu chi cá nhân','https://res.cloudinary.com/djcb4rai9/image/upload/v1679480428/spendingmanagement/pngtree-administration-icon-in-trendy-style-isolated-background-png-image_4830782_xobbrc.jpg','2020-01-20 00:00:00',_binary '',1),(2,'Xóa thu chi cá nhân','https://res.cloudinary.com/djcb4rai9/image/upload/v1679480428/spendingmanagement/pngtree-administration-icon-in-trendy-style-isolated-background-png-image_4830782_xobbrc.jpg','2020-01-08 00:00:00',_binary '',1),(3,'Tra cứu','https://res.cloudinary.com/djcb4rai9/image/upload/v1679480428/spendingmanagement/pngtree-administration-icon-in-trendy-style-isolated-background-png-image_4830782_xobbrc.jpg','2020-01-12 00:00:00',_binary '',1),(4,'Tạo nhóm','https://res.cloudinary.com/djcb4rai9/image/upload/v1679480428/spendingmanagement/pngtree-administration-icon-in-trendy-style-isolated-background-png-image_4830782_xobbrc.jpg','2020-01-15 00:00:00',_binary '',2),(5,'Thêm thu chi','https://res.cloudinary.com/djcb4rai9/image/upload/v1679480428/spendingmanagement/pngtree-administration-icon-in-trendy-style-isolated-background-png-image_4830782_xobbrc.jpg','2020-01-12 00:00:00',_binary '',2);
+/*!40000 ALTER TABLE `feature` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `feature_detail`
 --
 
@@ -51,12 +81,12 @@ CREATE TABLE `feature_detail` (
   `amount` decimal(10,0) DEFAULT '0',
   `num` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT '0',
   `user_id` int NOT NULL,
-  `subcategory_id` int NOT NULL,
+  `feature_id` int NOT NULL,
   `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `feature_detail_user_fk_idx` (`user_id`),
-  KEY `feature_detail_subcategory_fk_idx` (`subcategory_id`),
-  CONSTRAINT `feature_detail_subcategory_fk` FOREIGN KEY (`subcategory_id`) REFERENCES `subcategory` (`id`),
+  KEY `feature_detail_subcategory_fk_idx` (`feature_id`),
+  CONSTRAINT `feature_detail_subcategory_fk` FOREIGN KEY (`feature_id`) REFERENCES `feature` (`id`),
   CONSTRAINT `feature_detail_user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -130,36 +160,6 @@ LOCK TABLES `groups` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `subcategory`
---
-
-DROP TABLE IF EXISTS `subcategory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `subcategory` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
-  `active` bit(1) DEFAULT b'1',
-  `category_id` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_PRODUCE_CATEGORY_idx` (`category_id`),
-  CONSTRAINT `FK_PRODUCE_CATEGORY` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `subcategory`
---
-
-LOCK TABLES `subcategory` WRITE;
-/*!40000 ALTER TABLE `subcategory` DISABLE KEYS */;
-INSERT INTO `subcategory` VALUES (1,'Thêm thu chi cá nhân','https://res.cloudinary.com/djcb4rai9/image/upload/v1679480428/spendingmanagement/pngtree-administration-icon-in-trendy-style-isolated-background-png-image_4830782_xobbrc.jpg','2020-01-20 00:00:00',_binary '',1),(2,'Xóa thu chi cá nhân','https://res.cloudinary.com/djcb4rai9/image/upload/v1679480428/spendingmanagement/pngtree-administration-icon-in-trendy-style-isolated-background-png-image_4830782_xobbrc.jpg','2020-01-08 00:00:00',_binary '',1),(3,'Tra cứu','https://res.cloudinary.com/djcb4rai9/image/upload/v1679480428/spendingmanagement/pngtree-administration-icon-in-trendy-style-isolated-background-png-image_4830782_xobbrc.jpg','2020-01-12 00:00:00',_binary '',1),(4,'Tạo nhóm','https://res.cloudinary.com/djcb4rai9/image/upload/v1679480428/spendingmanagement/pngtree-administration-icon-in-trendy-style-isolated-background-png-image_4830782_xobbrc.jpg','2020-01-15 00:00:00',_binary '',2),(5,'Thêm thu chi','https://res.cloudinary.com/djcb4rai9/image/upload/v1679480428/spendingmanagement/pngtree-administration-icon-in-trendy-style-isolated-background-png-image_4830782_xobbrc.jpg','2020-01-12 00:00:00',_binary '',2);
-/*!40000 ALTER TABLE `subcategory` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `user`
 --
 
@@ -199,4 +199,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-23  0:42:40
+-- Dump completed on 2023-03-26 17:44:49

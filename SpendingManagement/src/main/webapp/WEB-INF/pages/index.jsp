@@ -9,15 +9,18 @@
 
 <section class="container">
     <div class="row">
-        <c:forEach items="${subcategories}" var="s">
-            <div class="col-md-3 col-xs-12" style="padding: 1rem;">
-                <div class="card">
-                    <img class="card-img-top" src="${s.image}" alt="${s.name}">
-                    <div class="card-body">
-                        <h4 class="card-title">${s.name}</h4>
+        <c:forEach items="${features}" var="s">
+            <c:url value="/features/${s.id}" var="detail" />
+            <a href="${detail}" class="col-md-3 col-xs-12" style="padding: 1rem;">
+                <div>
+                    <div class="card">
+                        <img class="card-img-top" src="${s.image}" alt="${s.name}">
+                        <div class="card-body">
+                            <h4 class="card-title">${s.name}</h4>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </c:forEach>
     </div>
 </section>

@@ -47,7 +47,7 @@ public class Category implements Serializable {
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryId")
-    private Set<Subcategory> subcategorySet;
+    private Set<Feature> featureSet;
 
     public Category() {
     }
@@ -78,12 +78,12 @@ public class Category implements Serializable {
     }
 
     @XmlTransient
-    public Set<Subcategory> getSubcategorySet() {
-        return subcategorySet;
+    public Set<Feature> getFeatureSet() {
+        return featureSet;
     }
 
-    public void setSubcategorySet(Set<Subcategory> subcategorySet) {
-        this.subcategorySet = subcategorySet;
+    public void setFeatureSet(Set<Feature> featureSet) {
+        this.featureSet = featureSet;
     }
 
     @Override

@@ -4,14 +4,13 @@
  */
 package com.btl.repository.impl;
 
-import com.btl.pojo.Subcategory;
-import com.btl.repository.SubcategoryRepository;
+import com.btl.pojo.Feature;
+import com.btl.repository.FeatureRepository;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -26,17 +25,17 @@ import java.util.Map;
  */
 @Repository
 @Transactional
-public class SubcategoryRepositoryImpl implements SubcategoryRepository {
+public class FeatureRepositoryImpl implements FeatureRepository {
 
     @Autowired
     private LocalSessionFactoryBean factory;
 
     @Override
-    public List<Subcategory> getSubcategories(Map<String, String> params) {
+    public List<Feature> getFeatures(Map<String, String> params) {
         Session s = factory.getObject().getCurrentSession();
         CriteriaBuilder b = s.getCriteriaBuilder();
-        CriteriaQuery<Subcategory> q = b.createQuery(Subcategory.class);
-        Root root = q.from(Subcategory.class);
+        CriteriaQuery<Feature> q = b.createQuery(Feature.class);
+        Root root = q.from(Feature.class);
         q.select(root);
 
         List<Predicate> predicates = new ArrayList<>();
@@ -57,15 +56,15 @@ public class SubcategoryRepositoryImpl implements SubcategoryRepository {
         q.where(predicates.toArray(Predicate[]::new));
         q.orderBy(b.desc(root.get("id")));
         Query query = s.createQuery(q);
-        List<Subcategory> subcategories = query.getResultList();
+        List<Feature> features = query.getResultList();
 
-        return subcategories;
+        return features;
     }
 
     @Override
-    public Subcategory getSubcategoryById(int id) {
+    public Feature getFeatureById(int id) {
         Session s = this.factory.getObject().getCurrentSession();
-
-        return s.get(Subcategory.class, id);
+        
+        return s.get(Feature.class, id);
     }
 }
