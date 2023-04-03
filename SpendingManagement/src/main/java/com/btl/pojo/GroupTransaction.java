@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -23,17 +25,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
  * @author trant
  */
 @Entity
-@Table(name = "category")
+@Table(name = "group_transaction")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c"),
-    @NamedQuery(name = "Category.findById", query = "SELECT c FROM Category c WHERE c.id = :id"),
-    @NamedQuery(name = "Category.findByName", query = "SELECT c FROM Category c WHERE c.name = :name")})
-public class Category implements Serializable {
+        @NamedQuery(name = "GroupTransaction.findAll", query = "SELECT g FROM GroupTransaction g"),
+        @NamedQuery(name = "GroupTransaction.findById", query = "SELECT g FROM GroupTransaction g WHERE g.id = :id"),
+        @NamedQuery(name = "GroupTransaction.findByName", query = "SELECT g FROM GroupTransaction g WHERE g.name = :name"),
+        @NamedQuery(name = "GroupTransaction.findByDescription", query = "SELECT g FROM GroupTransaction g WHERE g.description = :description")})
+public class GroupTransaction implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,17 +48,23 @@ public class Category implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryId")
-    private Set<Feature> featureSet;
+    @Size(max = 255)
+    @Column(name = "description")
+    private String description;
+    @JoinColumn(name = "creator_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private User creatorId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "groupId")
+    private Set<GroupMember> groupMemberSet;
 
-    public Category() {
+    public GroupTransaction() {
     }
 
-    public Category(Integer id) {
+    public GroupTransaction(Integer id) {
         this.id = id;
     }
 
-    public Category(Integer id, String name) {
+    public GroupTransaction(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -77,13 +85,29 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    @XmlTransient
-    public Set<Feature> getFeatureSet() {
-        return featureSet;
+    public String getDescription() {
+        return description;
     }
 
-    public void setFeatureSet(Set<Feature> featureSet) {
-        this.featureSet = featureSet;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public User getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(User creatorId) {
+        this.creatorId = creatorId;
+    }
+
+    @XmlTransient
+    public Set<GroupMember> getGroupMemberSet() {
+        return groupMemberSet;
+    }
+
+    public void setGroupMemberSet(Set<GroupMember> groupMemberSet) {
+        this.groupMemberSet = groupMemberSet;
     }
 
     @Override
@@ -96,10 +120,10 @@ public class Category implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Category)) {
+        if (!(object instanceof GroupTransaction)) {
             return false;
         }
-        Category other = (Category) object;
+        GroupTransaction other = (GroupTransaction) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -108,7 +132,7 @@ public class Category implements Serializable {
 
     @Override
     public String toString() {
-        return "com.btl.pojo.Category[ id=" + id + " ]";
+        return "com.btl.pojo.GroupTransaction[ id=" + id + " ]";
     }
-    
+
 }

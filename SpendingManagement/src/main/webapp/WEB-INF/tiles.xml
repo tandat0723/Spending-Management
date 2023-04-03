@@ -14,8 +14,13 @@
         <put-attribute name="title" value="Trang chủ"/>
         <put-attribute name="content" value="/WEB-INF/pages/index.jsp"/>
     </definition>
-    <definition name="feature-detail" extends="baseLayout">
-        <put-attribute name="title" value="Trang chủ"/>
-        <put-attribute name="content" value="/WEB-INF/pages/feature-detail.jsp"/>
+    
+    <definition name="login" extends="baseLayout">
+        <put-attribute name="title" value="Đăng nhập"/>
+        <put-attribute name="content" value="/WEB-INF/pages/login.jsp"/>
+    </definition>
+    <definition name="register" extends="baseLayout">
+        <put-attribute name="title" value="Đăng ký"/>
+        <put-attribute name="content" value="/WEB-INF/pages/register.jsp"/>
     </definition>
 </tiles-definitions>

@@ -19,23 +19,23 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
  * @author trant
  */
 @Entity
-@Table(name = "feature_detail")
+@Table(name = "notification")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "FeatureDetail.findAll", query = "SELECT f FROM FeatureDetail f"),
-    @NamedQuery(name = "FeatureDetail.findById", query = "SELECT f FROM FeatureDetail f WHERE f.id = :id"),
-    @NamedQuery(name = "FeatureDetail.findByAmount", query = "SELECT f FROM FeatureDetail f WHERE f.amount = :amount"),
-    @NamedQuery(name = "FeatureDetail.findByNum", query = "SELECT f FROM FeatureDetail f WHERE f.num = :num"),
-    @NamedQuery(name = "FeatureDetail.findByCreatedDate", query = "SELECT f FROM FeatureDetail f WHERE f.createdDate = :createdDate")})
-public class FeatureDetail implements Serializable {
+        @NamedQuery(name = "Notification.findAll", query = "SELECT n FROM Notification n"),
+        @NamedQuery(name = "Notification.findById", query = "SELECT n FROM Notification n WHERE n.id = :id"),
+        @NamedQuery(name = "Notification.findByType", query = "SELECT n FROM Notification n WHERE n.type = :type"),
+        @NamedQuery(name = "Notification.findByDescription", query = "SELECT n FROM Notification n WHERE n.description = :description"),
+        @NamedQuery(name = "Notification.findByDate", query = "SELECT n FROM Notification n WHERE n.date = :date")})
+public class Notification implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,26 +43,31 @@ public class FeatureDetail implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "amount")
-    private Long amount;
-    @Size(max = 45)
-    @Column(name = "num")
-    private String num;
-    @Column(name = "created_date")
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "type")
+    private String type;
+    @Size(max = 255)
+    @Column(name = "description")
+    private String description;
+    @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
-    @JoinColumn(name = "feature_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Feature featureId;
+    private Date date;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User userId;
 
-    public FeatureDetail() {
+    public Notification() {
     }
 
-    public FeatureDetail(Integer id) {
+    public Notification(Integer id) {
         this.id = id;
+    }
+
+    public Notification(Integer id, String type) {
+        this.id = id;
+        this.type = type;
     }
 
     public Integer getId() {
@@ -73,36 +78,28 @@ public class FeatureDetail implements Serializable {
         this.id = id;
     }
 
-    public Long getAmount() {
-        return amount;
+    public String getType() {
+        return type;
     }
 
-    public void setAmount(Long amount) {
-        this.amount = amount;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getNum() {
-        return num;
+    public String getDescription() {
+        return description;
     }
 
-    public void setNum(String num) {
-        this.num = num;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Feature getFeatureId() {
-        return featureId;
-    }
-
-    public void setFeatureId(Feature featureId) {
-        this.featureId = featureId;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public User getUserId() {
@@ -123,10 +120,10 @@ public class FeatureDetail implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof FeatureDetail)) {
+        if (!(object instanceof Notification)) {
             return false;
         }
-        FeatureDetail other = (FeatureDetail) object;
+        Notification other = (Notification) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -135,7 +132,7 @@ public class FeatureDetail implements Serializable {
 
     @Override
     public String toString() {
-        return "com.btl.pojo.FeatureDetail[ id=" + id + " ]";
+        return "com.btl.pojo.Notification[ id=" + id + " ]";
     }
-    
+
 }

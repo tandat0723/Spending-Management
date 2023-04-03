@@ -2,16 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.btl.service;
+package com.btl.configs;
 
-import com.btl.pojo.Feature;
-import java.util.List;
-import java.util.Map;
+import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
 /**
+ *
  * @author trant
  */
-public interface FeatureService {
-    List<Feature> getFeatures(Map<String, String> params);
-    Feature getFeatureById(int id);
+public class SecurityWebApplicationInitializer extends AbstractSecurityWebApplicationInitializer{
+
 }

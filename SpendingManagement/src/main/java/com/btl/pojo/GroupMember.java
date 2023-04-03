@@ -5,7 +5,6 @@
 package com.btl.pojo;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,23 +16,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
  * @author trant
  */
 @Entity
 @Table(name = "group_member")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "GroupMember.findAll", query = "SELECT g FROM GroupMember g"),
-    @NamedQuery(name = "GroupMember.findById", query = "SELECT g FROM GroupMember g WHERE g.id = :id"),
-    @NamedQuery(name = "GroupMember.findByIsOwner", query = "SELECT g FROM GroupMember g WHERE g.isOwner = :isOwner"),
-    @NamedQuery(name = "GroupMember.findByCreatedDate", query = "SELECT g FROM GroupMember g WHERE g.createdDate = :createdDate"),
-    @NamedQuery(name = "GroupMember.findByUpdatedDate", query = "SELECT g FROM GroupMember g WHERE g.updatedDate = :updatedDate")})
+        @NamedQuery(name = "GroupMember.findAll", query = "SELECT g FROM GroupMember g"),
+        @NamedQuery(name = "GroupMember.findById", query = "SELECT g FROM GroupMember g WHERE g.id = :id"),
+        @NamedQuery(name = "GroupMember.findByContribution", query = "SELECT g FROM GroupMember g WHERE g.contribution = :contribution")})
 public class GroupMember implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,17 +37,13 @@ public class GroupMember implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "is_owner")
-    private Boolean isOwner;
-    @Column(name = "created_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
-    @Column(name = "updated_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedDate;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "contribution")
+    private double contribution;
     @JoinColumn(name = "group_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Groups groupId;
+    private GroupTransaction groupId;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User userId;
@@ -64,6 +55,11 @@ public class GroupMember implements Serializable {
         this.id = id;
     }
 
+    public GroupMember(Integer id, double contribution) {
+        this.id = id;
+        this.contribution = contribution;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -72,35 +68,19 @@ public class GroupMember implements Serializable {
         this.id = id;
     }
 
-    public Boolean getIsOwner() {
-        return isOwner;
+    public double getContribution() {
+        return contribution;
     }
 
-    public void setIsOwner(Boolean isOwner) {
-        this.isOwner = isOwner;
+    public void setContribution(double contribution) {
+        this.contribution = contribution;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    public Groups getGroupId() {
+    public GroupTransaction getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(Groups groupId) {
+    public void setGroupId(GroupTransaction groupId) {
         this.groupId = groupId;
     }
 
@@ -136,5 +116,5 @@ public class GroupMember implements Serializable {
     public String toString() {
         return "com.btl.pojo.GroupMember[ id=" + id + " ]";
     }
-    
+
 }

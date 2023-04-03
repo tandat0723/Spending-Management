@@ -2,15 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.btl.service;
-
-import com.btl.pojo.Category;
-
-import java.util.List;
+package com.btl.validator;
 
 /**
+ *
  * @author trant
  */
-public interface CategoryService {
-    List<Category> getCategories();
+public class UserValidator {
+    
 }

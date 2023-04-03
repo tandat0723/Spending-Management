@@ -1,43 +1,30 @@
 package com.btl.controllers;
 
-import com.btl.pojo.Category;
-import com.btl.pojo.Feature;
-import com.btl.service.CategoryService;
-import com.btl.service.FeatureService;
-import java.util.List;
-import java.util.Map;
-
+import com.btl.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@ControllerAdvice
 public class HomeController {
 
     @Autowired
-    private FeatureService featureService;
-    @Autowired
-    private CategoryService categoryService;
+    private UserService userService;
 
-    @GetMapping(path = {"/", "/features"})
-    public String index(Model model, @RequestParam Map<String, String> params) {
-        List<Category> cates = this.categoryService.getCategories();
-        model.addAttribute("categories", cates);
-
-        List<Feature> features = this.featureService.getFeatures(params);
-        model.addAttribute("features", features);
-
+    @RequestMapping("/")
+    public String index() {
         return "index";
     }
-    
-    @RequestMapping("/features/{featureId}")
-    public String details(Model model, @PathVariable(value= "featureId") int id){
-        model.addAttribute("feature", this.featureService.getFeatureById(id));
-        
-        return "feature-detail";
+
+    public void addAttributes(Model model, Authentication authentication) {
+        if (authentication != null) {
+            model.addAttribute("currentUser", this.userService.getByUsername(authentication.getName()));
+        }
+
     }
+
 }

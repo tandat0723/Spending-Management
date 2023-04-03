@@ -4,8 +4,6 @@
  */
 package com.btl.configs;
 
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -30,7 +28,9 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan(basePackages = {
         "com.btl.controllers",
         "com.btl.repository",
-        "com.btl.service"
+        "com.btl.service",
+        "com.btl.handlers",
+        "com.btl.validator"
 })
 public class WebAppContextConfig implements WebMvcConfigurer {
 
@@ -38,16 +38,6 @@ public class WebAppContextConfig implements WebMvcConfigurer {
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
-
-//    @Bean
-//    public InternalResourceViewResolver internalResourceViewResolver() {
-//        InternalResourceViewResolver r = new InternalResourceViewResolver();
-//        r.setViewClass(JstlView.class);
-//        r.setPrefix("/WEB-INF/pages/");
-//        r.setSuffix(".jsp");
-//
-//        return r;
-//    }
 
     @Bean(name = "validator")
     public LocalValidatorFactoryBean validator() {
@@ -60,6 +50,15 @@ public class WebAppContextConfig implements WebMvcConfigurer {
     @Override
     public Validator getValidator() {
         return validator();
+    }
+
+    public InternalResourceViewResolver internalResourceViewResolver() {
+        InternalResourceViewResolver resolver =new InternalResourceViewResolver();
+        resolver.setViewClass(JstlView.class);
+        resolver.setPrefix("/WEB-INF/pages/");
+
+        resolver.setSuffix(".jsp");
+        return resolver;
     }
 
     @Bean
@@ -78,14 +77,5 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         return resolver;
     }
 
-    @Bean
-    public Cloudinary cloudinary() {
-        Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
-                "cloud_name", "djcb4rai9",
-                "api_key", "854214918936189",
-                "api_secret", "50I_-7dpJDFv0APlAEKS5utLb9U",
-                "secure", true));
 
-        return cloudinary;
-    }
 }

@@ -1,41 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92278259-1573-4f28-a786-5d16afdd4c93" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/btl/configs/TilesConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/btl/pojo/FeatureDetail.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/btl/pojo/GroupMember.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/btl/pojo/Groups.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/tiles.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/btl/formatter/UserFormatter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/btl/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/btl/repository/impl/UserRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/btl/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/btl/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/configs/DispatcherServletInit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/configs/DispatcherServletInit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/configs/HibernateConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/configs/HibernateConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/configs/WebAppContextConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/configs/WebAppContextConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/controllers/AdminController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/controllers/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/controllers/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/formatter/CategoryFormatter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/pojo/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/pojo/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/pojo/Subcategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/pojo/Subcategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/pojo/Category.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/pojo/Feature.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/pojo/FeatureDetail.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/pojo/GroupMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/pojo/GroupMember.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/pojo/Groups.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/pojo/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/pojo/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/repository/CategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/repository/CategoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/repository/StastRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/repository/SubcategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/repository/SubcategoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/repository/impl/CategoryRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/repository/impl/CategoryRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/repository/impl/StatsRepositoryImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/repository/impl/SubcategoryRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/repository/impl/SubcategoryRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/service/CategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/service/SubcategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/service/SubcategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/service/impl/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/service/impl/CategoryServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/service/impl/SubcategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/btl/service/impl/SubcategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/repository/CategoryRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/repository/FeatureRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/repository/impl/CategoryRepositoryImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/repository/impl/FeatureRepositoryImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/service/CategoryService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/service/FeatureService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/service/impl/CategoryServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/btl/service/impl/FeatureServiceImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/databases.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/databases.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/layout/base.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/layout/base.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/layout/footer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/layout/footer.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/layout/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/layout/header.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/feature-detail.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/tiles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/tiles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spenddb.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../spenddb.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +94,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/trant/OneDrive - tandattran/Desktop/JobSearchingSpringMVC_v2/JobSearchingSpringMVC",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -145,6 +152,11 @@
       <workItem from="1679464790079" duration="6001000" />
       <workItem from="1679501535507" duration="2666000" />
       <workItem from="1679506660026" duration="67000" />
+      <workItem from="1680346939755" duration="4859000" />
+      <workItem from="1680353962022" duration="4926000" />
+      <workItem from="1680460609937" duration="713000" />
+      <workItem from="1680512424597" duration="1485000" />
+      <workItem from="1680515279125" duration="31000" />
     </task>
     <servers />
   </component>

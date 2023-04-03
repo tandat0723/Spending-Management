@@ -4,13 +4,16 @@
  */
 package com.btl.repository;
 
-import com.btl.pojo.Category;
+import com.btl.pojo.User;
 
-import java.util.List;
 
 /**
  * @author trant
  */
-public interface CategoryRepository {
-    List<Category> getCategories();
+public interface UserRepository {
+    User GetById(int id);
+
+    boolean AddOrUpdate(User user);
+
+    User GetByUserName(String username);
 }
