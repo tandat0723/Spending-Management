@@ -24,14 +24,16 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <c:if test="${currentUser == null}">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/login" />">Đăng nhập</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/register" />">Đăng ký</a>
+                </li>
+            </ul>
+        </c:if>
 
-        <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/login" />">Đăng nhập</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/register" />">Đăng ký</a>
-            </li>
-        </ul>
     </nav>
 </header>
