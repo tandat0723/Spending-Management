@@ -6,14 +6,15 @@ package com.btl.repository;
 
 import com.btl.pojo.User;
 
-
 /**
  * @author trant
  */
 public interface UserRepository {
+
     User GetById(int id);
 
-    boolean AddOrUpdate(User user);
+//    boolean AddOrUpdate(User user);
 
     User GetByUserName(String username);
+
 }

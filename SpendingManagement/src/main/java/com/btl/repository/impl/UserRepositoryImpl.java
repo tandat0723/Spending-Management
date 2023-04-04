@@ -26,11 +26,11 @@ public class UserRepositoryImpl implements UserRepository {
     @Autowired
     private LocalSessionFactoryBean factory;
 
-    private final int maxPage = 10;
-
-    private int GetMaxPage() {
-        return maxPage;
-    }
+//    private final int maxPage = 10;
+//
+//    private int GetMaxPage() {
+//        return maxPage;
+//    }
 
     @Override
     public User GetById(int id) {
@@ -51,20 +51,21 @@ public class UserRepositoryImpl implements UserRepository {
         return (User) q.getSingleResult();
     }
 
-    @Override
-    public boolean AddOrUpdate(User user) {
-        Session session = this.factory.getObject().getCurrentSession();
-        try {
-            if (user.getId() != 0)
-                session.update(user);
-            else
-                session.save(user);
-
-            return true;
-        } catch (HibernateException ex) {
-            ex.printStackTrace();
-        }
-
-        return false;
-    }
+//    @Override
+//    public boolean AddOrUpdate(User user) {
+//        Session session = this.factory.getObject().getCurrentSession();
+//        try {
+//            if (user.getId() != 0) {
+//                session.update(user);
+//            } else {
+//                session.save(user);
+//            }
+//
+//            return true;
+//        } catch (HibernateException ex) {
+//            ex.printStackTrace();
+//        }
+//
+//        return false;
+//    }
 }

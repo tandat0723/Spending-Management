@@ -10,67 +10,59 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Service("userDetailsService")
+@Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private Cloudinary cloudinary;
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+//    @Autowired
+//    private Cloudinary cloudinary;
+//    @Autowired
+//    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public User GetById(int id) {
         return this.userRepository.GetById(id);
     }
 
-    @Override
-    public boolean AddOrUpdate(User user) {
-        String pass = user.getPassword().trim();
-        user.setPassword(this.passwordEncoder.encode(pass));
-
-        if (user.getLastName() != null) {
-            String lastName = user.getLastName();
-            user.setLastName(utils.stringNormalization(lastName));
-        }
-
-        String avatar = user.getAvatar();
-        if (!user.getFile().isEmpty()) {
-            Map result = null;
-            try {
-                result = this.cloudinary.uploader().upload(user.getFile().getBytes(),
-                        ObjectUtils.asMap("resource_type", "auto"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            if (result != null) {
-                user.setAvatar((String) result.get("secure_url"));
-            } else {
-                user.setAvatar(avatar);
-            }
-        }
-
-        if (user.getId() == 0) {
-            user.setJoinedDate(new Date());
-        }
-        return this.userRepository.AddOrUpdate(user);
-    }
+//    @Override
+//    public boolean AddOrUpdate(User user) {
+//        String pass = user.getPassword().trim();
+//        user.setPassword(this.passwordEncoder.encode(pass));
+//
+//        if (user.getLastName() != null) {
+//            String lastName = user.getLastName();
+//            user.setLastName(utils.stringNormalization(lastName));
+//        }
+//
+//        String avatar = user.getAvatar();
+//        if (!user.getFile().isEmpty()) {
+//            Map result = null;
+//            try {
+//                result = this.cloudinary.uploader().upload(user.getFile().getBytes(),
+//                        ObjectUtils.asMap("resource_type", "auto"));
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            if (result != null) {
+//                user.setAvatar((String) result.get("secure_url"));
+//            } else {
+//                user.setAvatar(avatar);
+//            }
+//        }
+//
+//        if (user.getId() == 0) {
+//            user.setJoinedDate(new Date());
+//        }
+//        return this.userRepository.AddOrUpdate(user);
+//    }
 
     @Override
     public User getByUsername(String username) {
         return this.userRepository.GetByUserName(username);
     }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
 }

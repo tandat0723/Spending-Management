@@ -1,3 +1,55 @@
+body {
+    background-color: #f0f0f0 !important;
+    font-family: none, serif;
+    scroll-behavior: smooth;
+}
+
+.custom-wrapper{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+}
+
+div.container {
+    margin: 25px auto;
+    padding: 30px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.jumbotron {
+    margin: 0;
+    border-radius: 0;
+    color: white;
+    background-color: #616e7a !important;
+}
+
+h1 {
+    font-size: 45px !important;
+    font-weight: 600 !important;
+    margin: 0 0 6px !important;
+}
+
+a:hover {
+    text-decoration: none !important;
+}
+
+.active a{
+    background-color: #17a2b8 !important;
+}
+
+.page-link{
+    border-color: #c1c1c1 !important;
+}
+
+.info-color{
+    color: #17a2b8 !important;
+}
 
 .back-to-top {
     position: fixed;

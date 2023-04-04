@@ -4,6 +4,8 @@
  */
 package com.btl.configs;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -77,5 +79,15 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         return resolver;
     }
 
+    @Bean
+    public Cloudinary cloudinary() {
+        Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+                "cloud_name", "djcb4rai9",
+                "api_key", "854214918936189",
+                "api_secret", "50I_-7dpJDFv0APlAEKS5utLb9U",
+                "secure", true
+        ));
 
+        return cloudinary;
+    }
 }
