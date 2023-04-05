@@ -102,6 +102,9 @@ public class User implements Serializable {
     private int year;
     @Transient
     @JsonIgnore
+    private String confirmPassword;
+    @Transient
+    @JsonIgnore
     private MultipartFile file;
 
     {
@@ -325,6 +328,20 @@ public class User implements Serializable {
      */
     public void setYear(int year) {
         this.year = year;
+    }
+
+    /**
+     * @return the confirmPassword
+     */
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    /**
+     * @param confirmPassword the confirmPassword to set
+     */
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
 }

@@ -8,10 +8,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <section class="container">
-    <br>
-    <a class="link-success" href="<c:url value="/login" />">
+    <br/>
+    <a style="text-decoration: none;" class="link-success" href="<c:url value="/login" />">
         Đăng nhập ngay thôi!
     </a>
-    <br>
+    <br/>
 </section>
 

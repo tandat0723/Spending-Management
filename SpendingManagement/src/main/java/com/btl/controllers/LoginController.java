@@ -37,4 +37,9 @@ public class LoginController {
     public String Register(Model model) {
         return "register";
     }
+    
+    @RequestMapping("/forgot-password")
+    public String ChangePassword(Model model) {
+        return "forgot-password";
+    }
 }

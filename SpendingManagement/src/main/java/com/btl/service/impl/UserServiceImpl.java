@@ -8,6 +8,7 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -60,9 +61,22 @@ public class UserServiceImpl implements UserService {
 //        }
 //        return this.userRepository.AddOrUpdate(user);
 //    }
-
     @Override
     public User getByUsername(String username) {
         return this.userRepository.GetByUserName(username);
+    }
+
+    @Override
+    public List<User> GetUsers(String username, int page) {
+        return this.userRepository.GetUsers(username, page);
+    }
+
+    @Override
+    public List<User> GetByEmail(String email) {
+        return this.userRepository.GetByEmail(email);
+    }
+    @Override
+    public List<User> GetByPhone(String phone) {
+        return this.userRepository.GetByPhone(phone);
     }
 }
