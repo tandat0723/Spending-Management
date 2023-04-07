@@ -12,7 +12,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="SpendingManagement" options="-endorseddirs &quot;C:\Users\trant\OneDrive - tandattran\Desktop\Spending-Management\SpendingManagement\target/endorsed&quot;" />
+      <module name="SpendingManagement" options="-endorseddirs C:\Users\trant\Downloads\Spending-Management\SpendingManagement\target/endorsed" />
     </option>
   </component>
 </project>

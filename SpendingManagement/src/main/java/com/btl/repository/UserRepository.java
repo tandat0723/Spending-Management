@@ -5,6 +5,7 @@
 package com.btl.repository;
 
 import com.btl.pojo.User;
+
 import java.util.List;
 
 /**
@@ -14,7 +15,8 @@ public interface UserRepository {
 
     User GetById(int id);
 
-//    boolean AddOrUpdate(User user);
+    boolean AddOrUpdate(User user);
+
     User GetByUserName(String username);
 
     List<User> GetUsers(String username, int page);
@@ -22,4 +24,6 @@ public interface UserRepository {
     List<User> GetByEmail(String email);
 
     List<User> GetByPhone(String phone);
+
+    int getMaxItemsInPage();
 }

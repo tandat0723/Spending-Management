@@ -8,13 +8,14 @@ import com.btl.pojo.User;
 import com.btl.service.UserService;
 import com.btl.utils.utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 /**
- *
  * @author trant
  */
+@Component
 public class UserValidator implements Validator {
 
     @Autowired

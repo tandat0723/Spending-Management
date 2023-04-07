@@ -4,7 +4,7 @@
     Author     : trant
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="custom-wrapper">
@@ -37,7 +37,7 @@
                                         <a class="small" href="<c:url value="/register" />">Tạo mới tài khoản</a>
                                     </div>
                                     <div class="text-center">
-                                        Đã có tài khoản! 
+                                        Đã có tài khoản!
                                         <a class="small" href="<c:url value="/login" />">Đăng nhập</a>
                                     </div>
                                 </div>

@@ -24,6 +24,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <c:if test="${currentUser == null}">
             <ul class="nav navbar-nav navbar-right">
                 <li class="nav-item">
@@ -34,6 +35,5 @@
                 </li>
             </ul>
         </c:if>
-
     </nav>
 </header>

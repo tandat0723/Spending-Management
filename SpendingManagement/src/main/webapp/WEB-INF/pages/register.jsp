@@ -4,7 +4,7 @@
     Author     : trant
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -22,8 +22,16 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Đăng ký</h1>
                         </div>
-                        <form:form action="${action}" method="post" class="user" enctype="multipart/form-data" 
+                        <form:form action="${action}" method="post" class="user" enctype="multipart/form-data"
                                    modelAttribute="user">
+                            <div class="form-group">
+                                <form:input path="firstName" class="form-control form-control-user"
+                                            placeholder="Tên trước" required="required"/>
+                            </div>
+                            <div class="form-group">
+                                <form:input path="lastName" class="form-control form-control-user"
+                                            placeholder="Tên sau" required="required"/>
+                            </div>
                             <div class="form-group">
                                 <form:input path="username" class="form-control form-control-user"
                                             placeholder="Tên đăng nhập" required="required"/>
@@ -47,7 +55,28 @@
                                 <form:input path="phone" class="form-control form-control-user"
                                             placeholder="Số điện thoại" required="required"/>
                             </div>
-
+                            <div class="form-group row align-items-center">
+                                <div class="col">
+                                    <a onclick="AvatarBrowse()" class="btn btn-primary btn-user btn-block">
+                                        Chọn ảnh đại diện
+                                    </a>
+                                    <form:input type="file" id="avatarBrowse" path="file"
+                                                onchange="showPreviewDiv(event);"
+                                                accept="image/*" class="form-control" cssStyle="display: none"/>
+                                </div>
+                                <div class="col text-center">
+                                    <div class="rounded-circle m-auto" id="img-preview"
+                                         style="background-image: url('<c:url
+                                                 value='/resources/images/none.png'/>');
+                                                 width: 150px; height: 150px;
+                                                 background-position: center;
+                                                 background-size: contain;
+                                                 background-repeat: no-repeat;
+                                                 border-radius: .35rem;
+                                                 border: 1px solid lightgray">
+                                    </div>
+                                </div>
+                            </div>
                         </form:form>
                     </div>
                 </div>

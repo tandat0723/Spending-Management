@@ -6,6 +6,7 @@ package com.btl.repository.impl;
 
 import com.btl.pojo.User;
 import com.btl.repository.UserRepository;
+
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -34,7 +35,8 @@ public class UserRepositoryImpl implements UserRepository {
     public int getMaxItemsInPage() {
         return maxItemsInPage;
     }
-
+    
+    
     @Override
     public User GetById(int id) {
         Session session = this.factory.getObject().getCurrentSession();
@@ -54,23 +56,24 @@ public class UserRepositoryImpl implements UserRepository {
         return (User) q.getSingleResult();
     }
 
-//    @Override
-//    public boolean AddOrUpdate(User user) {
-//        Session session = this.factory.getObject().getCurrentSession();
-//        try {
-//            if (user.getId() != 0) {
-//                session.update(user);
-//            } else {
-//                session.save(user);
-//            }
-//
-//            return true;
-//        } catch (HibernateException ex) {
-//            ex.printStackTrace();
-//        }
-//
-//        return false;
-//    }
+    @Override
+    public boolean AddOrUpdate(User user) {
+        Session session = this.factory.getObject().getCurrentSession();
+        try {
+            if (user.getId() != 0) {
+                session.update(user);
+            } else {
+                session.save(user);
+            }
+
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
     @Override
     public List<User> GetUsers(String username, int page) {
         Session session = this.factory.getObject().getCurrentSession();
@@ -132,4 +135,6 @@ public class UserRepositoryImpl implements UserRepository {
 
         return q.getResultList();
     }
+
+    
 }

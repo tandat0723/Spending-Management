@@ -24,17 +24,18 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
+ *
  * @author trant
  */
 @Entity
 @Table(name = "notification")
 @XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "Notification.findAll", query = "SELECT n FROM Notification n"),
-        @NamedQuery(name = "Notification.findById", query = "SELECT n FROM Notification n WHERE n.id = :id"),
-        @NamedQuery(name = "Notification.findByType", query = "SELECT n FROM Notification n WHERE n.type = :type"),
-        @NamedQuery(name = "Notification.findByDescription", query = "SELECT n FROM Notification n WHERE n.description = :description"),
-        @NamedQuery(name = "Notification.findByDate", query = "SELECT n FROM Notification n WHERE n.date = :date")})
+    @NamedQuery(name = "Notification.findAll", query = "SELECT n FROM Notification n"),
+    @NamedQuery(name = "Notification.findById", query = "SELECT n FROM Notification n WHERE n.id = :id"),
+    @NamedQuery(name = "Notification.findByType", query = "SELECT n FROM Notification n WHERE n.type = :type"),
+    @NamedQuery(name = "Notification.findByDescription", query = "SELECT n FROM Notification n WHERE n.description = :description"),
+    @NamedQuery(name = "Notification.findByDate", query = "SELECT n FROM Notification n WHERE n.date = :date")})
 public class Notification implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -134,5 +135,5 @@ public class Notification implements Serializable {
     public String toString() {
         return "com.btl.pojo.Notification[ id=" + id + " ]";
     }
-
+    
 }

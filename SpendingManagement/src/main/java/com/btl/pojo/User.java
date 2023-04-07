@@ -5,17 +5,33 @@
 package com.btl.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.web.multipart.MultipartFile;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
+ *
  * @author trant
  */
 @Entity
@@ -35,10 +51,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByAvatar", query = "SELECT u FROM User u WHERE u.avatar = :avatar"),
     @NamedQuery(name = "User.findByJoinedDate", query = "SELECT u FROM User u WHERE u.joinedDate = :joinedDate")})
 public class User implements Serializable {
-
     public static final String ADMIN = "ROLE_ADMIN";
     public static final String USER = "ROLE_USER";
-
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,8 +84,10 @@ public class User implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "password")
     private String password;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "active")
-    private Boolean active;
+    private int active;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
@@ -83,14 +100,15 @@ public class User implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date joinedDate;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Set<PersonalTransaction> personalTransactionSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<Notification> notificationSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "creatorId")
     private Set<GroupTransaction> groupTransactionSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<GroupMember> groupMemberSet;
-
+    @JoinColumn(name = "personal_transaction_id", referencedColumnName = "id")
+    @ManyToOne
+    private PersonalTransaction personalTransactionId;
+    
     @Transient
     @JsonIgnore
     private int day;
@@ -118,10 +136,11 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String username, String password, String userRole) {
+    public User(Integer id, String username, String password, short active, String userRole) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.active = active;
         this.userRole = userRole;
     }
 
@@ -181,11 +200,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Boolean getActive() {
+    public int getActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(int active) {
         this.active = active;
     }
 
@@ -211,15 +230,6 @@ public class User implements Serializable {
 
     public void setJoinedDate(Date joinedDate) {
         this.joinedDate = joinedDate;
-    }
-
-    @XmlTransient
-    public Set<PersonalTransaction> getPersonalTransactionSet() {
-        return personalTransactionSet;
-    }
-
-    public void setPersonalTransactionSet(Set<PersonalTransaction> personalTransactionSet) {
-        this.personalTransactionSet = personalTransactionSet;
     }
 
     @XmlTransient
@@ -249,6 +259,14 @@ public class User implements Serializable {
         this.groupMemberSet = groupMemberSet;
     }
 
+    public PersonalTransaction getPersonalTransactionId() {
+        return personalTransactionId;
+    }
+
+    public void setPersonalTransactionId(PersonalTransaction personalTransactionId) {
+        this.personalTransactionId = personalTransactionId;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -272,20 +290,6 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "com.btl.pojo.User[ id=" + id + " ]";
-    }
-
-    /**
-     * @return the file
-     */
-    public MultipartFile getFile() {
-        return file;
-    }
-
-    /**
-     * @param file the file to set
-     */
-    public void setFile(MultipartFile file) {
-        this.file = file;
     }
 
     /**
@@ -344,4 +348,18 @@ public class User implements Serializable {
         this.confirmPassword = confirmPassword;
     }
 
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+    
 }
