@@ -69,14 +69,16 @@ public class LoginController {
         String errMsg = null;
         String sucMsg = null;
         userValidator.validate(user, result);
-        if (result.hasErrors())
+        if (result.hasErrors()) {
             return "register";
-        
+        }
+
         //set role
-        if(user.getUserRole().equals("ROLE_USER"))
+        if (user.getUserRole().equals("ROLE_USER")) {
             user.setActive(0);
-        else
+        } else {
             user.setActive(1);
+        }
 
         boolean addOrUpdates = this.userService.AddOrUpdate(user);
         if (addOrUpdates) {
@@ -100,7 +102,12 @@ public class LoginController {
     }
 
     @RequestMapping("/forgot-password")
-    public String ChangePassword(Model model) {
+    public String ChangePassword() {
         return "forgot-password";
+    }
+
+    @RequestMapping("/me/profile/change-password")
+    public String changePassword() {
+        return "change-password";
     }
 }

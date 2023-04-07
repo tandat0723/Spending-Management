@@ -14,4 +14,6 @@ public interface PersonalTransactionRepository {
     PersonalTransaction getById(int id);
 
     boolean addOrUpdate(PersonalTransaction personalTransaction);
+    
+    PersonalTransaction getByUserId(int id);
 }

@@ -45,7 +45,6 @@
     @include transition($modal-transition);
     transform: $modal-fade-transform;
   }
-
   .modal.show & {
     transform: $modal-show-transform;
   }
@@ -133,13 +132,8 @@
   background-color: $modal-backdrop-bg;
 
   // Fade for backdrop
-  &.fade {
-    opacity: 0;
-  }
-
-  &.show {
-    opacity: $modal-backdrop-opacity;
-  }
+  &.fade { opacity: 0; }
+  &.show { opacity: $modal-backdrop-opacity; }
 }
 
 // Modal header
@@ -231,9 +225,7 @@
     @include box-shadow($modal-content-box-shadow-sm-up);
   }
 
-  .modal-sm {
-    max-width: $modal-sm;
-  }
+  .modal-sm { max-width: $modal-sm; }
 }
 
 @include media-breakpoint-up(lg) {
@@ -244,7 +236,5 @@
 }
 
 @include media-breakpoint-up(xl) {
-  .modal-xl {
-    max-width: $modal-xl;
-  }
+  .modal-xl { max-width: $modal-xl; }
 }

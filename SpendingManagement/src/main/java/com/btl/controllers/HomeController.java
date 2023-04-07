@@ -1,11 +1,16 @@
 package com.btl.controllers;
 
+import com.btl.pojo.PersonalTransaction;
+import com.btl.service.PersonalTransactionService;
 import com.btl.service.UserService;
+import javax.persistence.NoResultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -14,12 +19,16 @@ public class HomeController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private PersonalTransactionService personalTransactionService;
 
     @RequestMapping("/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("sucMsg", model.asMap().get("sucMsg"));
         return "index";
     }
 
+    @ModelAttribute
     public void addAttributes(Model model, Authentication authentication) {
         if (authentication != null) {
             model.addAttribute("currentUser", this.userService.getByUsername(authentication.getName()));
@@ -27,4 +36,28 @@ public class HomeController {
 
     }
 
+    @RequestMapping("/me/view")
+    public String aboutMeView(Model model, Authentication authentication) {
+        PersonalTransaction personalTransaction;
+        try {
+            personalTransaction = personalTransactionService.getByUserId(userService.getByUsername(authentication.getName()).getId());
+            model.addAttribute("personalTransaction", personalTransaction);
+        } catch(NoResultException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return "me-view";
+    }
+    
+    @RequestMapping("/me/edit")
+    public String aboutMeEditView(Model model) {
+        model.addAttribute("sucMsg", model.asMap().get("sucMsg"));
+        return "index";
+    }
+    
+    @PostMapping("/me/edit")
+    public String aboutMeEdit(Model model) {
+        model.addAttribute("sucMsg", model.asMap().get("sucMsg"));
+        return "index";
+    }
 }

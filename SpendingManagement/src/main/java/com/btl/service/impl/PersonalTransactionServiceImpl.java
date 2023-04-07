@@ -18,17 +18,22 @@ import org.springframework.transaction.annotation.Transactional;
 public class PersonalTransactionServiceImpl implements PersonalTransactionService {
 
     @Autowired
-    private PersonalTransactionRepository PersonalTransaction;
+    private PersonalTransactionRepository personalTransaction;
 
     @Override
     public PersonalTransaction getById(int id) {
-        return this.PersonalTransaction.getById(id);
+        return this.personalTransaction.getById(id);
     }
 
     @Override
     @Transactional
     public boolean addOrUpdate(PersonalTransaction personalTransaction) {
-        return this.PersonalTransaction.addOrUpdate(personalTransaction);
+        return this.personalTransaction.addOrUpdate(personalTransaction);
+    }
+
+    @Override
+    public PersonalTransaction getByUserId(int id) {
+        return this.personalTransaction.getByUserId(id);
     }
 
 }

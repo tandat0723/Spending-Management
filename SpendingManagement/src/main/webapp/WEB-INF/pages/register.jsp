@@ -24,6 +24,9 @@
                         </div>
                         <form:form action="${action}" method="post" class="user" enctype="multipart/form-data"
                                    modelAttribute="user">
+                            <form:errors path="*" element="div" cssClass="alert alert-danger mt-3"/>
+                            <form:hidden path="id"/>
+                            <form:hidden path="avatar"/>
                             <div class="form-group">
                                 <form:input path="firstName" class="form-control form-control-user"
                                             placeholder="Tên trước" required="required"/>
@@ -66,16 +69,27 @@
                                 </div>
                                 <div class="col text-center">
                                     <div class="rounded-circle m-auto" id="img-preview"
-                                         style="background-image: url('<c:url
-                                                 value='/resources/images/none.png'/>');
-                                                 width: 150px; height: 150px;
-                                                 background-position: center;
-                                                 background-size: contain;
-                                                 background-repeat: no-repeat;
-                                                 border-radius: .35rem;
-                                                 border: 1px solid lightgray">
+                                         style="background-image: url('<c:url value="/resources/images/none.png"/>');
+                                         width: 150px; height: 150px;
+                                         background-position: center;
+                                         background-size: contain;
+                                         background-repeat: no-repeat;
+                                         border-radius: .35rem;
+                                         border: 1px solid lightgray">
                                     </div>
                                 </div>
+                            </div>
+                            <div class="form-group mt-4">
+                                <button type="submit" class="btn btn-primary btn-user btn-block">
+                                    Đăng ký
+                                </button>
+                            </div>
+                            <div class="text-center">
+                                <a href="<c:url value="/forgot-password" />">Quên mật khẩu</a>
+                            </div>
+                            <div class="text-center">
+                                Đã có tài khoản 
+                                <a href="<c:url value="/login" />">Đăng nhập</a>
                             </div>
                         </form:form>
                     </div>
@@ -89,4 +103,5 @@
 <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
 <script src="<c:url value="/resources/vendor/jquery-easing/jquery.easing.min.js"/>"></script>
 <script src="<c:url value="/resources/js/sb-admin-2.min.js"/>"></script>
+<script src="<c:url value="/resources/js/register.js"/>"></script>
 
