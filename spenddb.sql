@@ -108,15 +108,12 @@ DROP TABLE IF EXISTS `personal_transaction`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `personal_transaction` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
   `transaction_type` varchar(45) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `purpose` varchar(45) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `description` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `price` double NOT NULL,
   `date` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `person_user_fk_idx` (`user_id`) /*!80000 INVISIBLE */,
-  CONSTRAINT `person_user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -141,14 +138,17 @@ CREATE TABLE `user` (
   `first_name` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `last_name` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `email` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
-  `phone` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `phone` varchar(10) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `username` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `password` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `active` bit(1) DEFAULT b'1',
+  `active` tinyint NOT NULL DEFAULT '0',
   `user_role` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `avatar` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `joined_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `personal_transaction_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_personal_fk_idx` (`personal_transaction_id`),
+  CONSTRAINT `user_personal_fk` FOREIGN KEY (`personal_transaction_id`) REFERENCES `personal_transaction` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -158,6 +158,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'tran','dat','admin@admin.com','039474635','tandat123','12345',1,'ADMIN','abc',NULL,NULL),(2,'phu','an','an@admin.com','093837364','admin123','1234',1,'ADMIN','abcc',NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -170,4 +171,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-03 17:27:51
+-- Dump completed on 2023-04-07 23:10:29

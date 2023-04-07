@@ -4,11 +4,12 @@
     Author     : trant
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:url value="/login" var="action"/>
 
+</div>
 <div class="custom-wrapper">
     <div class="container m-auto" style="background: none">
         <div class="row justify-content-center">
@@ -41,7 +42,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block" style="font-size: 16px">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block"
+                                                style="font-size: 16px">
                                             Đăng nhập
                                         </button>
                                         <br/>
@@ -49,7 +51,7 @@
                                             <a href="<c:url value="/forgot-password" />">Quên mật khẩu</a>
                                         </div>
                                         <div class="text-center">
-                                            Tạo mới tài khoản 
+                                            Tạo mới tài khoản
                                             <a href="<c:url value="/register" />">Đăng ký</a>
                                         </div>
                                     </form>

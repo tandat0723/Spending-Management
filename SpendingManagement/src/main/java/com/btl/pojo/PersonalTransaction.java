@@ -6,37 +6,39 @@ package com.btl.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
+ *
  * @author trant
  */
 @Entity
 @Table(name = "personal_transaction")
 @XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "PersonalTransaction.findAll", query = "SELECT p FROM PersonalTransaction p"),
-        @NamedQuery(name = "PersonalTransaction.findById", query = "SELECT p FROM PersonalTransaction p WHERE p.id = :id"),
-        @NamedQuery(name = "PersonalTransaction.findByTransactionType", query = "SELECT p FROM PersonalTransaction p WHERE p.transactionType = :transactionType"),
-        @NamedQuery(name = "PersonalTransaction.findByPurpose", query = "SELECT p FROM PersonalTransaction p WHERE p.purpose = :purpose"),
-        @NamedQuery(name = "PersonalTransaction.findByDescription", query = "SELECT p FROM PersonalTransaction p WHERE p.description = :description"),
-        @NamedQuery(name = "PersonalTransaction.findByPrice", query = "SELECT p FROM PersonalTransaction p WHERE p.price = :price"),
-        @NamedQuery(name = "PersonalTransaction.findByDate", query = "SELECT p FROM PersonalTransaction p WHERE p.date = :date")})
+    @NamedQuery(name = "PersonalTransaction.findAll", query = "SELECT p FROM PersonalTransaction p"),
+    @NamedQuery(name = "PersonalTransaction.findById", query = "SELECT p FROM PersonalTransaction p WHERE p.id = :id"),
+    @NamedQuery(name = "PersonalTransaction.findByTransactionType", query = "SELECT p FROM PersonalTransaction p WHERE p.transactionType = :transactionType"),
+    @NamedQuery(name = "PersonalTransaction.findByPurpose", query = "SELECT p FROM PersonalTransaction p WHERE p.purpose = :purpose"),
+    @NamedQuery(name = "PersonalTransaction.findByDescription", query = "SELECT p FROM PersonalTransaction p WHERE p.description = :description"),
+    @NamedQuery(name = "PersonalTransaction.findByPrice", query = "SELECT p FROM PersonalTransaction p WHERE p.price = :price"),
+    @NamedQuery(name = "PersonalTransaction.findByDate", query = "SELECT p FROM PersonalTransaction p WHERE p.date = :date")})
 public class PersonalTransaction implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -67,9 +69,8 @@ public class PersonalTransaction implements Serializable {
     @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private User userId;
+    @OneToMany(mappedBy = "personalTransactionId")
+    private Set<User> userSet;
 
     public PersonalTransaction() {
     }
@@ -134,12 +135,13 @@ public class PersonalTransaction implements Serializable {
         this.date = date;
     }
 
-    public User getUserId() {
-        return userId;
+    @XmlTransient
+    public Set<User> getUserSet() {
+        return userSet;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUserSet(Set<User> userSet) {
+        this.userSet = userSet;
     }
 
     @Override
@@ -166,5 +168,5 @@ public class PersonalTransaction implements Serializable {
     public String toString() {
         return "com.btl.pojo.PersonalTransaction[ id=" + id + " ]";
     }
-
+    
 }

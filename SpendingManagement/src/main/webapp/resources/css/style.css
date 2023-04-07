@@ -4,7 +4,7 @@ body {
     scroll-behavior: smooth;
 }
 
-.custom-wrapper{
+.custom-wrapper {
     height: 100vh;
     display: flex;
     align-items: center;
@@ -39,15 +39,15 @@ a:hover {
     text-decoration: none !important;
 }
 
-.active a{
+.active a {
     background-color: #17a2b8 !important;
 }
 
-.page-link{
+.page-link {
     border-color: #c1c1c1 !important;
 }
 
-.info-color{
+.info-color {
     color: #17a2b8 !important;
 }
 

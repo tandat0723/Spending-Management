@@ -4,19 +4,20 @@
  */
 package com.btl.configs;
 
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
+import com.btl.formatter.UserFormatter;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
@@ -28,17 +29,24 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 @EnableTransactionManagement
 @ComponentScan(basePackages = {
-        "com.btl.controllers",
-        "com.btl.repository",
-        "com.btl.service",
-        "com.btl.handlers",
-        "com.btl.validator"
+    "com.btl.controllers",
+    "com.btl.repository",
+    "com.btl.service",
+    "com.btl.handlers",
+    "com.btl.validator"
 })
 public class WebAppContextConfig implements WebMvcConfigurer {
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/image/**").addResourceLocations("/resources/image/");
+        registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
+        registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/");
     }
 
     @Bean(name = "validator")
@@ -50,12 +58,20 @@ public class WebAppContextConfig implements WebMvcConfigurer {
     }
 
     @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addFormatter(new UserFormatter());
+    }
+
+    @Override
     public Validator getValidator() {
         return validator();
     }
 
+    
+
+    @Bean
     public InternalResourceViewResolver internalResourceViewResolver() {
-        InternalResourceViewResolver resolver =new InternalResourceViewResolver();
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setViewClass(JstlView.class);
         resolver.setPrefix("/WEB-INF/pages/");
 
@@ -78,16 +94,5 @@ public class WebAppContextConfig implements WebMvcConfigurer {
 
         return resolver;
     }
-
-    @Bean
-    public Cloudinary cloudinary() {
-        Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
-                "cloud_name", "cloudybeauty",
-                "api_key", "852545332348685",
-                "api_secret", "dSdPEQGcfz-jRKPd7fwGlgFUOkc",
-                "secure", true
-        ));
-
-        return cloudinary;
-    }
+    
 }

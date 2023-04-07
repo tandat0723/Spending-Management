@@ -20,15 +20,16 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
+ *
  * @author trant
  */
 @Entity
 @Table(name = "group_member")
 @XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "GroupMember.findAll", query = "SELECT g FROM GroupMember g"),
-        @NamedQuery(name = "GroupMember.findById", query = "SELECT g FROM GroupMember g WHERE g.id = :id"),
-        @NamedQuery(name = "GroupMember.findByContribution", query = "SELECT g FROM GroupMember g WHERE g.contribution = :contribution")})
+    @NamedQuery(name = "GroupMember.findAll", query = "SELECT g FROM GroupMember g"),
+    @NamedQuery(name = "GroupMember.findById", query = "SELECT g FROM GroupMember g WHERE g.id = :id"),
+    @NamedQuery(name = "GroupMember.findByContribution", query = "SELECT g FROM GroupMember g WHERE g.contribution = :contribution")})
 public class GroupMember implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -116,5 +117,5 @@ public class GroupMember implements Serializable {
     public String toString() {
         return "com.btl.pojo.GroupMember[ id=" + id + " ]";
     }
-
+    
 }

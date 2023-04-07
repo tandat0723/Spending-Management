@@ -6,8 +6,6 @@ package com.btl.configs;
 
 import java.util.Properties;
 import javax.sql.DataSource;
-import static org.hibernate.cfg.AvailableSettings.DIALECT;
-import static org.hibernate.cfg.AvailableSettings.SHOW_SQL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,17 +47,17 @@ public class HibernateConfig {
 
     public Properties hibernateProperties() {
         Properties props = new Properties();
-        props.put(DIALECT, env.getProperty("hibernate.dialect"));
-        props.put(SHOW_SQL, env.getProperty("hibernate.showSql"));
+        props.setProperty(org.hibernate.cfg.Environment.DIALECT, env.getProperty("hibernate.dialect"));
+        props.setProperty(org.hibernate.cfg.Environment.SHOW_SQL, env.getProperty("hibernate.showSql"));
 
         return props;
     }
 
     @Bean
     public HibernateTransactionManager transactionManager() {
-        HibernateTransactionManager m = new HibernateTransactionManager();
-        m.setSessionFactory(sessionFactoryBean().getObject());
+        HibernateTransactionManager manager = new HibernateTransactionManager();
+        manager.setSessionFactory(sessionFactoryBean().getObject());
 
-        return m;
+        return manager;
     }
 }

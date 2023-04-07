@@ -5,15 +5,16 @@
 package com.btl.formatter;
 
 import com.btl.pojo.User;
+
 import java.text.ParseException;
 import java.util.Locale;
+
 import org.springframework.format.Formatter;
 
 /**
- *
  * @author trant
  */
-public class UserFormatter implements Formatter<User>{
+public class UserFormatter implements Formatter<User> {
 
     @Override
     public String print(User user, Locale locale) {
@@ -26,5 +27,5 @@ public class UserFormatter implements Formatter<User>{
         user.setId(Integer.parseInt(s));
         return user;
     }
-    
+
 }
