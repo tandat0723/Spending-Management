@@ -30,10 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- *
- * @author trant
- */
+
 @Entity
 @Table(name = "user")
 @XmlRootElement
@@ -55,6 +52,7 @@ public class User implements Serializable {
     public static final String USER = "ROLE_USER";
     
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -208,6 +206,7 @@ public class User implements Serializable {
         this.active = active;
     }
 
+
     public String getUserRole() {
         return userRole;
     }
@@ -348,6 +347,7 @@ public class User implements Serializable {
         this.confirmPassword = confirmPassword;
     }
 
+        
     /**
      * @return the file
      */
@@ -360,6 +360,7 @@ public class User implements Serializable {
      */
     public void setFile(MultipartFile file) {
         this.file = file;
+
     }
     
 }

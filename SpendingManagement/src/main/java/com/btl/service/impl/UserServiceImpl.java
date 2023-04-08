@@ -6,15 +6,15 @@ import com.btl.service.UserService;
 import com.btl.utils.utils;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -93,6 +93,39 @@ public class UserServiceImpl implements UserService {
     public List<User> getByPhone(String phone) {
         return this.userRepository.getByPhone(phone);
     }
+    
+    @Override
+    public List<User> getUsers(Map<String, String> params) {
+        return this.userRepository.getUsers(params);
+    }
+
+    @Override
+    public boolean addOrUpdateUser(User u) {
+    
+        if (!u.getFile().isEmpty()) {
+            try {
+                Map res = this.cloudinary.uploader().upload(u.getFile().getBytes(),
+                        ObjectUtils.asMap("resource_type", "auto"));
+                u.setAvatar(res.get("secure_url").toString());
+            } catch (IOException ex) {
+                Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return this.userRepository.addOrUpdateUser(u);
+    }
+
+    @Override
+    public boolean deleteUser(int id) {
+    
+        return this.userRepository.deleteUser(id);
+    }
+
+    @Override
+    public User getUserById(int id) {
+    
+        return this.userRepository.getUserById(id);
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -143,6 +176,5 @@ public class UserServiceImpl implements UserService {
     public int getMaxItemsInPage() {
         return this.userRepository.getMaxItemsInPage();
     }
-
 
 }

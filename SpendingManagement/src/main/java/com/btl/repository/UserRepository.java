@@ -20,8 +20,6 @@ public interface UserRepository {
 
     User getByUserName(String username);
 
-    List<User> getUsers(String username, int page);
-
     List<User> getByEmail(String email);
 
     List<User> getByPhone(String phone);
@@ -40,5 +38,12 @@ public interface UserRepository {
 
     boolean changePassword(int id, String rawPassword);
 
+    List<User> getUsers(Map<String, String> params);
+
+    boolean addOrUpdateUser(User u);
+    
+    boolean deleteUser(int id);
+    
     long count();
+
 }

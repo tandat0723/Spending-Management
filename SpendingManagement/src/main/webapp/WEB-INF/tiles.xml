@@ -53,4 +53,10 @@
         <put-attribute name="title" value="Đổi mật khẩu"/>
         <put-attribute name="content" value="/WEB-INF/pages/change-password.jsp"/>
     </definition>
+    
+    
+     <definition name="users" extends="baseLayout">
+        <put-attribute name="title" value="Quản lý người dùng" />
+        <put-attribute name="content" value="/WEB-INF/pages/userManagement.jsp" />
+  </definition>
 </tiles-definitions>
