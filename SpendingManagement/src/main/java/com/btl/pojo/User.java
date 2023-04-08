@@ -5,18 +5,34 @@
 package com.btl.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.web.multipart.MultipartFile;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
- * @author trant
+ *
+ * @author phuan
  */
 @Entity
 @Table(name = "user")
@@ -36,18 +52,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByJoinedDate", query = "SELECT u FROM User u WHERE u.joinedDate = :joinedDate")})
 public class User implements Serializable {
 
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "active")
-    private short active;
-    @JoinColumn(name = "personal_transaction_id", referencedColumnName = "id")
-    @ManyToOne
-    private PersonalTransaction personalTransactionId;
-
     public static final String ADMIN = "ROLE_ADMIN";
     public static final String USER = "ROLE_USER";
 
-    private static final long serialVersionUID = 1L;
+    private static long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -79,6 +87,10 @@ public class User implements Serializable {
     private String password;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "active")
+    private short active;
+    @Basic(optional = false)
+    @NotNull
     @Size(min = 1, max = 10)
     @Column(name = "user_role")
     private String userRole;
@@ -89,14 +101,15 @@ public class User implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date joinedDate;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Set<PersonalTransaction> personalTransactionSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<Notification> notificationSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "creatorId")
     private Set<GroupTransaction> groupTransactionSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<GroupMember> groupMemberSet;
-
+    @JoinColumn(name = "personal_transaction_id", referencedColumnName = "id")
+    @ManyToOne
+    private PersonalTransaction personalTransactionId;
+    
     @Transient
     @JsonIgnore
     private int day;
@@ -210,15 +223,6 @@ public class User implements Serializable {
 
     public void setJoinedDate(Date joinedDate) {
         this.joinedDate = joinedDate;
-    }
-
-    @XmlTransient
-    public Set<PersonalTransaction> getPersonalTransactionSet() {
-        return personalTransactionSet;
-    }
-
-    public void setPersonalTransactionSet(Set<PersonalTransaction> personalTransactionSet) {
-        this.personalTransactionSet = personalTransactionSet;
     }
 
     @XmlTransient
@@ -358,5 +362,5 @@ public class User implements Serializable {
     public void setPersonalTransactionId(PersonalTransaction personalTransactionId) {
         this.personalTransactionId = personalTransactionId;
     }
-
+    
 }

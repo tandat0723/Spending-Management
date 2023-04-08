@@ -25,16 +25,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * @author trant
+ *
+ * @author phuan
  */
 @Entity
 @Table(name = "group_transaction")
 @XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "GroupTransaction.findAll", query = "SELECT g FROM GroupTransaction g"),
-        @NamedQuery(name = "GroupTransaction.findById", query = "SELECT g FROM GroupTransaction g WHERE g.id = :id"),
-        @NamedQuery(name = "GroupTransaction.findByName", query = "SELECT g FROM GroupTransaction g WHERE g.name = :name"),
-        @NamedQuery(name = "GroupTransaction.findByDescription", query = "SELECT g FROM GroupTransaction g WHERE g.description = :description")})
+    @NamedQuery(name = "GroupTransaction.findAll", query = "SELECT g FROM GroupTransaction g"),
+    @NamedQuery(name = "GroupTransaction.findById", query = "SELECT g FROM GroupTransaction g WHERE g.id = :id"),
+    @NamedQuery(name = "GroupTransaction.findByName", query = "SELECT g FROM GroupTransaction g WHERE g.name = :name"),
+    @NamedQuery(name = "GroupTransaction.findByDescription", query = "SELECT g FROM GroupTransaction g WHERE g.description = :description")})
 public class GroupTransaction implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -134,5 +135,5 @@ public class GroupTransaction implements Serializable {
     public String toString() {
         return "com.btl.pojo.GroupTransaction[ id=" + id + " ]";
     }
-
+    
 }
