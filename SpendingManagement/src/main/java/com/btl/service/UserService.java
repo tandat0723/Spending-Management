@@ -8,17 +8,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService extends UserDetailsService {
 
-    User GetById(int id);
+    User getById(int id);
 
-    boolean AddOrUpdate(User user);
+    boolean addOrUpdate(User user);
 
     User getByUsername(String username);
 
-    List<User> GetUsers(String username, int page);
+    List<User> getUsers(String username, int page);
 
-    List<User> GetByEmail(String email);
+    List<User> getByEmail(String email);
 
-    List<User> GetByPhone(String phone);
+    List<User> getByPhone(String phone);
 
     boolean addOrUpdateNoPassword(User user);
 
