@@ -17,10 +17,10 @@ public class utils {
     public static Date stringToDate(String strDate, String pattern) throws ParseException {
         return new SimpleDateFormat(pattern).parse(strDate);
     }
-    
+
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-    
+
     public static boolean isValidEmail(String emailStr) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
         return matcher.find();
@@ -31,7 +31,7 @@ public class utils {
         Matcher matcher = pattern.matcher(phoneStr);
         return matcher.matches();
     }
-    
+
     public static String capitalizeWord(String str) {
         String word[] = str.split("");
         String capitalizeWord = "";

@@ -30,10 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- *
- * @author phuan
- */
+
 @Entity
 @Table(name = "user")
 @XmlRootElement
@@ -51,11 +48,11 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByAvatar", query = "SELECT u FROM User u WHERE u.avatar = :avatar"),
     @NamedQuery(name = "User.findByJoinedDate", query = "SELECT u FROM User u WHERE u.joinedDate = :joinedDate")})
 public class User implements Serializable {
-
     public static final String ADMIN = "ROLE_ADMIN";
     public static final String USER = "ROLE_USER";
+    
+    private static final long serialVersionUID = 1L;
 
-    private static long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -88,7 +85,7 @@ public class User implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "active")
-    private short active;
+    private int active;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
@@ -137,10 +134,11 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String username, String password, String userRole) {
+    public User(Integer id, String username, String password, short active, String userRole) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.active = active;
         this.userRole = userRole;
     }
 
@@ -200,6 +198,14 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
+    }
+
 
     public String getUserRole() {
         return userRole;
@@ -252,6 +258,14 @@ public class User implements Serializable {
         this.groupMemberSet = groupMemberSet;
     }
 
+    public PersonalTransaction getPersonalTransactionId() {
+        return personalTransactionId;
+    }
+
+    public void setPersonalTransactionId(PersonalTransaction personalTransactionId) {
+        this.personalTransactionId = personalTransactionId;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -275,20 +289,6 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "com.btl.pojo.User[ id=" + id + " ]";
-    }
-
-    /**
-     * @return the file
-     */
-    public MultipartFile getFile() {
-        return file;
-    }
-
-    /**
-     * @param file the file to set
-     */
-    public void setFile(MultipartFile file) {
-        this.file = file;
     }
 
     /**
@@ -347,20 +347,20 @@ public class User implements Serializable {
         this.confirmPassword = confirmPassword;
     }
 
-    public short getActive() {
-        return active;
+        
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
     }
 
-    public void setActive(short active) {
-        this.active = active;
-    }
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
 
-    public PersonalTransaction getPersonalTransactionId() {
-        return personalTransactionId;
-    }
-
-    public void setPersonalTransactionId(PersonalTransaction personalTransactionId) {
-        this.personalTransactionId = personalTransactionId;
     }
     
 }

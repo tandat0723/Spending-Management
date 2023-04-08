@@ -19,10 +19,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author phuan
- */
+
 @Entity
 @Table(name = "group_member")
 @XmlRootElement

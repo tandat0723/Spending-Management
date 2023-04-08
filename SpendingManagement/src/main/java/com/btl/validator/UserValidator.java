@@ -8,13 +8,14 @@ import com.btl.pojo.User;
 import com.btl.service.UserService;
 import com.btl.utils.utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 /**
- *
  * @author trant
  */
+@Component
 public class UserValidator implements Validator {
 
     @Autowired
@@ -32,7 +33,7 @@ public class UserValidator implements Validator {
         int usernameMaxLength = 20;
         int passwordMinLength = 6;
 
-        if (userService.GetUsers(user.getUsername(), 0).size() > 0) {
+        if (userService.getUsers(user.getUsername(), 0).size() > 0) {
             errors.rejectValue("username", "", "Tên đăng nhập đã tồn tại");
         }
         if (user.getUsername().isEmpty()) {
@@ -59,13 +60,13 @@ public class UserValidator implements Validator {
         if (user.getPassword().length() < passwordMinLength) {
             errors.rejectValue("password", "", "Mật khẩu cần có tối thiểu " + passwordMinLength + " ký tự");
         }
-        if (userService.GetByEmail(user.getEmail()).size() > 0) {
+        if (userService.getByEmail(user.getEmail()).size() > 0) {
             errors.rejectValue("email", "", "Email đã tồn tại");
         }
         if (!utils.isValidEmail(user.getEmail())) {
             errors.rejectValue("email", "", "Email chưa đúng định dạng");
         }
-        if (userService.GetByPhone(user.getPhone()).size() > 0) {
+        if (userService.getByPhone(user.getPhone()).size() > 0) {
             errors.rejectValue("phone", "", "Số điện thoại đã tồn tại");
         }
         if (!utils.isValidMobile(user.getPhone())) {
