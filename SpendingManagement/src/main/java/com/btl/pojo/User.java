@@ -36,6 +36,14 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByJoinedDate", query = "SELECT u FROM User u WHERE u.joinedDate = :joinedDate")})
 public class User implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "active")
+    private short active;
+    @JoinColumn(name = "personal_transaction_id", referencedColumnName = "id")
+    @ManyToOne
+    private PersonalTransaction personalTransactionId;
+
     public static final String ADMIN = "ROLE_ADMIN";
     public static final String USER = "ROLE_USER";
 
@@ -69,8 +77,6 @@ public class User implements Serializable {
     @Size(min = 1, max = 100)
     @Column(name = "password")
     private String password;
-    @Column(name = "active")
-    private Boolean active;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
@@ -181,13 +187,6 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
 
     public String getUserRole() {
         return userRole;
@@ -342,6 +341,22 @@ public class User implements Serializable {
      */
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public short getActive() {
+        return active;
+    }
+
+    public void setActive(short active) {
+        this.active = active;
+    }
+
+    public PersonalTransaction getPersonalTransactionId() {
+        return personalTransactionId;
+    }
+
+    public void setPersonalTransactionId(PersonalTransaction personalTransactionId) {
+        this.personalTransactionId = personalTransactionId;
     }
 
 }

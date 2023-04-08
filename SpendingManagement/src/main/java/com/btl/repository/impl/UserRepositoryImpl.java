@@ -6,7 +6,9 @@ package com.btl.repository.impl;
 
 import com.btl.pojo.User;
 import com.btl.repository.UserRepository;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -131,5 +133,67 @@ public class UserRepositoryImpl implements UserRepository {
         Query q = session.createQuery(query);
 
         return q.getResultList();
+    }
+
+    @Override
+    public User getUserById(int id) {
+    
+        Session s = this.factory.getObject().getCurrentSession();
+        return s.get(User.class, id);
+    }
+
+    @Override
+    public boolean addOrUpdateUser(User u) {
+    
+        Session s = this.factory.getObject().getCurrentSession();
+        try {
+            if (u.getId() > 0)
+                s.update(u);
+            else
+                s.save(u);
+            
+            return true;
+        } catch (HibernateException ex) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteUser(int id) {
+    
+        User u = this.getUserById(id);
+        Session s = this.factory.getObject().getCurrentSession();
+        try {
+            s.delete(u);
+            return true;
+        } catch (HibernateException ex) {
+            return false;
+        }
+    }
+    
+    @Override
+    public List<User> getUsers(Map<String, String> params) {
+        Session s = factory.getObject().getCurrentSession();
+        CriteriaBuilder b = s.getCriteriaBuilder();
+        CriteriaQuery<User> q = b.createQuery(User.class);
+        Root root = q.from(User.class);
+        q.select(root);
+
+        if (params != null) {
+            List<Predicate> predicates = new ArrayList<>();
+            String kw = params.get("kw");
+            if (kw != null && !kw.isEmpty()) {
+                Predicate p = b.like(root.get("name").as(String.class),
+                        String.format("%%%s%%", kw));
+                predicates.add(p);
+            }
+            q.where(predicates.toArray(Predicate[]::new));
+        }
+
+        q.orderBy(b.desc(root.get("id")));
+        Query query = s.createQuery(q);
+        List<User> users = query.getResultList();
+
+        return users;
     }
 }

@@ -2,7 +2,7 @@ package com.btl.service;
 
 import com.btl.pojo.User;
 import java.util.List;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import java.util.Map;
 
 public interface UserService {
 
@@ -16,4 +16,8 @@ public interface UserService {
     List<User> GetByEmail(String email);
 
     List<User> GetByPhone(String phone);
+    List<User> getUsers(Map<String, String> params);
+    User getUserById(int id);
+    boolean addOrUpdateUser(User u);
+    boolean deleteUser(int id);
 }
