@@ -35,13 +35,13 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public User GetById(int id) {
-        return this.userRepository.GetById(id);
+    public User getById(int id) {
+        return this.userRepository.getById(id);
     }
     
 
     @Override
-    public boolean AddOrUpdate(User user) {
+    public boolean addOrUpdate(User user) {
         String pass = user.getPassword().trim();
         user.setPassword(this.bCryptPasswordEncoder.encode(pass));
 
@@ -70,34 +70,34 @@ public class UserServiceImpl implements UserService {
         if (user.getId() == 0) {
             user.setJoinedDate(new Date());
         }
-        return this.userRepository.AddOrUpdate(user);
+        return this.userRepository.addOrUpdate(user);
     }
 
     @Override
     @Transactional(readOnly = true)
     public User getByUsername(String username) {
-        return this.userRepository.GetByUserName(username);
+        return this.userRepository.getByUserName(username);
     }
 
     @Override
-    public List<User> GetUsers(String username, int page) {
-        return this.userRepository.GetUsers(username, page);
+    public List<User> getUsers(String username, int page) {
+        return this.userRepository.getUsers(username, page);
     }
 
     @Override
-    public List<User> GetByEmail(String email) {
-        return this.userRepository.GetByEmail(email);
+    public List<User> getByEmail(String email) {
+        return this.userRepository.getByEmail(email);
     }
 
     @Override
-    public List<User> GetByPhone(String phone) {
-        return this.userRepository.GetByPhone(phone);
+    public List<User> getByPhone(String phone) {
+        return this.userRepository.getByPhone(phone);
     }
 
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        List<User> users = this.GetUsers(username, 0);
+        List<User> users = this.getUsers(username, 0);
         if (users.isEmpty()) {
             throw new UsernameNotFoundException("Người dùng Không tồn tại!");
         }
@@ -136,7 +136,7 @@ public class UserServiceImpl implements UserService {
         if (user.getId() == 0) {
             user.setJoinedDate(new Date());
         }
-        return this.userRepository.AddOrUpdate(user);
+        return this.userRepository.addOrUpdate(user);
     }
 
     @Override

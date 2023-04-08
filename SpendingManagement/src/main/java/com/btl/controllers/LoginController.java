@@ -80,7 +80,7 @@ public class LoginController {
             user.setActive(1);
         }
 
-        boolean addOrUpdates = this.userService.AddOrUpdate(user);
+        boolean addOrUpdates = this.userService.addOrUpdate(user);
         if (addOrUpdates) {
             if (user.getUserRole().equals(User.USER)) {
                 PersonalTransaction personalTransaction = new PersonalTransaction();

@@ -44,13 +44,13 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User GetById(int id) {
+    public User getById(int id) {
         Session session = this.factory.getObject().getCurrentSession();
         return session.get(User.class, id);
     }
 
     @Override
-    public User GetByUserName(String username) {
+    public User getByUserName(String username) {
         Session session = this.factory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery(User.class);
@@ -63,7 +63,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public boolean AddOrUpdate(User user) {
+    public boolean addOrUpdate(User user) {
         Session session = this.factory.getObject().getCurrentSession();
         try {
             if (user.getId() != 0) {
@@ -81,7 +81,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> GetUsers(String username, int page) {
+    public List<User> getUsers(String username, int page) {
         Session session = this.factory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery(User.class);
@@ -104,7 +104,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> GetByEmail(String email) {
+    public List<User> getByEmail(String email) {
         Session session = this.factory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery(User.class);
@@ -123,7 +123,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> GetByPhone(String phone) {
+    public List<User> getByPhone(String phone) {
         Session session = this.factory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery(User.class);
@@ -242,37 +242,37 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public boolean activate(int id) {
-        User user = GetById(id);
+        User user = getById(id);
         if (user == null) {
             return false;
         } else {
             user.setActive(1);
-            AddOrUpdate(user);
+            addOrUpdate(user);
             return true;
         }
     }
 
     @Override
     public boolean deactivate(int id) {
-        User user = GetById(id);
+        User user = getById(id);
         if (user == null) {
             return false;
         } else {
             user.setActive(0);
-            AddOrUpdate(user);
+            addOrUpdate(user);
             return true;
         }
     }
 
     @Override
     public boolean changePassword(int id, String rawPassword) {
-        User user = GetById(id);
+        User user = getById(id);
         if (user == null) {
             return false;
         } else {
             String password = bCryptPasswordEncoder.encode(rawPassword);
             user.setPassword(password);
-            AddOrUpdate(user);
+            addOrUpdate(user);
             return true;
         }
     }
