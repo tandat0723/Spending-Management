@@ -14,36 +14,28 @@ import java.util.Map;
  */
 public interface UserRepository {
 
-    User getById(int id);
+    User getUserById(int id);
 
-    boolean addOrUpdate(User user);
+    boolean addOrUpdateUser(User user);
 
     User getByUserName(String username);
+
+    List<User> getUsersMultiCondition(Map<String, String> params, int page);
+
+    boolean changePassword(int id, String rawPassword);
+
+    List<User> getUsers(String username, int page);
 
     List<User> getByEmail(String email);
 
     List<User> getByPhone(String phone);
 
-    int getMaxItemsInPage();
-
     List<User> getByRole(String role, int page, int active);
 
-    List<User> getUsersMultiCondition(Map<String, String> params, int page);
-
-    boolean delete(User user);
-
-    boolean activate(int id);
-
-    boolean deactivate(int id);
-
-    boolean changePassword(int id, String rawPassword);
-
-    List<User> getUsers(Map<String, String> params);
-
-    boolean addOrUpdateUser(User u);
-    
     boolean deleteUser(int id);
-    
+
+    int getMaxItemsInPage();
+
     long count();
 
 }

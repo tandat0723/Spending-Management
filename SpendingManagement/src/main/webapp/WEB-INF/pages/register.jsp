@@ -24,17 +24,13 @@
                         </div>
                         <form:form action="${action}" method="post" class="user" enctype="multipart/form-data"
                                    modelAttribute="user">
-                            <form:errors path="*" element="div" cssClass="alert alert-danger mt-3"/>
+                            <form:errors path="*" element="div" class="alert alert-danger mt-3"/>
                             <form:hidden path="id"/>
                             <form:hidden path="avatar"/>
-                            <div class="form-group">
-                                <form:input path="firstName" class="form-control form-control-user"
-                                            placeholder="Tên trước" required="required"/>
-                            </div>
-                            <div class="form-group">
-                                <form:input path="lastName" class="form-control form-control-user"
-                                            placeholder="Tên sau" required="required"/>
-                            </div>
+<!--                            <div class="form-group">
+                                <form:input path="fullname" class="form-control form-control-user"
+                                            placeholder="Tên của bạn" required="required"/>
+                            </div>-->
                             <div class="form-group">
                                 <form:input path="username" class="form-control form-control-user"
                                             placeholder="Tên đăng nhập" required="required"/>
@@ -57,6 +53,13 @@
                             <div class="form-group">
                                 <form:input path="phone" class="form-control form-control-user"
                                             placeholder="Số điện thoại" required="required"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Loại tài khoản</label>
+                                <form:select path="userRole" class="custom-select">
+                                    <form:option value="ROLE_USER" label="Người dùng"
+                                                 selected="${user.userRole.equals('ROLE_USER') ? true : ''}"/>
+                                </form:select>
                             </div>
                             <div class="form-group row align-items-center">
                                 <div class="col">

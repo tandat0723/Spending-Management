@@ -7,7 +7,6 @@ import com.btl.utils.utils;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -35,53 +34,48 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public User getById(int id) {
-        return this.userRepository.getById(id);
+    public User getUserById(int id) {
+        return this.userRepository.getUserById(id);
     }
-    
 
     @Override
-    public boolean addOrUpdate(User user) {
+    public boolean addOrUpdateUser(User user) {
         String pass = user.getPassword().trim();
         user.setPassword(this.bCryptPasswordEncoder.encode(pass));
 
-        if (user.getLastName() != null) {
-            String lastName = user.getLastName();
-            user.setLastName(utils.stringNormalization(lastName));
+        if (user.getFullname() != null) {
+            String fullname = user.getFullname();
+            user.setFullname(utils.stringNormalization(fullname));
         }
 
         String avatar = user.getAvatar();
+
         if (!user.getFile().isEmpty()) {
-            Map result = null;
+            Map res = null;
             try {
-                result = this.cloudinary.uploader().upload(user.getFile().getBytes(),
+                res = this.cloudinary.uploader().upload(user.getFile().getBytes(),
                         ObjectUtils.asMap("resource_type", "auto"));
-            } catch (IOException e) {
-                e.printStackTrace();
+                user.setAvatar(res.get("secure_url").toString());
+            } catch (IOException ex) {
+                Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            if (result != null) {
-                user.setAvatar((String) result.get("secure_url"));
-            } else {
+            if (res != null)
+                user.setAvatar((String) res.get("secure_url"));
+            else
                 user.setAvatar(avatar);
-            }
+            
         }
-
-        if (user.getId() == 0) {
+        
+        if(user.getId() == 0) 
             user.setJoinedDate(new Date());
-        }
-        return this.userRepository.addOrUpdate(user);
+        return this.userRepository.addOrUpdateUser(user);
     }
 
     @Override
     @Transactional(readOnly = true)
     public User getByUsername(String username) {
         return this.userRepository.getByUserName(username);
-    }
-
-    @Override
-    public List<User> getUsers(String username, int page) {
-        return this.userRepository.getUsers(username, page);
     }
 
     @Override
@@ -93,60 +87,38 @@ public class UserServiceImpl implements UserService {
     public List<User> getByPhone(String phone) {
         return this.userRepository.getByPhone(phone);
     }
-    
-    @Override
-    public List<User> getUsers(Map<String, String> params) {
-        return this.userRepository.getUsers(params);
-    }
 
     @Override
-    public boolean addOrUpdateUser(User u) {
-    
-        if (!u.getFile().isEmpty()) {
-            try {
-                Map res = this.cloudinary.uploader().upload(u.getFile().getBytes(),
-                        ObjectUtils.asMap("resource_type", "auto"));
-                u.setAvatar(res.get("secure_url").toString());
-            } catch (IOException ex) {
-                Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
-        return this.userRepository.addOrUpdateUser(u);
+    public List<User> getUsers(String username, int page) {
+        return this.userRepository.getUsers(username, page);
     }
 
     @Override
     public boolean deleteUser(int id) {
-    
+
         return this.userRepository.deleteUser(id);
     }
 
     @Override
-    public User getUserById(int id) {
-    
-        return this.userRepository.getUserById(id);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        List<User> users = this.getUsers(username, 0);
-        if (users.isEmpty()) {
+        User users = this.getByUsername(username);
+        if (users == null) {
             throw new UsernameNotFoundException("Người dùng Không tồn tại!");
         }
-        User user = users.get(0);
-        Set<GrantedAuthority> auth = new HashSet<>();
-        auth.add(new SimpleGrantedAuthority(user.getUserRole()));
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(),
-                user.getPassword(), auth);
+        Set<GrantedAuthority> auth = new HashSet<>();
+        auth.add(new SimpleGrantedAuthority(users.getUserRole()));
+
+        return new org.springframework.security.core.userdetails.User(users.getUsername(),
+                users.getPassword(), auth);
     }
 
     @Override
     public boolean addOrUpdateNoPassword(User user) {
-        if (user.getLastName() != null) {
-            String lastname = user.getLastName();
-            user.setLastName(utils.stringNormalization(lastname));
+        if (user.getFullname() != null) {
+            String fullname = user.getFullname();
+            user.setFullname(utils.stringNormalization(fullname));
         }
 
         String avatar = user.getAvatar();
@@ -169,12 +141,11 @@ public class UserServiceImpl implements UserService {
         if (user.getId() == 0) {
             user.setJoinedDate(new Date());
         }
-        return this.userRepository.addOrUpdate(user);
+        return this.userRepository.addOrUpdateUser(user);
     }
 
     @Override
     public int getMaxItemsInPage() {
         return this.userRepository.getMaxItemsInPage();
     }
-
 }

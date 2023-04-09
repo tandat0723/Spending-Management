@@ -38,7 +38,7 @@ public class LoginHandler implements AuthenticationSuccessHandler {
                 redirectStr = "admin";
                 break;
             case User.USER:
-                redirectStr = "user";
+                redirectStr = "home";
                 break;
         }
         response.sendRedirect(redirectStr);

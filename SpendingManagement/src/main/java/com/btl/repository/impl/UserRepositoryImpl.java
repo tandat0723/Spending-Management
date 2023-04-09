@@ -43,7 +43,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User getById(int id) {
+    public User getUserById(int id) {
         Session session = this.factory.getObject().getCurrentSession();
         return session.get(User.class, id);
     }
@@ -55,51 +55,10 @@ public class UserRepositoryImpl implements UserRepository {
         CriteriaQuery<User> query = builder.createQuery(User.class);
         Root root = query.from(User.class);
         query = query.select(root);
-
         query = query.where(builder.equal(root.get("username").as(String.class), username));
         org.hibernate.query.Query q = session.createQuery(query);
+
         return (User) q.getSingleResult();
-    }
-
-    @Override
-    public boolean addOrUpdate(User user) {
-        Session session = this.factory.getObject().getCurrentSession();
-        try {
-            if (user.getId() != 0) {
-                session.update(user);
-            } else {
-                session.save(user);
-            }
-
-            return true;
-        } catch (HibernateException ex) {
-            ex.printStackTrace();
-        }
-
-        return false;
-    }
-
-    @Override
-    public List<User> getUsers(String username, int page) {
-        Session session = this.factory.getObject().getCurrentSession();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<User> query = builder.createQuery(User.class);
-        Root root = query.from(User.class);
-        query = query.select(root);
-
-        if (!username.isEmpty()) {
-            Predicate p = builder.equal(root.get("username").as(String.class), username.trim());
-            query = query.where(p);
-        }
-        query = query.orderBy(builder.desc(root.get("id")));
-        Query q = session.createQuery(query);
-        if (page != 0) {
-            int max = maxItemsInPage;
-            q.setMaxResults(max);
-            q.setFirstResult((page - 1) * max);
-        }
-
-        return q.getResultList();
     }
 
     @Override
@@ -142,22 +101,16 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User getUserById(int id) {
-    
-        Session s = this.factory.getObject().getCurrentSession();
-        return s.get(User.class, id);
-    }
-
-    @Override
     public boolean addOrUpdateUser(User u) {
-    
+
         Session s = this.factory.getObject().getCurrentSession();
         try {
-            if (u.getId() > 0)
+            if (u.getId() > 0) {
                 s.update(u);
-            else
+            } else {
                 s.save(u);
-            
+            }
+
             return true;
         } catch (HibernateException ex) {
             return false;
@@ -166,7 +119,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public boolean deleteUser(int id) {
-    
+
         User u = this.getUserById(id);
         Session s = this.factory.getObject().getCurrentSession();
         try {
@@ -176,31 +129,29 @@ public class UserRepositoryImpl implements UserRepository {
             return false;
         }
     }
-    
-    @Override
-    public List<User> getUsers(Map<String, String> params) {
-        Session s = factory.getObject().getCurrentSession();
-        CriteriaBuilder b = s.getCriteriaBuilder();
-        CriteriaQuery<User> q = b.createQuery(User.class);
-        Root root = q.from(User.class);
-        q.select(root);
 
-        if (params != null) {
-            List<Predicate> predicates = new ArrayList<>();
-            String kw = params.get("kw");
-            if (kw != null && !kw.isEmpty()) {
-                Predicate p = b.like(root.get("name").as(String.class),
-                        String.format("%%%s%%", kw));
-                predicates.add(p);
-            }
-            q.where(predicates.toArray(Predicate[]::new));
+    @Override
+    public List<User> getUsers(String username, int page) {
+        Session session = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root root = query.from(User.class);
+        query = query.select(root);
+
+        if (!username.isEmpty()) {
+            Predicate p = builder.equal(root.get("username").as(String.class), username.trim());
+            query = query.where(p);
+        }
+        query = query.orderBy(builder.desc(root.get("id")));
+        Query q = session.createQuery(query);
+
+        if (page != 0) {
+            int max = maxItemsInPage;
+            q.setMaxResults(max);
+            q.setFirstResult((page - 1) * max);
         }
 
-        q.orderBy(b.desc(root.get("id")));
-        Query query = s.createQuery(q);
-        List<User> users = query.getResultList();
-
-        return users;
+        return q.getResultList();
     }
 
     public List<User> getByRole(String role, int page, int active) {
@@ -233,6 +184,7 @@ public class UserRepositoryImpl implements UserRepository {
         Root root = q.from(User.class);
         q.select(root);
         q = q.orderBy(builder.desc(root.get("id")));
+
         if (params != null) {
             List<Predicate> predicates = new ArrayList<>();
             if (params.containsKey("firstname")) {
@@ -289,50 +241,14 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public boolean delete(User user) {
-        Session session = this.factory.getObject().getCurrentSession();
-        try {
-            session.delete(user);
-            return true;
-        } catch (HibernateException ex) {
-            System.err.println(ex.getMessage());
-        }
-        return false;
-    }
-
-    @Override
-    public boolean activate(int id) {
-        User user = getById(id);
-        if (user == null) {
-            return false;
-        } else {
-            user.setActive(1);
-            addOrUpdate(user);
-            return true;
-        }
-    }
-
-    @Override
-    public boolean deactivate(int id) {
-        User user = getById(id);
-        if (user == null) {
-            return false;
-        } else {
-            user.setActive(0);
-            addOrUpdate(user);
-            return true;
-        }
-    }
-
-    @Override
     public boolean changePassword(int id, String rawPassword) {
-        User user = getById(id);
+        User user = getUserById(id);
         if (user == null) {
             return false;
         } else {
             String password = bCryptPasswordEncoder.encode(rawPassword);
             user.setPassword(password);
-            addOrUpdate(user);
+            addOrUpdateUser(user);
             return true;
         }
     }

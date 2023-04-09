@@ -29,7 +29,7 @@ public class AdminController {
     
     @ModelAttribute
     public void commonAttributes(Model model) {
-        model.addAttribute("users", this.userService.getUsers(null));
+        model.addAttribute("users", this.userService.getUsers(null, 0));
     }
     
     @RequestMapping("/users")

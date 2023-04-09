@@ -10,13 +10,18 @@
         <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp"/>
         <put-attribute name="content" value=""/>
     </definition>
+    <definition name="adminLayout" template="/WEB-INF/layout/admin-base.jsp">
+        <put-attribute name="title" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/layout/admin-footer.jsp"/>
+        <put-attribute name="content" value=""/>
+    </definition>
     <definition name="blankLayout" template="/WEB-INF/layout/blank-base.jsp">
         <put-attribute name="title" value=""/>
         <put-attribute name="content" value=""/>
     </definition>
     
-    <!--PAGE-->
     
+    <!--PAGE-->
     <definition name="index" extends="baseLayout">
         <put-attribute name="title" value="Trang chủ"/>
         <put-attribute name="content" value="/WEB-INF/pages/index.jsp"/>
@@ -30,13 +35,20 @@
         <put-attribute name="content" value="/WEB-INF/pages/me-view.jsp"/>
     </definition>
     
-    <definition name="personal-transaction" extends="baseLayout">
-        <put-attribute name="title" value="Chi tiêu cá nhân"/>
-        <put-attribute name="content" value="/WEB-INF/pages/personal-transaction.jsp"/>
+    <definition name="home" extends="baseLayout">
+        <put-attribute name="title" value="Trang chủ người dùng"/>
+        <put-attribute name="content" value="/WEB-INF/pages/home.jsp"/>
     </definition>
     
-    <!--LOGIN-->
     
+    <!--PAGE ADMINISTARTOR-->
+    <definition name="account-admin" extends="adminLayout">
+        <put-attribute name="title" value="Quản lý tài khoản người dùng" />
+        <put-attribute name="content" value="/WEB-INF/pages/account-admin.jsp" />
+  </definition>
+  
+    
+    <!--PAGE LOGIN-->
     <definition name="login" extends="blankLayout">
         <put-attribute name="title" value="Đăng nhập"/>
         <put-attribute name="content" value="/WEB-INF/pages/login.jsp"/>
@@ -53,10 +65,5 @@
         <put-attribute name="title" value="Đổi mật khẩu"/>
         <put-attribute name="content" value="/WEB-INF/pages/change-password.jsp"/>
     </definition>
-    
-    
-     <definition name="users" extends="baseLayout">
-        <put-attribute name="title" value="Quản lý người dùng" />
-        <put-attribute name="content" value="/WEB-INF/pages/userManagement.jsp" />
-  </definition>
+      
 </tiles-definitions>

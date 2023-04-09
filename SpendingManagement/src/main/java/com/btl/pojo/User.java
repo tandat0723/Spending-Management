@@ -30,15 +30,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.web.multipart.MultipartFile;
 
-
+/**
+ *
+ * @author trant
+ */
 @Entity
 @Table(name = "user")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
-    @NamedQuery(name = "User.findByFirstName", query = "SELECT u FROM User u WHERE u.firstName = :firstName"),
-    @NamedQuery(name = "User.findByLastName", query = "SELECT u FROM User u WHERE u.lastName = :lastName"),
+    @NamedQuery(name = "User.findByFullname", query = "SELECT u FROM User u WHERE u.fullname = :fullname"),
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
     @NamedQuery(name = "User.findByPhone", query = "SELECT u FROM User u WHERE u.phone = :phone"),
     @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
@@ -48,22 +50,19 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByAvatar", query = "SELECT u FROM User u WHERE u.avatar = :avatar"),
     @NamedQuery(name = "User.findByJoinedDate", query = "SELECT u FROM User u WHERE u.joinedDate = :joinedDate")})
 public class User implements Serializable {
+    
     public static final String ADMIN = "ROLE_ADMIN";
     public static final String USER = "ROLE_USER";
     
     private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
     @Size(max = 45)
-    @Column(name = "first_name")
-    private String firstName;
-    @Size(max = 45)
-    @Column(name = "last_name")
-    private String lastName;
+    @Column(name = "fullname")
+    private String fullname;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 45)
     @Column(name = "email")
@@ -106,7 +105,7 @@ public class User implements Serializable {
     @JoinColumn(name = "personal_transaction_id", referencedColumnName = "id")
     @ManyToOne
     private PersonalTransaction personalTransactionId;
-    
+
     @Transient
     @JsonIgnore
     private int day;
@@ -150,20 +149,12 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFullname() {
+        return fullname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public String getEmail() {
@@ -205,7 +196,6 @@ public class User implements Serializable {
     public void setActive(int active) {
         this.active = active;
     }
-
 
     public String getUserRole() {
         return userRole;
@@ -347,7 +337,6 @@ public class User implements Serializable {
         this.confirmPassword = confirmPassword;
     }
 
-        
     /**
      * @return the file
      */
@@ -360,7 +349,6 @@ public class User implements Serializable {
      */
     public void setFile(MultipartFile file) {
         this.file = file;
-
     }
-    
+
 }

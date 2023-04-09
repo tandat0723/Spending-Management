@@ -33,7 +33,6 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
-
     @Autowired
     private UserValidator userValidator;
     @Autowired
@@ -55,16 +54,16 @@ public class LoginController {
 
     @GetMapping(value = "/register")
     public String RegisterView(Model model) {
-//        User user = new User();
-//        user.setId(0);
-        model.addAttribute("user", new User());
+        User user = new User();
+        user.setId(0);
+        model.addAttribute("user", user);
         model.addAttribute("errMsg", model.asMap().get("errMsg"));
 
         return "register";
     }
 
     @PostMapping(value = "/register")
-    public String RegisterProcess(@ModelAttribute(value = "user") @Valid User user,
+    public String RegisterProcess(Model model, @ModelAttribute(value = "user") @Valid User user,
             BindingResult result, final RedirectAttributes redirectAttributes) {
         String errMsg = null;
         String sucMsg = null;
@@ -73,18 +72,18 @@ public class LoginController {
             return "register";
         }
 
-        //set role
         if (user.getUserRole().equals("ROLE_USER")) {
             user.setActive(0);
         } else {
             user.setActive(1);
         }
 
-        boolean addOrUpdates = this.userService.addOrUpdate(user);
+        boolean addOrUpdates = this.userService.addOrUpdateUser(user);
         if (addOrUpdates) {
             if (user.getUserRole().equals(User.USER)) {
                 PersonalTransaction personalTransaction = new PersonalTransaction();
                 personalTransaction.setId(0);
+
                 personalTransactionService.addOrUpdate(personalTransaction);
                 user.setPersonalTransactionId(personalTransaction);
                 userService.addOrUpdateNoPassword(user);

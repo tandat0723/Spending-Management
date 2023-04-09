@@ -6,12 +6,11 @@ import java.util.Map;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-
 public interface UserService extends UserDetailsService {
 
-    User getById(int id);
+    User getUserById(int id);
 
-    boolean addOrUpdate(User user);
+    boolean addOrUpdateUser(User user);
 
     User getByUsername(String username);
 
@@ -19,16 +18,11 @@ public interface UserService extends UserDetailsService {
 
     List<User> getByPhone(String phone);
 
+    List<User> getUsers(String username, int page);
+
     boolean addOrUpdateNoPassword(User user);
 
-    List<User> getUsers(Map<String, String> params);
-    
-    User getUserById(int id);
-    
-    boolean addOrUpdateUser(User u);
-    
     boolean deleteUser(int id);
-    
-    int getMaxItemsInPage();
 
+    int getMaxItemsInPage();
 }
