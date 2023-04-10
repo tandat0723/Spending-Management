@@ -20,7 +20,6 @@
         <put-attribute name="content" value=""/>
     </definition>
     
-    
     <!--PAGE-->
     <definition name="index" extends="baseLayout">
         <put-attribute name="title" value="Trang chủ"/>

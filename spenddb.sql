@@ -16,35 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `group_member`
---
-
-DROP TABLE IF EXISTS `group_member`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `group_member` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `group_id` int NOT NULL,
-  `user_id` int NOT NULL,
-  `contribution` double NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `group_members_fk_idx` (`group_id`),
-  KEY `user_members_fk_idx` (`user_id`),
-  CONSTRAINT `group_members_fk` FOREIGN KEY (`group_id`) REFERENCES `group_transaction` (`id`),
-  CONSTRAINT `user_members_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `group_member`
---
-
-LOCK TABLES `group_member` WRITE;
-/*!40000 ALTER TABLE `group_member` DISABLE KEYS */;
-/*!40000 ALTER TABLE `group_member` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `group_transaction`
 --
 
@@ -56,10 +27,12 @@ CREATE TABLE `group_transaction` (
   `name` varchar(45) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `description` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `creator_id` int NOT NULL,
+  `price` double DEFAULT NULL,
+  `active` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  KEY `group_user_fk_idx` (`creator_id`),
-  CONSTRAINT `group_user_fk` FOREIGN KEY (`creator_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+  KEY `user_group_fk_idx` (`creator_id`),
+  CONSTRAINT `user_group_fk` FOREIGN KEY (`creator_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +41,37 @@ CREATE TABLE `group_transaction` (
 
 LOCK TABLES `group_transaction` WRITE;
 /*!40000 ALTER TABLE `group_transaction` DISABLE KEYS */;
+INSERT INTO `group_transaction` VALUES (1,'Nhóm 1','arp',10,10000000,0),(2,'Nhóm 2','arp',9,5000030,0);
 /*!40000 ALTER TABLE `group_transaction` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `group_users`
+--
+
+DROP TABLE IF EXISTS `group_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `group_users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `group_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `group_members_fk_idx` (`group_id`),
+  KEY `user_members_fk_idx` (`user_id`),
+  CONSTRAINT `group_members_fk` FOREIGN KEY (`group_id`) REFERENCES `group_transaction` (`id`),
+  CONSTRAINT `user_members_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `group_users`
+--
+
+LOCK TABLES `group_users` WRITE;
+/*!40000 ALTER TABLE `group_users` DISABLE KEYS */;
+INSERT INTO `group_users` VALUES (1,1,10),(2,1,9);
+/*!40000 ALTER TABLE `group_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -112,7 +115,7 @@ CREATE TABLE `personal_transaction` (
   `purpose` varchar(45) COLLATE utf8mb4_unicode_520_ci NOT NULL,
   `description` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `price` double NOT NULL,
-  `date` datetime NOT NULL,
+  `date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -123,6 +126,7 @@ CREATE TABLE `personal_transaction` (
 
 LOCK TABLES `personal_transaction` WRITE;
 /*!40000 ALTER TABLE `personal_transaction` DISABLE KEYS */;
+INSERT INTO `personal_transaction` VALUES (1,'chi tiêu cá nhân','shoping','abc',2000000,NULL);
 /*!40000 ALTER TABLE `personal_transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,13 +139,12 @@ DROP TABLE IF EXISTS `user`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
-  `last_name` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `fullname` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `email` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `phone` varchar(10) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `username` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `password` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `active` tinyint NOT NULL DEFAULT '0',
+  `active` int NOT NULL DEFAULT '0',
   `user_role` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `avatar` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `joined_date` datetime DEFAULT NULL,
@@ -149,7 +152,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   KEY `user_personal_fk_idx` (`personal_transaction_id`),
   CONSTRAINT `user_personal_fk` FOREIGN KEY (`personal_transaction_id`) REFERENCES `personal_transaction` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +161,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'tran','dat','admin@admin.com','039474635','tandat123','12345',1,'ADMIN','abc',NULL,NULL),(2,'phu','an','an@admin.com','093837364','admin123','1234',1,'ADMIN','abcc',NULL,NULL);
+INSERT INTO `user` VALUES (1,NULL,'admin@admin.com','039474635','admin','$2a$10$oU0okApZiC38mt8qn0KNYuOh9EldEZjrQX/YM09hMezBsh3UzEXkO',0,'ROLE_ADMIN','abc',NULL,NULL),(9,NULL,'nkocbroed123@gmail.com','0398475467','tandat1234','$2a$10$oU0okApZiC38mt8qn0KNYuOh9EldEZjrQX/YM09hMezBsh3UzEXkO',0,'ROLE_USER','','2023-04-09 23:57:05',NULL),(10,NULL,'doremon@doremon.com','0394843635','doremon','$2a$10$bcSsEfB7cCeqKt4QZ7yNDOdXHa6uaASfsChF5CPhdVZXDTYY/0Y0O',0,'ROLE_USER','https://res.cloudinary.com/cloudybeauty/image/upload/v1681060469/sxxdipein8lywpbh8xjd.jpg','2023-04-10 00:14:29',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -171,4 +174,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-07 23:10:29
+-- Dump completed on 2023-04-10 20:50:01

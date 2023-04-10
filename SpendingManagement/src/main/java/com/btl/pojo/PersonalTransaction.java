@@ -64,8 +64,6 @@ public class PersonalTransaction implements Serializable {
     @NotNull
     @Column(name = "price")
     private double price;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
@@ -79,12 +77,11 @@ public class PersonalTransaction implements Serializable {
         this.id = id;
     }
 
-    public PersonalTransaction(Integer id, String transactionType, String purpose, double price, Date date) {
+    public PersonalTransaction(Integer id, String transactionType, String purpose, double price) {
         this.id = id;
         this.transactionType = transactionType;
         this.purpose = purpose;
         this.price = price;
-        this.date = date;
     }
 
     public Integer getId() {

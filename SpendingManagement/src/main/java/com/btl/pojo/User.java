@@ -50,7 +50,7 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByAvatar", query = "SELECT u FROM User u WHERE u.avatar = :avatar"),
     @NamedQuery(name = "User.findByJoinedDate", query = "SELECT u FROM User u WHERE u.joinedDate = :joinedDate")})
 public class User implements Serializable {
-    
+
     public static final String ADMIN = "ROLE_ADMIN";
     public static final String USER = "ROLE_USER";
     
@@ -98,14 +98,14 @@ public class User implements Serializable {
     private Date joinedDate;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<Notification> notificationSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    private Set<GroupUsers> groupUsersSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "creatorId")
     private Set<GroupTransaction> groupTransactionSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Set<GroupMember> groupMemberSet;
     @JoinColumn(name = "personal_transaction_id", referencedColumnName = "id")
     @ManyToOne
     private PersonalTransaction personalTransactionId;
-
+    
     @Transient
     @JsonIgnore
     private int day;
@@ -133,7 +133,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String username, String password, short active, String userRole) {
+    public User(Integer id, String username, String password, int active, String userRole) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -231,21 +231,21 @@ public class User implements Serializable {
     }
 
     @XmlTransient
+    public Set<GroupUsers> getGroupUsersSet() {
+        return groupUsersSet;
+    }
+
+    public void setGroupUsersSet(Set<GroupUsers> groupUsersSet) {
+        this.groupUsersSet = groupUsersSet;
+    }
+
+    @XmlTransient
     public Set<GroupTransaction> getGroupTransactionSet() {
         return groupTransactionSet;
     }
 
     public void setGroupTransactionSet(Set<GroupTransaction> groupTransactionSet) {
         this.groupTransactionSet = groupTransactionSet;
-    }
-
-    @XmlTransient
-    public Set<GroupMember> getGroupMemberSet() {
-        return groupMemberSet;
-    }
-
-    public void setGroupMemberSet(Set<GroupMember> groupMemberSet) {
-        this.groupMemberSet = groupMemberSet;
     }
 
     public PersonalTransaction getPersonalTransactionId() {

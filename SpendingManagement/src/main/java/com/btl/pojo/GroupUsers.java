@@ -16,7 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -24,13 +23,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author trant
  */
 @Entity
-@Table(name = "group_member")
+@Table(name = "group_users")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "GroupMember.findAll", query = "SELECT g FROM GroupMember g"),
-    @NamedQuery(name = "GroupMember.findById", query = "SELECT g FROM GroupMember g WHERE g.id = :id"),
-    @NamedQuery(name = "GroupMember.findByContribution", query = "SELECT g FROM GroupMember g WHERE g.contribution = :contribution")})
-public class GroupMember implements Serializable {
+    @NamedQuery(name = "GroupUsers.findAll", query = "SELECT g FROM GroupUsers g"),
+    @NamedQuery(name = "GroupUsers.findById", query = "SELECT g FROM GroupUsers g WHERE g.id = :id")})
+public class GroupUsers implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -38,10 +36,6 @@ public class GroupMember implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "contribution")
-    private double contribution;
     @JoinColumn(name = "group_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private GroupTransaction groupId;
@@ -49,16 +43,11 @@ public class GroupMember implements Serializable {
     @ManyToOne(optional = false)
     private User userId;
 
-    public GroupMember() {
+    public GroupUsers() {
     }
 
-    public GroupMember(Integer id) {
+    public GroupUsers(Integer id) {
         this.id = id;
-    }
-
-    public GroupMember(Integer id, double contribution) {
-        this.id = id;
-        this.contribution = contribution;
     }
 
     public Integer getId() {
@@ -67,14 +56,6 @@ public class GroupMember implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public double getContribution() {
-        return contribution;
-    }
-
-    public void setContribution(double contribution) {
-        this.contribution = contribution;
     }
 
     public GroupTransaction getGroupId() {
@@ -103,10 +84,10 @@ public class GroupMember implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GroupMember)) {
+        if (!(object instanceof GroupUsers)) {
             return false;
         }
-        GroupMember other = (GroupMember) object;
+        GroupUsers other = (GroupUsers) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -115,7 +96,7 @@ public class GroupMember implements Serializable {
 
     @Override
     public String toString() {
-        return "com.btl.pojo.GroupMember[ id=" + id + " ]";
+        return "com.btl.pojo.GroupUsers[ id=" + id + " ]";
     }
     
 }

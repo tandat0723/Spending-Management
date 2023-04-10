@@ -35,7 +35,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "GroupTransaction.findAll", query = "SELECT g FROM GroupTransaction g"),
     @NamedQuery(name = "GroupTransaction.findById", query = "SELECT g FROM GroupTransaction g WHERE g.id = :id"),
     @NamedQuery(name = "GroupTransaction.findByName", query = "SELECT g FROM GroupTransaction g WHERE g.name = :name"),
-    @NamedQuery(name = "GroupTransaction.findByDescription", query = "SELECT g FROM GroupTransaction g WHERE g.description = :description")})
+    @NamedQuery(name = "GroupTransaction.findByDescription", query = "SELECT g FROM GroupTransaction g WHERE g.description = :description"),
+    @NamedQuery(name = "GroupTransaction.findByPrice", query = "SELECT g FROM GroupTransaction g WHERE g.price = :price"),
+    @NamedQuery(name = "GroupTransaction.findByActive", query = "SELECT g FROM GroupTransaction g WHERE g.active = :active")})
 public class GroupTransaction implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,11 +54,18 @@ public class GroupTransaction implements Serializable {
     @Size(max = 255)
     @Column(name = "description")
     private String description;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "price")
+    private Double price;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "active")
+    private int active;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "groupId")
+    private Set<GroupUsers> groupUsersSet;
     @JoinColumn(name = "creator_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User creatorId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "groupId")
-    private Set<GroupMember> groupMemberSet;
 
     public GroupTransaction() {
     }
@@ -65,9 +74,10 @@ public class GroupTransaction implements Serializable {
         this.id = id;
     }
 
-    public GroupTransaction(Integer id, String name) {
+    public GroupTransaction(Integer id, String name, int active) {
         this.id = id;
         this.name = name;
+        this.active = active;
     }
 
     public Integer getId() {
@@ -94,21 +104,37 @@ public class GroupTransaction implements Serializable {
         this.description = description;
     }
 
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
+    }
+
+    @XmlTransient
+    public Set<GroupUsers> getGroupUsersSet() {
+        return groupUsersSet;
+    }
+
+    public void setGroupUsersSet(Set<GroupUsers> groupUsersSet) {
+        this.groupUsersSet = groupUsersSet;
+    }
+
     public User getCreatorId() {
         return creatorId;
     }
 
     public void setCreatorId(User creatorId) {
         this.creatorId = creatorId;
-    }
-
-    @XmlTransient
-    public Set<GroupMember> getGroupMemberSet() {
-        return groupMemberSet;
-    }
-
-    public void setGroupMemberSet(Set<GroupMember> groupMemberSet) {
-        this.groupMemberSet = groupMemberSet;
     }
 
     @Override
