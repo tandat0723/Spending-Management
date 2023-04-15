@@ -72,7 +72,7 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setViewClass(JstlView.class);
         resolver.setPrefix("/WEB-INF/pages/");
-
+        resolver.setPrefix("/WEB-INF/pages/admin");
         resolver.setSuffix(".jsp");
         return resolver;
     }

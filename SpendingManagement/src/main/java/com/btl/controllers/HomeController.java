@@ -1,6 +1,6 @@
 package com.btl.controllers;
 
-import com.btl.pojo.PersonalTransaction;
+import com.btl.pojo.User;
 import com.btl.service.PersonalTransactionService;
 import com.btl.service.UserService;
 import javax.persistence.NoResultException;
@@ -19,8 +19,6 @@ public class HomeController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private PersonalTransactionService personalTransactionService;
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -38,10 +36,10 @@ public class HomeController {
 
     @RequestMapping("/me/view")
     public String aboutMeView(Model model, Authentication authentication) {
-        PersonalTransaction personalTransaction;
+        User user;
         try {
-            personalTransaction = personalTransactionService.getByUserId(userService.getByUsername(authentication.getName()).getId());
-            model.addAttribute("personalTransaction", personalTransaction);
+            user = userService.getUserById(userService.getByUsername(authentication.getName()).getId());
+            model.addAttribute("user", user);
         } catch(NoResultException ex) {
             System.out.println(ex.getMessage());
         }

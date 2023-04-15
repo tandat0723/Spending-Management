@@ -8,6 +8,9 @@ import com.btl.service.UserService;
 import com.btl.pojo.User;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,39 +24,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author phuan
  */
 @Controller
-@RequestMapping("/admin")
+@RequestMapping(path = "/admin")
 public class AdminController {
-    
+
     @Autowired
     private UserService userService;
-    
+
     @ModelAttribute
     public void commonAttributes(Model model) {
         model.addAttribute("users", this.userService.getUsers(null, 0));
     }
-    
+
+    @RequestMapping(path = "/admin")
+    public String index() {
+        return "admin";
+    }
+
     @RequestMapping("/users")
-    public String addUser(Model model, 
+    public String addUser(Model model,
             @ModelAttribute(value = "user") @Valid User u,
             BindingResult rs) {
-        if (rs.hasErrors())
+        if (rs.hasErrors()) {
             return "users";
-        
-        if (this.userService.addOrUpdateUser(u) == true)
+        }
+
+        if (this.userService.addOrUpdateUser(u) == true) {
             return "redirect:/admin/users";
-        else
+        } else {
             model.addAttribute("errMsg", "Lỗi! Xin liên hệ người quản trị xử lý!!!");
-        
+        }
+
         return "users";
     }
-    
+
     @GetMapping("/users")
     public String users(Model model) {
         model.addAttribute("user", new User());
-        
+
         return "users";
     }
-    
+
     @GetMapping("/users/{userId}")
     public String updateUser(Model model, @PathVariable(value = "userId") int id) {
         model.addAttribute("user", this.userService.getUserById(id));

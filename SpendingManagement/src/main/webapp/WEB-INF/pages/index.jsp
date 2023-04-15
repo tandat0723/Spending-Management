@@ -4,14 +4,15 @@
     Author     : trant
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <section class="container">
     <br/>
     <a style="text-decoration: none;" class="link-success" href="<c:url value="/login" />">
         Đăng nhập ngay thôi!
     </a>
+    <br/>
     <br/>
 </section>
 

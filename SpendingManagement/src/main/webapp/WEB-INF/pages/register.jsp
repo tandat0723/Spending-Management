@@ -27,10 +27,10 @@
                             <form:errors path="*" element="div" class="alert alert-danger mt-3"/>
                             <form:hidden path="id"/>
                             <form:hidden path="avatar"/>
-<!--                            <div class="form-group">
+                            <div class="form-group">
                                 <form:input path="fullname" class="form-control form-control-user"
                                             placeholder="Tên của bạn" required="required"/>
-                            </div>-->
+                            </div>
                             <div class="form-group">
                                 <form:input path="username" class="form-control form-control-user"
                                             placeholder="Tên đăng nhập" required="required"/>
