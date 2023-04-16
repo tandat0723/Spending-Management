@@ -31,7 +31,6 @@ public class HomeController {
         if (authentication != null) {
             model.addAttribute("currentUser", this.userService.getByUsername(authentication.getName()));
         }
-
     }
 
     @RequestMapping("/me/view")
@@ -40,19 +39,19 @@ public class HomeController {
         try {
             user = userService.getUserById(userService.getByUsername(authentication.getName()).getId());
             model.addAttribute("user", user);
-        } catch(NoResultException ex) {
+        } catch (NoResultException ex) {
             System.out.println(ex.getMessage());
         }
 
         return "me-view";
     }
-    
+
     @RequestMapping("/me/edit")
     public String aboutMeEditView(Model model) {
         model.addAttribute("sucMsg", model.asMap().get("sucMsg"));
         return "index";
     }
-    
+
     @PostMapping("/me/edit")
     public String aboutMeEdit(Model model) {
         model.addAttribute("sucMsg", model.asMap().get("sucMsg"));

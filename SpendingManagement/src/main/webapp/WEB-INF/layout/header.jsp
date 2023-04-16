@@ -6,7 +6,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="se" uri="http://www.springframework.org/security/tags"%>
+
 <header>
     <nav class="navbar sticky-top navbar-expand-md bg-dark navbar-dark">
         <c:choose>
@@ -43,13 +43,20 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                            aria-haspopup="true" aria-expanded="false">
-                            Thống kê
+                            Thống kê báo cáo
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="<c:url value="#"/>">Thống kê loại tài khoản</a>
-                            <a class="dropdown-item" href="<c:url value="#"/>">Thống kê bài viết theo tháng</a>
-                            <a class="dropdown-item" href="<c:url value="#"/>">Thống kê</a>
+                            <a class="dropdown-item" href="<c:url value="#"/>">Thống kê tài khoản</a>
+                            <a class="dropdown-item" href="<c:url value="#"/>">Thống kê chi tiêu</a>
                         </div>
+                    </li>
+                </c:if>
+                <c:if test="${currentUser.userRole == 'ROLE_USE' && currentUser.active == 1}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="#" />">Chi tiêu cá nhân</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="#" />">Chi tiêu nhóm</a>
                     </li>
                 </c:if>
             </ul>
@@ -72,13 +79,24 @@
                         <span>
                             <i class="fa-solid fa-user"></i>
                         </span>
+
+                        <c:if test="${!(currentUser.userRole == 'ROLE_USER')}">
+                            ${currentUser.fullname}
+                        </c:if>
                         <c:if test="${currentUser.userRole == 'ROLE_USER'}">
                             ${userService.getUserById(currentUser.id).name}
                         </c:if>
+
+                        <span class="badge badge-secondary">${currentUser.userRole}</span>
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/" />">${pageContext.request.userPrincipal.name}</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="<c:url value="/me/view"/>" >Thông tin tài khoản</a>
+                        <c:if test="${currentUser.userRole == 'ROLE_USER'}">
+                            <a class="dropdown-item" href="<c:url value="/user/user-info/add-or-update"/>">
+                                Chỉnh sửa thông tin người dùng
+                            </a>
+                        </c:if>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/logout" />">Đăng xuất</a>
