@@ -53,6 +53,24 @@
                                             Đổi mật khẩu
                                         </button>     
                                     </form>
+                                    <hr/>
+                                    <c:choose>
+                                        <c:when test="${currentUser.userRole == 'ROLE_ADMIN'}">
+                                            <a style="color:black;" class="small" href="<c:url value="/admin"/>">
+                                                Trở lại trang chủ
+                                            </a>
+                                        </c:when>
+                                        <c:when test="${currentUser.userRole == 'ROLE_USER'}">
+                                            <a style="color:black;" class="small" href="<c:url value="/user"/>">
+                                                Trở lại trang chủ
+                                            </a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a style="color:black;" class="small" href="<c:url value="/"/>">
+                                                Trở lại trang chủ
+                                            </a>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </div>
                         </div>

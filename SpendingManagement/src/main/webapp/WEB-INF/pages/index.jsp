@@ -38,10 +38,11 @@
             <span class="carousel-control-next-icon"></span>
         </a>
     </div>
-    
+
     <br/>
     <a class="nav-link home-main" href="<c:url value="/login" />">
         Đăng nhập ngay thôi!
     </a>
 </div>
 
+<!--xem lại sucMsg-->
