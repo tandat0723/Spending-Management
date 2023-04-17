@@ -49,10 +49,9 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/");
     }
 
-    @Bean(name = "validator")
+    @Bean
     public LocalValidatorFactoryBean validator() {
         LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
-        bean.setValidationMessageSource(messageSource());
 
         return bean;
     }
@@ -72,17 +71,11 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setViewClass(JstlView.class);
         resolver.setPrefix("/WEB-INF/pages/");
-
+        resolver.setPrefix("/WEB-INF/pages/admin");
+        resolver.setPrefix("/WEB-INF/pages/admin/account");
         resolver.setSuffix(".jsp");
+
         return resolver;
-    }
-
-    @Bean
-    public MessageSource messageSource() {
-        ResourceBundleMessageSource resource = new ResourceBundleMessageSource();
-        resource.setBasename("messages");
-
-        return resource;
     }
 
     @Bean
@@ -92,5 +85,5 @@ public class WebAppContextConfig implements WebMvcConfigurer {
 
         return resolver;
     }
-    
+
 }

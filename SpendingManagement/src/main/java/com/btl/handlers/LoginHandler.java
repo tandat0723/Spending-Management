@@ -23,13 +23,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoginHandler implements AuthenticationSuccessHandler {
     @Autowired
-    private UserService UserService;
+    private UserService userService;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, 
             HttpServletResponse response, Authentication a) throws IOException, ServletException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = this.UserService.getByUsername(authentication.getName());
+        User user = this.userService.getByUsername(authentication.getName());
         request.getSession().setAttribute("currentUser", user);
         System.out.println("LOGIN SUCCESSFUL");
         String redirectStr = request.getContextPath();
@@ -38,7 +38,7 @@ public class LoginHandler implements AuthenticationSuccessHandler {
                 redirectStr = "admin";
                 break;
             case User.USER:
-                redirectStr = "home";
+                redirectStr = "user";
                 break;
         }
         response.sendRedirect(redirectStr);

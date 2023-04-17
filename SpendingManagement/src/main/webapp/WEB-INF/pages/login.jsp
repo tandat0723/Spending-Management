@@ -4,7 +4,7 @@
     Author     : trant
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:url value="/login" var="action"/>
@@ -38,7 +38,7 @@
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
                                                 <label class="custom-control-label" for="customCheck">
-                                                    Remember Me
+                                                    Ghi nhớ
                                                 </label>
                                             </div>
                                         </div>

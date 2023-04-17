@@ -4,6 +4,7 @@
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
+    <!--LAYOUT PAGE-->
     <definition name="baseLayout" template="/WEB-INF/layout/base.jsp">
         <put-attribute name="title" value=""/>
         <put-attribute name="header" value="/WEB-INF/layout/header.jsp"/>
@@ -12,6 +13,8 @@
     </definition>
     <definition name="adminLayout" template="/WEB-INF/layout/admin-base.jsp">
         <put-attribute name="title" value=""/>
+        <put-attribute name="sidebar" value="/WEB-INF/layout/admin-sidebar.jsp"/>
+        <put-attribute name="topbar" value="/WEB-INF/layout/admin-topbar.jsp"/>
         <put-attribute name="footer" value="/WEB-INF/layout/admin-footer.jsp"/>
         <put-attribute name="content" value=""/>
     </definition>
@@ -20,31 +23,23 @@
         <put-attribute name="content" value=""/>
     </definition>
     
-    <!--PAGE-->
-    <definition name="index" extends="baseLayout">
-        <put-attribute name="title" value="Trang chủ"/>
-        <put-attribute name="content" value="/WEB-INF/pages/index.jsp"/>
-    </definition>
-    <definition name="personal-transaction" extends="baseLayout">
-        <put-attribute name="title" value="Chi tiêu cá nhân"/>
-        <put-attribute name="content" value="/WEB-INF/pages/personal-transaction.jsp"/>
-    </definition>
-    <definition name="me-view" extends="baseLayout">
-        <put-attribute name="title" value="Thông tin tài khoản"/>
-        <put-attribute name="content" value="/WEB-INF/pages/me-view.jsp"/>
-    </definition>
     
-    <definition name="home" extends="baseLayout">
+    <!--PAGE ACCESS-->
+    <definition name="user" extends="baseLayout">
         <put-attribute name="title" value="Trang chủ người dùng"/>
-        <put-attribute name="content" value="/WEB-INF/pages/home.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/pages/user.jsp"/>
     </definition>
     
     
-    <!--PAGE ADMINISTARTOR-->
+    <!--PAGE ADMINISTRARTOR-->
+    <definition name="admin" extends="adminLayout">
+        <put-attribute name="title" value="Trang chủ quản trị" />
+        <put-attribute name="content" value="/WEB-INF/pages/admin/admin.jsp" />
+    </definition>
     <definition name="account-admin" extends="adminLayout">
         <put-attribute name="title" value="Quản lý tài khoản người dùng" />
-        <put-attribute name="content" value="/WEB-INF/pages/account-admin.jsp" />
-  </definition>
+        <put-attribute name="content" value="/WEB-INF/pages/admin/account/account-admin.jsp" />
+    </definition>
   
     
     <!--PAGE LOGIN-->
@@ -64,5 +59,21 @@
         <put-attribute name="title" value="Đổi mật khẩu"/>
         <put-attribute name="content" value="/WEB-INF/pages/change-password.jsp"/>
     </definition>
+    
+    
+    <!--PAGE DEFINE-->
+    <definition name="index" extends="baseLayout">
+        <put-attribute name="title" value="Trang chủ"/>
+        <put-attribute name="content" value="/WEB-INF/pages/index.jsp"/>
+    </definition>
+    <definition name="me-view" extends="baseLayout">
+        <put-attribute name="title" value="Thông tin tài khoản người dùng"/>
+        <put-attribute name="content" value="/WEB-INF/pages/me-view.jsp"/>
+    </definition>
+    <definition name="access-denied" extends="baseLayout">
+        <put-attribute name="title" value="Quyền truy cập bị từ chối"/>
+        <put-attribute name="content" value="/WEB-INF/pages/access-denied.jsp"/>
+    </definition>
+    
       
 </tiles-definitions>

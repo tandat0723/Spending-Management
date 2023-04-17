@@ -15,22 +15,18 @@
             <tiles:insertAttribute name="title"/>
         </title>
 
-        <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-                integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link href="<c:url value="/resources/css/sb-admin-2.min.css" />" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+              integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"/>
     </head>
     <body id="page-top">
         <div id="wrapper">
+            <tiles:insertAttribute name="sidebar"/>
             <div id="content-wrapper" class="d-flex flex-column">
                 <div id="content">
+                    <tiles:insertAttribute name="topbar"/>
                     <div class="container-fluid">
                         <tiles:insertAttribute name="content"/>
                     </div>
@@ -44,15 +40,12 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js" />"></script>
         <script src="<c:url value="/resources/vendor/jquery-easing/jquery.easing.min.js" />"></script>
-
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment-with-locales.min.js"
                 integrity="sha512-vFABRuf5oGUaztndx4KoAEUVQnOvAIFs59y4tO0DILGWhQiFnFHiR+ZJfxLDyJlXgeut9Z07Svuvm+1Jv89w5g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  
         <script src="<c:url value="/resources/js/sb-admin-2.min.js" />"></script>
         <script src="<c:url value="/resources/vendor/chart.js/Chart.min.js" />"></script>
-
         <script src="<c:url value="/resources/js/chart-area-demo.js" />"></script>
         <script src="<c:url value="/resources/js/chart-pie-demo.js" />"></script>
         <script src="<c:url value="/resources/js/main.js" />"></script>

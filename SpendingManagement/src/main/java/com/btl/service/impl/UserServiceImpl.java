@@ -148,4 +148,9 @@ public class UserServiceImpl implements UserService {
     public int getMaxItemsInPage() {
         return this.userRepository.getMaxItemsInPage();
     }
+
+    @Override
+    public boolean changePassword(int id, String rawPassword) {
+        return this.userRepository.changePassword(id, rawPassword);
+    }
 }

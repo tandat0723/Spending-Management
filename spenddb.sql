@@ -111,10 +111,10 @@ DROP TABLE IF EXISTS `personal_transaction`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `personal_transaction` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `transaction_type` varchar(45) COLLATE utf8mb4_unicode_520_ci NOT NULL,
-  `purpose` varchar(45) COLLATE utf8mb4_unicode_520_ci NOT NULL,
+  `transaction_type` varchar(45) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `purpose` varchar(45) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `description` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `price` double NOT NULL,
+  `price` double DEFAULT NULL,
   `date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
@@ -152,7 +152,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   KEY `user_personal_fk_idx` (`personal_transaction_id`),
   CONSTRAINT `user_personal_fk` FOREIGN KEY (`personal_transaction_id`) REFERENCES `personal_transaction` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -161,7 +161,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,NULL,'admin@admin.com','039474635','admin','$2a$10$oU0okApZiC38mt8qn0KNYuOh9EldEZjrQX/YM09hMezBsh3UzEXkO',0,'ROLE_ADMIN','abc',NULL,NULL),(9,NULL,'nkocbroed123@gmail.com','0398475467','tandat1234','$2a$10$oU0okApZiC38mt8qn0KNYuOh9EldEZjrQX/YM09hMezBsh3UzEXkO',0,'ROLE_USER','','2023-04-09 23:57:05',NULL),(10,NULL,'doremon@doremon.com','0394843635','doremon','$2a$10$bcSsEfB7cCeqKt4QZ7yNDOdXHa6uaASfsChF5CPhdVZXDTYY/0Y0O',0,'ROLE_USER','https://res.cloudinary.com/cloudybeauty/image/upload/v1681060469/sxxdipein8lywpbh8xjd.jpg','2023-04-10 00:14:29',1);
+INSERT INTO `user` VALUES (1,'admin pro','admin@admin.com','039474635','admin','$2a$10$oU0okApZiC38mt8qn0KNYuOh9EldEZjrQX/YM09hMezBsh3UzEXkO',1,'ROLE_ADMIN','https://res.cloudinary.com/cloudybeauty/image/upload/v1681060469/sxxdipein8lywpbh8xjd.jpg','2023-04-09 23:57:05',NULL),(9,'tấn đạt','nkocbroed123@gmail.com','0398475467','tandat1234','$2a$10$oU0okApZiC38mt8qn0KNYuOh9EldEZjrQX/YM09hMezBsh3UzEXkO',1,'ROLE_USER','','2023-04-09 23:57:05',NULL),(10,'dore mon','doremon@doremon.com','0394843635','doremon','$2a$10$bcSsEfB7cCeqKt4QZ7yNDOdXHa6uaASfsChF5CPhdVZXDTYY/0Y0O',1,'ROLE_USER','https://res.cloudinary.com/cloudybeauty/image/upload/v1681060469/sxxdipein8lywpbh8xjd.jpg','2023-04-10 00:14:29',1),(11,'T Ấ N Đ Ạ T','tandat0723@gmail.com','0393610575','tandat123','$2a$10$hs4r1CxAyWDv9.LtIjgvQepbGMuUVifNMGXJHdmR7BYm799Xec7b2',0,'ROLE_USER','https://res.cloudinary.com/cloudybeauty/image/upload/v1681675099/iqkvvnag91dgyayogpda.jpg','2023-04-17 02:58:20',NULL),(12,'T Ấ N Đ Ạ T','user111@gmail.com','0393610573','user111','$2a$10$KojV2K4/N5QsdzjIsxW/.e4QpsTpqsrUSvMf67fu/oa6D7k6VYdye',0,'ROLE_USER','https://res.cloudinary.com/cloudybeauty/image/upload/v1681675511/eaxakhdyboso7hmdui6g.jpg','2023-04-17 03:05:12',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -174,4 +174,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-10 20:50:01
+-- Dump completed on 2023-04-17  3:06:39

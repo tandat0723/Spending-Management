@@ -101,7 +101,7 @@ public class LoginController {
     }
 
     @RequestMapping("/forgot-password")
-    public String ChangePassword() {
+    public String forgotPassword() {
         return "forgot-password";
     }
 

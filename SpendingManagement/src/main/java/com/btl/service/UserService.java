@@ -2,8 +2,6 @@ package com.btl.service;
 
 import com.btl.pojo.User;
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService extends UserDetailsService {
@@ -21,6 +19,8 @@ public interface UserService extends UserDetailsService {
     List<User> getUsers(String username, int page);
 
     boolean addOrUpdateNoPassword(User user);
+    
+    boolean changePassword(int id, String rawPassword);
 
     boolean deleteUser(int id);
 

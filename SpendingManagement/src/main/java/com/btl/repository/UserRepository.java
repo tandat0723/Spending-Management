@@ -37,5 +37,5 @@ public interface UserRepository {
     int getMaxItemsInPage();
 
     long count();
-
+    
 }
