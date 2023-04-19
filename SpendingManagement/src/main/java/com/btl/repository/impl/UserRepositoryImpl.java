@@ -261,4 +261,45 @@ public class UserRepositoryImpl implements UserRepository {
         return Long.parseLong(q.getSingleResult().toString());
     }
 
+    @Override
+    public List<User> getAllUsers(Map<String, String> params) {
+        Session s = factory.getObject().getCurrentSession();
+        CriteriaBuilder b = s.getCriteriaBuilder();
+        CriteriaQuery<User> q = b.createQuery(User.class);
+        Root root = q.from(User.class);
+        q.select(root);
+
+        if (params != null) {
+            List<Predicate> predicates = new ArrayList<>();
+            String kw = params.get("kw");
+            if (kw != null && !kw.isEmpty()) {
+                Predicate p = b.like(root.get("name").as(String.class),
+                        String.format("%%%s%%", kw));
+                predicates.add(p);
+            }
+            q.where(predicates.toArray(Predicate[]::new));
+        }
+
+        q.orderBy(b.desc(root.get("id")));
+        Query query = s.createQuery(q);
+        List<User> users = query.getResultList();
+
+        return users;
+    }
+
+    @Override
+    public boolean addOrUpdateAccountUser(User user) {
+        Session s = this.factory.getObject().getCurrentSession();
+        try {
+            if (user.getId() > 0)
+                s.update(user);
+            else
+                s.save(user);
+            
+            return true;
+        } catch (HibernateException ex) {
+            return false;
+        }
+    }
+
 }

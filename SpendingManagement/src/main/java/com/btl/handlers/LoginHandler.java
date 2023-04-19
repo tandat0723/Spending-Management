@@ -33,11 +33,11 @@ public class LoginHandler implements AuthenticationSuccessHandler {
         request.getSession().setAttribute("currentUser", user);
         System.out.println("LOGIN SUCCESSFUL");
         String redirectStr = request.getContextPath();
-        switch (user.getUserRole()) {
-            case User.ADMIN:
+        switch (user.getUserRole().getId()) {
+            case 1:
                 redirectStr = "admin";
                 break;
-            case User.USER:
+            case 3:
                 redirectStr = "user";
                 break;
         }
