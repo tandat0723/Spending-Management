@@ -77,3 +77,7 @@ a:hover {
 .img-set {
     height: 550px;
 }
+.th-sort {
+    cursor: pointer;
+    text-align: center;
+}

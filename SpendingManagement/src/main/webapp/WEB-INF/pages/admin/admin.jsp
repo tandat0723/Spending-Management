@@ -6,5 +6,5 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="container">
-    <h1 class="text-center dark-color">TRANG CHỦ QUẢN LÝ</h1>
+    <h1 class="text-center text-info">TRANG CHỦ QUẢN LÝ</h1>
 </div>

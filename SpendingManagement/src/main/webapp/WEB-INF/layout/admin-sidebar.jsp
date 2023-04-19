@@ -21,13 +21,13 @@
     </div>
 
     <li class="nav-item">
-        <a class="nav-link" href="<c:url value="#" />">
+        <a class="nav-link" href="<c:url value="/admin/account-admin" />"> <!<!-- Path trong AdminController -->
             <i class="fa-solid fa-user"></i>
             <span>Tài khoản</span>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="<c:url value="#" />">
+        <a class="nav-link" href="<c:url value="/admin/spending-admin" />">
             <i class="fa-solid fa-user"></i>
             <span>Chi tiêu cá nhân</span>
         </a>

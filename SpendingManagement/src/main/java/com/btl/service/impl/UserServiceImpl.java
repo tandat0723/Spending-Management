@@ -108,7 +108,7 @@ public class UserServiceImpl implements UserService {
         }
 
         Set<GrantedAuthority> auth = new HashSet<>();
-        auth.add(new SimpleGrantedAuthority(users.getUserRole()));
+        auth.add(new SimpleGrantedAuthority(users.getUserRole().getRole()));
 
         return new org.springframework.security.core.userdetails.User(users.getUsername(),
                 users.getPassword(), auth);
@@ -152,5 +152,25 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean changePassword(int id, String rawPassword) {
         return this.userRepository.changePassword(id, rawPassword);
+    }
+
+    @Override
+    public List<User> getAllUsers(Map<String, String> params) {
+        return this.userRepository.getAllUsers(params);
+    }
+
+    @Override
+    public boolean addOrUpdateAccountUser(User user) {
+        if (!user.getFile().isEmpty()) {
+            try {
+                Map res = this.cloudinary.uploader().upload(user.getFile().getBytes(),
+                        ObjectUtils.asMap("resource_type", "auto"));
+                user.setAvatar(res.get("secure_url").toString());
+            } catch (IOException ex) {
+                Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return this.userRepository.addOrUpdateAccountUser(user);
     }
 }
