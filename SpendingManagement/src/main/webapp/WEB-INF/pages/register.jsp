@@ -22,7 +22,7 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Đăng ký</h1>
                         </div>
-                        <form:form action="${action}" method="post" class="user" enctype="multipart/form-data"
+                        <form:form action="${action}" method="POST" class="user" enctype="multipart/form-data"
                                    modelAttribute="user">
                             <form:errors path="*" element="div" class="alert alert-danger mt-3"/>
                             <form:hidden path="id"/>
