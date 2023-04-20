@@ -53,7 +53,7 @@ public class User implements Serializable {
 
     public static final String ADMIN = "ROLE_ADMIN";
     public static final String USER = "ROLE_USER";
-    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -105,7 +105,7 @@ public class User implements Serializable {
     @JoinColumn(name = "personal_transaction_id", referencedColumnName = "id")
     @ManyToOne
     private PersonalTransaction personalTransactionId;
-    
+
     @Transient
     @JsonIgnore
     private int day;
