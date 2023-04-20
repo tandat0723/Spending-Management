@@ -72,6 +72,8 @@ public class UserValidator implements Validator {
         if (!utils.isValidMobile(user.getPhone())) {
             errors.rejectValue("phone", "", "Số điện thoại không hợp lệ");
         }
+        if(user.getPhone().length() > 10)
+            errors.rejectValue("phone","", "Số điện thoại không vượt quá 10 ký tự");
     }
 
 }
