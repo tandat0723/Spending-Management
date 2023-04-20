@@ -57,8 +57,8 @@
                             <div class="form-group">
                                 <label>Loại tài khoản</label>
                                 <form:select path="userRole" class="custom-select">
-                                    <form:option value="ROLE_USER" label="Người dùng"
-                                                 selected="${user.userRole.equals('ROLE_USER') ? true : ''}"/>
+                                    <form:option value="3" label="Người dùng"
+                                                 selected="${user.userRole.id.equals(3) ? true : ''}"/>
                                 </form:select>
                             </div>
                             <div class="form-group row align-items-center">

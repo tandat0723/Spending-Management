@@ -4,7 +4,9 @@
  */
 package com.btl.configs;
 
+import com.btl.formatter.StatusFormatter;
 import com.btl.formatter.UserFormatter;
+import com.btl.formatter.UserRoleFormatter;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -59,6 +61,8 @@ public class WebAppContextConfig implements WebMvcConfigurer {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new UserFormatter());
+        registry.addFormatter(new StatusFormatter());
+        registry.addFormatter(new UserRoleFormatter());
     }
 
     @Override

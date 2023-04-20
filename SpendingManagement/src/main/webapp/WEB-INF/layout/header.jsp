@@ -80,18 +80,18 @@
                             <i class="fa-solid fa-user"></i>
                         </span>
 
-                        <c:if test="${!(currentUser.userRole == 'ROLE_USER')}">
+                        <c:if test="${!(currentUser.userRole == '3')}">
                             ${currentUser.fullname}
                         </c:if>
-                        <c:if test="${currentUser.userRole == 'ROLE_USER'}">
+                        <c:if test="${currentUser.userRole == '3'}">
                             ${userService.getUserById(currentUser.id).name}
                         </c:if>
 
-                        <span class="badge badge-secondary">${currentUser.userRole}</span>
+                        <span class="badge badge-secondary">${currentUser.userRole.role}</span>
                     </a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="<c:url value="/me/view"/>" >Thông tin tài khoản</a>
-                        <c:if test="${currentUser.userRole == 'ROLE_USER'}">
+                        <c:if test="${currentUser.userRole == '3'}">
                             <a class="dropdown-item" href="<c:url value="/user/user-info/add-or-update"/>">
                                 Chỉnh sửa thông tin người dùng
                             </a>

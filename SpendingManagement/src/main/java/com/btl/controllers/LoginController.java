@@ -5,6 +5,7 @@
 package com.btl.controllers;
 
 import com.btl.pojo.PersonalTransaction;
+import com.btl.pojo.Status;
 import com.btl.pojo.User;
 import com.btl.service.PersonalTransactionService;
 import com.btl.service.UserService;
@@ -71,16 +72,12 @@ public class LoginController {
         if (result.hasErrors()) {
             return "register";
         }
-
-        if (user.getUserRole().equals("ROLE_USER")) {
-            user.setActive(0);
-        } else {
-            user.setActive(1);
-        }
+        
+        user.setActive(new Status(1));
 
         boolean addOrUpdates = this.userService.addOrUpdateUser(user);
         if (addOrUpdates) {
-            if (user.getUserRole().equals(User.USER)) {
+            if (user.getUserRole().getId().equals(3)) {
                 PersonalTransaction personalTransaction = new PersonalTransaction();
                 personalTransaction.setId(0);
 
@@ -89,7 +86,7 @@ public class LoginController {
                 userService.addOrUpdateNoPassword(user);
             }
             sucMsg = String.format("Đăng ký tài khoản '%s' thành công", user.getUsername(),
-                    user.getUserRole().equals("ROLE_USER") ? "Người dùng" : "");
+                    user.getUserRole().getId().equals(3) ? "Người dùng" : "");
 
         } else {
             errMsg = String.format("Đăng ký tài khoản '%s' không thành công", user.getUsername(),
