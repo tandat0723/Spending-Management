@@ -42,6 +42,7 @@
                 <td class="overflow-hidden">${u.userRole.role}</td>
                 <td class="overflow-hidden">${u.joinedDate}</td>
                 <td>
+                    <a href="<c:url value="/admin/account-admin/view/${u.id}" />" style="color: #00bbb3; margin-right: 5px;"><i class="fas fa-eye"></i></a>
                     <a href="<c:url value="/admin/account-admin/${u.id}" />" style="color: #00bbb3; margin-right: 5px;"><i class="fas fa-pen"></i></a>
                     <div id="spinner${u.id}" style="display:none" class="spinner-border spinner-border-sm"></div>
                     <c:url value="/api/users/${u.id}" var="endpoint" />
