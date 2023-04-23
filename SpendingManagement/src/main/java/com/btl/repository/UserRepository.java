@@ -27,8 +27,6 @@ public interface UserRepository {
     List<User> getUsers(String username, int page);
     
     List<User> getAllUsers(Map<String, String> params);
-    
-    boolean addOrUpdateAccountUser(User user);
 
     List<User> getByEmail(String email);
 

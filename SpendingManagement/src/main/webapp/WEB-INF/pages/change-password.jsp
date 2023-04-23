@@ -55,12 +55,12 @@
                                     </form>
                                     <hr/>
                                     <c:choose>
-                                        <c:when test="${currentUser.userRole == 'ROLE_ADMIN'}">
+                                        <c:when test="${currentUser.userRole.role == 'ROLE_ADMIN'}">
                                             <a style="color:black;" class="small" href="<c:url value="/admin"/>">
                                                 Trở lại trang chủ
                                             </a>
                                         </c:when>
-                                        <c:when test="${currentUser.userRole == 'ROLE_USER'}">
+                                        <c:when test="${currentUser.userRole.role == 'ROLE_USER'}">
                                             <a style="color:black;" class="small" href="<c:url value="/user"/>">
                                                 Trở lại trang chủ
                                             </a>

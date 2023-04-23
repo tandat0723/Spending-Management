@@ -106,10 +106,10 @@ public class User implements Serializable {
     @JsonIgnore
     private MultipartFile file;
     
-    {
-        active = new Status(1);
-        userRole = new UserRole(3);
-    }
+//    {
+//        active = new Status(1);
+//        userRole = new UserRole(3);
+//    }
     
     public User() {
     }

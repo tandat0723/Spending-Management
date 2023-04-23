@@ -20,8 +20,6 @@ public interface UserService extends UserDetailsService {
     List<User> getUsers(String username, int page);
     
     List<User> getAllUsers(Map<String, String> params);
-    
-    boolean addOrUpdateAccountUser(User user);
 
     boolean addOrUpdateNoPassword(User user);
     
