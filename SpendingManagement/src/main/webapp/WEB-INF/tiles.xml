@@ -40,6 +40,10 @@
         <put-attribute name="title" value="Quản lý tài khoản người dùng" />
         <put-attribute name="content" value="/WEB-INF/pages/admin/account/account-admin.jsp" />
     </definition>
+    <definition name="account-view" extends="adminLayout">
+        <put-attribute name="title" value="Thông tin tài khoản người dùng"/>
+        <put-attribute name="content" value="/WEB-INF/pages/admin/account/account-view.jsp"/>
+    </definition>
     <definition name="spending-admin" extends="adminLayout">
         <put-attribute name="title" value="Quản lý chi tiêu" />
         <put-attribute name="content" value="/WEB-INF/pages/admin/spending/spending-admin.jsp" />

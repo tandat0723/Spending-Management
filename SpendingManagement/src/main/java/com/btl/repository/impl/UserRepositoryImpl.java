@@ -287,19 +287,4 @@ public class UserRepositoryImpl implements UserRepository {
         return users;
     }
 
-    @Override
-    public boolean addOrUpdateAccountUser(User user) {
-        Session s = this.factory.getObject().getCurrentSession();
-        try {
-            if (user.getId() > 0)
-                s.update(user);
-            else
-                s.save(user);
-            
-            return true;
-        } catch (HibernateException ex) {
-            return false;
-        }
-    }
-
 }

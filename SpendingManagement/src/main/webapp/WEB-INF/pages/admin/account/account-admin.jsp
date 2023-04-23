@@ -29,19 +29,20 @@
     <tbody>
         <c:forEach items="${users}" var="u">
             <tr id="user${u.id}">
-                <td>
-                    <img class="rounded-circle" src="${u.avatar}" width="50" />
+                <td class="overflow-hidden">
+                    <img class="rounded-circle" src="${u.avatar}" width="55px" height="55px" />
                 </td>
-                <td>${u.id}</td>
-                <td>${u.fullname}</td>
-                <td>${u.email}</td>
-                <td>${u.phone}</td>
-                <td>${u.username}</td>
-                <td>${u.password}</td>
-                <td>${u.active.statusName}</td>
-                <td>${u.userRole.role}</td>
-                <td>${u.joinedDate}</td>
+                <td class="overflow-hidden">${u.id}</td>
+                <td class="overflow-hidden">${u.fullname}</td>
+                <td class="overflow-hidden">${u.email}</td>
+                <td class="overflow-hidden">${u.phone}</td>
+                <td class="overflow-hidden">${u.username}</td>
+                <td class="overflow-hidden">${u.password}</td>
+                <td class="overflow-hidden">${u.active.statusName}</td>
+                <td class="overflow-hidden">${u.userRole.role}</td>
+                <td class="overflow-hidden">${u.joinedDate}</td>
                 <td>
+                    <a href="<c:url value="/admin/account-admin/view/${u.id}" />" style="color: blue; margin-right: 5px;"><i class="fas fa-eye"></i></a>
                     <a href="<c:url value="/admin/account-admin/${u.id}" />" style="color: #00bbb3; margin-right: 5px;"><i class="fas fa-pen"></i></a>
                     <div id="spinner${u.id}" style="display:none" class="spinner-border spinner-border-sm"></div>
                     <c:url value="/api/users/${u.id}" var="endpoint" />
@@ -55,17 +56,29 @@
 <c:if test="${errMsg != null}">
     <div class="alert alert-danger">${errMsg}</div>
 </c:if>
+<c:if test="${sucMsg != null}">
+    <div class="alert alert-success">${sucMsg}</div>
+</c:if>
 
 <c:url value="/admin/account-admin" var="action" />
 <form:form method="POST" action="${action}"
            modelAttribute="user" enctype="multipart/form-data">
-
+    <c:choose>
+            <c:when test="${user.id > 0}">
+                <h3 class="text-center text-primary">Cập nhật thông tin</h3>
+            </c:when>
+            <c:otherwise>
+                <h3 class="text-center text-success">Thêm người dùng</h3>
+            </c:otherwise>
+        </c:choose>
     <form:errors path="*" element="div" cssClass="alert alert-danger" />
     <div class="row">
         <div class="col-md-6">
+            <form:hidden path="id" />
+            <form:hidden path="avatar" />
             <div class="form-floating mb-3 mt-3">
                 <label for="fullname">Họ và Tên</label>
-                <form:input class="form-control" id="fullname" placeholder="Full Name" path="fullname" name="fullname" />
+                <form:input class="form-control" id="fullname" placeholder="Họ và Tên" path="fullname" name="fullname" />
             </div>
             <div class="form-floating mb-3 mt-3">
                 <label for="email">Email</label>
@@ -73,29 +86,29 @@
             </div>
             <div class="form-floating mb-3 mt-3">
                 <label for="phone">Số điện thoại</label>
-                <form:input class="form-control" id="phone" placeholder="Phone" path="phone" name="phone" />
+                <form:input class="form-control" id="phone" placeholder="Số điện thoại" path="phone" name="phone" />
             </div>
             <div class="form-floating mb-3 mt-3">
                 <label for="file">Avatar</label>
                 <form:input type="file" class="form-control" id="file" path="file" name="file" onchange="previewImage(this);" />
             </div>
             <div class="form-floating mb-3 mt-3" id="preview-container" style="display: none;">
-                <img id="preview" src="" width="120" />
+                <img id="preview" src="" width="150" />
             </div>
             <c:if test="${user.avatar != null && user.avatar != ''}">
                 <div class="form-floating mb-3 mt-3" id="avatar-old">
-                    <img src="${user.avatar}" width="120" />
+                    <img src="${user.avatar}" width="150" />
                 </div>
             </c:if>
         </div>
         <div class="col-md-6">
             <div class="form-floating mb-3 mt-3">
                 <label for="username">Tên đăng nhập</label>
-                <form:input class="form-control" id="username" placeholder="Username" path="username" name="username" />
+                <form:input class="form-control" id="username" placeholder="Tên đăng nhập" path="username" name="username" />
             </div>
             <div class="form-floating mb-3 mt-3">
                 <label for="password">Mật khẩu</label>
-                <form:password class="form-control" id="password" placeholder="Password" path="password" name="password" />
+                <form:password class="form-control" id="password" placeholder="Mật khẩu" path="password" name="password" />
             </div>
             <div class="form-floating mb-3 mt-3">
                 <label for="active">Trạng thái</label>
@@ -132,11 +145,9 @@
         </div>
     </div>
 
-    <div class="row d-flex justify-content-center align-items-center">
+    <div class="row d-flex justify-content-center align-items-center p-md-3">
         <c:choose>
             <c:when test="${user.id > 0}">
-                <form:hidden path="id" />
-                <form:hidden path="avatar" />
                 <input type="submit" value="Cập nhật thông tin" class="btn btn-info" />
             </c:when>
             <c:otherwise>
