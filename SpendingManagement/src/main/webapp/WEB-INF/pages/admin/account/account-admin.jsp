@@ -42,7 +42,7 @@
                 <td class="overflow-hidden">${u.userRole.role}</td>
                 <td class="overflow-hidden">${u.joinedDate}</td>
                 <td>
-                    <a href="<c:url value="/admin/account-admin/view/${u.id}" />" style="color: #00bbb3; margin-right: 5px;"><i class="fas fa-eye"></i></a>
+                    <a href="<c:url value="/admin/account-admin/view/${u.id}" />" style="color: blue; margin-right: 5px;"><i class="fas fa-eye"></i></a>
                     <a href="<c:url value="/admin/account-admin/${u.id}" />" style="color: #00bbb3; margin-right: 5px;"><i class="fas fa-pen"></i></a>
                     <div id="spinner${u.id}" style="display:none" class="spinner-border spinner-border-sm"></div>
                     <c:url value="/api/users/${u.id}" var="endpoint" />
@@ -63,7 +63,14 @@
 <c:url value="/admin/account-admin" var="action" />
 <form:form method="POST" action="${action}"
            modelAttribute="user" enctype="multipart/form-data">
-
+    <c:choose>
+            <c:when test="${user.id > 0}">
+                <h3 class="text-center text-primary">Cập nhật thông tin</h3>
+            </c:when>
+            <c:otherwise>
+                <h3 class="text-center text-success">Thêm người dùng</h3>
+            </c:otherwise>
+        </c:choose>
     <form:errors path="*" element="div" cssClass="alert alert-danger" />
     <div class="row">
         <div class="col-md-6">
