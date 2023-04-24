@@ -5,8 +5,11 @@
 package com.btl.service.impl;
 
 import com.btl.pojo.PersonalTransaction;
+import com.btl.pojo.TransactionType;
 import com.btl.repository.PersonalTransactionRepository;
 import com.btl.service.PersonalTransactionService;
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +37,16 @@ public class PersonalTransactionServiceImpl implements PersonalTransactionServic
     @Override
     public PersonalTransaction getByUserId(int id) {
         return this.personalTransaction.getByUserId(id);
+    }
+
+    @Override
+    public List<PersonalTransaction> getAllPersonalTransaction(Map<String, String> params) {
+        return this.personalTransaction.getAllPersonalTransaction(params);
+    }
+
+    @Override
+    public List<TransactionType> getAllTransactionType(Map<String, String> params) {
+        return this.personalTransaction.getAllTransactionType(params);
     }
 
 }

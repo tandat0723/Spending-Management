@@ -10,6 +10,7 @@ import com.btl.pojo.User;
 import com.btl.service.PersonalTransactionService;
 import com.btl.service.UserService;
 import com.btl.validator.UserValidator;
+import java.util.Set;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -82,7 +83,7 @@ public class LoginController {
                 personalTransaction.setId(0);
 
                 personalTransactionService.addOrUpdate(personalTransaction);
-                user.setPersonalTransactionId(personalTransaction);
+                personalTransaction.setUserId(user);
                 userService.addOrUpdateNoPassword(user);
             }
             sucMsg = String.format("Đăng ký tài khoản '%s' thành công", user.getUsername(),

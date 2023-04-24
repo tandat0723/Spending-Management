@@ -85,4 +85,5 @@ a:hover {
     max-width: 200px;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-align: center;
 }

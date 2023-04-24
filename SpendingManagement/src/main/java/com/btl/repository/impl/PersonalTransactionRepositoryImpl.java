@@ -5,9 +5,15 @@
 package com.btl.repository.impl;
 
 import com.btl.pojo.PersonalTransaction;
+import com.btl.pojo.TransactionType;
 import com.btl.repository.PersonalTransactionRepository;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -60,6 +66,58 @@ public class PersonalTransactionRepositoryImpl implements PersonalTransactionRep
         org.hibernate.query.Query q = session.createQuery(query);
         
         return (PersonalTransaction) q.getSingleResult();
+    }
+
+    @Override
+    public List<PersonalTransaction> getAllPersonalTransaction(Map<String, String> params) {
+        Session s = factory.getObject().getCurrentSession();
+        CriteriaBuilder b = s.getCriteriaBuilder();
+        CriteriaQuery<PersonalTransaction> q = b.createQuery(PersonalTransaction.class);
+        Root root = q.from(PersonalTransaction.class);
+        q.select(root);
+
+        if (params != null) {
+            List<Predicate> predicates = new ArrayList<>();
+            String kw = params.get("kw");
+            if (kw != null && !kw.isEmpty()) {
+                Predicate p = b.like(root.get("name").as(String.class),
+                        String.format("%%%s%%", kw));
+                predicates.add(p);
+            }
+            q.where(predicates.toArray(Predicate[]::new));
+        }
+
+        q.orderBy(b.desc(root.get("id")));
+        Query query = s.createQuery(q);
+        List<PersonalTransaction> personal = query.getResultList();
+
+        return personal;
+    }
+
+    @Override
+    public List<TransactionType> getAllTransactionType(Map<String, String> params) {
+        Session s = factory.getObject().getCurrentSession();
+        CriteriaBuilder b = s.getCriteriaBuilder();
+        CriteriaQuery<TransactionType> q = b.createQuery(TransactionType.class);
+        Root root = q.from(TransactionType.class);
+        q.select(root);
+
+        if (params != null) {
+            List<Predicate> predicates = new ArrayList<>();
+            String kw = params.get("kw");
+            if (kw != null && !kw.isEmpty()) {
+                Predicate p = b.like(root.get("name").as(String.class),
+                        String.format("%%%s%%", kw));
+                predicates.add(p);
+            }
+            q.where(predicates.toArray(Predicate[]::new));
+        }
+
+        q.orderBy(b.desc(root.get("id")));
+        Query query = s.createQuery(q);
+        List<TransactionType> transactionTypes = query.getResultList();
+
+        return transactionTypes;
     }
 
 }
