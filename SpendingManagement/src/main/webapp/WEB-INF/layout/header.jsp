@@ -51,6 +51,7 @@
                         </div>
                     </li>
                 </c:if>
+
                 <c:if test="${currentUser.userRole.role == 'ROLE_USE' && currentUser.active.id == '1'}">
                     <li class="nav-item">
                         <a class="nav-link" href="<c:url value="#" />">Chi tiêu cá nhân</a>
