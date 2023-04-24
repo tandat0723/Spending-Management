@@ -16,6 +16,7 @@
     <class>com.btl.pojo.GroupUsers</class>
     <class>com.btl.pojo.Status</class>
     <class>com.btl.pojo.UserRole</class>
+    <class>com.btl.pojo.TransactionType</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/spenddb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

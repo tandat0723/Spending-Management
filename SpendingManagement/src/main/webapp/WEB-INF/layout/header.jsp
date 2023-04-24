@@ -10,10 +10,10 @@
 <header>
     <nav class="navbar sticky-top navbar-expand-md bg-dark navbar-dark">
         <c:choose>
-            <c:when test="${currentUser.userRole == 'ROLE_ADMIN'}">
+            <c:when test="${currentUser.userRole.role == 'ROLE_ADMIN'}">
                 <a class="navbar-brand" href="<c:url value="/admin" />">Job Searching</a>
             </c:when>
-            <c:when test="${currentUser.userRole == 'ROLE_USER'}">
+            <c:when test="${currentUser.userRole.role == 'ROLE_USER'}">
                 <a class="navbar-brand" href="<c:url value="/user" />">Job Searching</a>
             </c:when>
             <c:otherwise>
@@ -27,7 +27,7 @@
 
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
-                <c:if test="${currentUser.userRole == 'ROLE_ADMIN'}">
+                <c:if test="${currentUser.userRole.role == 'ROLE_ADMIN'}">
                     <li class="nav-item">
                         <a class="nav-link" href="<c:url value="#"/> ">Tài khoản</a>
                     </li>
@@ -51,7 +51,7 @@
                         </div>
                     </li>
                 </c:if>
-                <c:if test="${currentUser.userRole == 'ROLE_USE' && currentUser.active == 1}">
+                <c:if test="${currentUser.userRole.role == 'ROLE_USE' && currentUser.active.id == '1'}">
                     <li class="nav-item">
                         <a class="nav-link" href="<c:url value="#" />">Chi tiêu cá nhân</a>
                     </li>
@@ -76,22 +76,26 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="<c:url value="/me/view" />"
                        role="button" aria-haspopup="true" aria-expanded="false">
-                        <span>
-                            <i class="fa-solid fa-user"></i>
-                        </span>
-
-                        <c:if test="${!(currentUser.userRole == '3')}">
-                            ${currentUser.fullname}
-                        </c:if>
-                        <c:if test="${currentUser.userRole == '3'}">
+                        <c:choose>
+                            <c:when test="${currentUser.avatar != null && currentUser.avatar != ''}">
+                                <img class="rounded-circle" src="<c:url value="${currentUser.avatar}" />" width="40px;" height="40px;" />
+                            </c:when>
+                            <c:otherwise>
+                                <img class="rounded-circle" src="<c:url value="/resources/images/none.png" />" width="40px;" height="40px;" />
+                            </c:otherwise>
+                        </c:choose>
+                                <span style="color: #fff; text-shadow: 2px 2px 10px white;">${currentUser.fullname}</span>
+                        <c:if test="${(currentUser.userRole.id == '3')}">
                             ${userService.getUserById(currentUser.id).name}
                         </c:if>
+                        <c:if test="${!(currentUser.userRole.id == '3')}">
+                            <span class="badge badge-secondary">${currentUser.userRole.role}</span>
+                        </c:if>
 
-                        <span class="badge badge-secondary">${currentUser.userRole.role}</span>
                     </a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="<c:url value="/me/view"/>" >Thông tin tài khoản</a>
-                        <c:if test="${currentUser.userRole == '3'}">
+                        <c:if test="${currentUser.userRole.id == '3'}">
                             <a class="dropdown-item" href="<c:url value="/user/user-info/add-or-update"/>">
                                 Chỉnh sửa thông tin người dùng
                             </a>
@@ -99,7 +103,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/logout" />">Đăng xuất</a>
+                    <a class="nav-link" style="line-height: 40px;" href="<c:url value="/logout" />">Đăng xuất</a>
                 </li>
             </ul>
         </c:if>
