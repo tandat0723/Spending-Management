@@ -63,11 +63,11 @@ public class AdminAccountController {
 
             if (this.userService.addOrUpdateUser(user) == true) {
                 if (user.getUserRole().getId().equals(3)) {
-                    PersonalTransaction personalTransaction = new PersonalTransaction();
-                    personalTransaction.setId(0);
-
-                    personalTransactionService.addOrUpdate(personalTransaction);
-                    user.setPersonalTransactionSet((Set<PersonalTransaction>) personalTransaction);
+//                    PersonalTransaction personalTransaction = new PersonalTransaction();
+//                    personalTransaction.setId(0);
+//
+//                    personalTransactionService.addOrUpdate(personalTransaction);
+//                    personalTransaction.setUserId(user);
                     userService.addOrUpdateNoPassword(user);
                 }
                 sucMsg = String.format("Thêm tài khoản '%s' thành công", user.getUsername(),

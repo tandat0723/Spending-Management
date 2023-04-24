@@ -83,7 +83,7 @@ public class LoginController {
                 personalTransaction.setId(0);
 
                 personalTransactionService.addOrUpdate(personalTransaction);
-                user.setPersonalTransactionSet((Set<PersonalTransaction>) personalTransaction);
+                personalTransaction.setUserId(user);
                 userService.addOrUpdateNoPassword(user);
             }
             sucMsg = String.format("Đăng ký tài khoản '%s' thành công", user.getUsername(),

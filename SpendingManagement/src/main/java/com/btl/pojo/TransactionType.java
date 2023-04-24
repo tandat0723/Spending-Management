@@ -7,6 +7,7 @@ package com.btl.pojo;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,7 +43,7 @@ public class TransactionType implements Serializable {
     @Size(max = 45)
     @Column(name = "typename")
     private String typename;
-    @OneToMany(mappedBy = "transactionType")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "transactionType")
     private Set<PersonalTransaction> personalTransactionSet;
 
     public TransactionType() {
