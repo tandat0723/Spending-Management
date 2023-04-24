@@ -13,6 +13,7 @@ import com.btl.service.StatusService;
 import com.btl.service.UserRoleService;
 import com.btl.service.UserService;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.NoResultException;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +67,7 @@ public class AdminAccountController {
                     personalTransaction.setId(0);
 
                     personalTransactionService.addOrUpdate(personalTransaction);
-                    user.setPersonalTransactionId(personalTransaction);
+                    user.setPersonalTransactionSet((Set<PersonalTransaction>) personalTransaction);
                     userService.addOrUpdateNoPassword(user);
                 }
                 sucMsg = String.format("Thêm tài khoản '%s' thành công", user.getUsername(),
@@ -97,12 +98,8 @@ public class AdminAccountController {
         return "account-admin";
     }
 
-    @GetMapping("/spending-admin")
-    public String spending(Model model) {
-        return "spending-admin";
-    }
     @GetMapping("/account-admin/view/{userId}")
-    public String aboutMeView(Model model, @PathVariable(value = "userId") int id) {
+    public String aboutAccountView(Model model, @PathVariable(value = "userId") int id) {
         try {
             model.addAttribute("userDetail", this.userService.getUserById(id));
         } catch (NoResultException ex) {

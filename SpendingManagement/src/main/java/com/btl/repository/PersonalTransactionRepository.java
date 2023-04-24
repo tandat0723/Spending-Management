@@ -5,6 +5,9 @@
 package com.btl.repository;
 
 import com.btl.pojo.PersonalTransaction;
+import com.btl.pojo.TransactionType;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author trant
@@ -16,4 +19,8 @@ public interface PersonalTransactionRepository {
     boolean addOrUpdate(PersonalTransaction personalTransaction);
     
     PersonalTransaction getByUserId(int id);
+    
+    List<PersonalTransaction> getAllPersonalTransaction(Map<String, String> params);
+    
+    List<TransactionType> getAllTransactionType(Map<String, String> params);
 }
