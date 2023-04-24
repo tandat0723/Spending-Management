@@ -15,14 +15,14 @@
         <tr>
             <th></th>
             <th class="th-sort"><a href="javascript:;" onclick="sortColumn(this)">User ID<span class="sort-icon"></span></a></th>
-            <th class="th-sort"><a href="javascript:;" onclick="sortColumn(this)">Full Name<span class="sort-icon"></span></a></th>
+            <th class="th-sort"><a href="javascript:;" onclick="sortColumn(this)">Họ và tên<span class="sort-icon"></span></a></th>
             <th class="th-sort"><a href="javascript:;" onclick="sortColumn(this)">Email<span class="sort-icon"></span></a></th>
-            <th class="th-sort"><a href="javascript:;" onclick="sortColumn(this)">Phone<span class="sort-icon"></span></a></th>
-            <th class="th-sort"><a href="javascript:;" onclick="sortColumn(this)">Username<span class="sort-icon"></span></a></th>
-            <th class="th-sort"><a href="javascript:;" onclick="sortColumn(this)">Password<span class="sort-icon"></span></a></th>
-            <th class="th-sort"><a href="javascript:;" onclick="sortColumn(this)">Active<span class="sort-icon"></span></a></th>
-            <th class="th-sort"><a href="javascript:;" onclick="sortColumn(this)">User Role<span class="sort-icon"></span></a></th>
-            <th class="th-sort"><a href="javascript:;" onclick="sortColumn(this)">Created Date<span class="sort-icon"></span></a></th>
+            <th class="th-sort"><a href="javascript:;" onclick="sortColumn(this)">Số điện thoại<span class="sort-icon"></span></a></th>
+            <th class="th-sort"><a href="javascript:;" onclick="sortColumn(this)">Tên đăng nhập<span class="sort-icon"></span></a></th>
+            <th class="th-sort"><a href="javascript:;" onclick="sortColumn(this)">Mật khẩu<span class="sort-icon"></span></a></th>
+            <th class="th-sort"><a href="javascript:;" onclick="sortColumn(this)">Trạng thái<span class="sort-icon"></span></a></th>
+            <th class="th-sort"><a href="javascript:;" onclick="sortColumn(this)">Loại tài khoản<span class="sort-icon"></span></a></th>
+            <th class="th-sort"><a href="javascript:;" onclick="sortColumn(this)">Ngày tạo<span class="sort-icon"></span></a></th>
             <th></th>
         </tr>
     </thead>
