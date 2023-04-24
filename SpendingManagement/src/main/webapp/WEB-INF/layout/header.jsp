@@ -51,7 +51,7 @@
                         </div>
                     </li>
                 </c:if>
-                <c:if test="${currentUser.userRole == 'ROLE_USE' && currentUser.active == 1}">
+                <c:if test="${currentUser.userRole == 'ROLE_USER'}">
                     <li class="nav-item">
                         <a class="nav-link" href="<c:url value="#" />">Chi tiêu cá nhân</a>
                     </li>
@@ -87,7 +87,7 @@
                             ${userService.getUserById(currentUser.id).name}
                         </c:if>
 
-                        <span class="badge badge-secondary">${currentUser.userRole.role}</span>
+<!--                        <span class="badge badge-secondary">${currentUser.userRole.role}</span>-->
                     </a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="<c:url value="/me/view"/>" >Thông tin tài khoản</a>
