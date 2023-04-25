@@ -31,6 +31,8 @@ public class PersonalTransactionRepositoryImpl implements PersonalTransactionRep
 
     @Autowired
     private LocalSessionFactoryBean factory;
+    
+    private final int maxItemsInPage = 10;
 
     @Override
     public PersonalTransaction getById(int id) {
@@ -118,6 +120,11 @@ public class PersonalTransactionRepositoryImpl implements PersonalTransactionRep
         List<TransactionType> transactionTypes = query.getResultList();
 
         return transactionTypes;
+    }
+
+    @Override
+    public int getMaxItemsInPage() {
+        return maxItemsInPage;
     }
 
 }

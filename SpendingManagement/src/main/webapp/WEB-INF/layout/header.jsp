@@ -51,11 +51,7 @@
                         </div>
                     </li>
                 </c:if>
-<<<<<<< HEAD
-                <c:if test="${currentUser.userRole == 'ROLE_USER'}">
-=======
-                <c:if test="${currentUser.userRole.role == 'ROLE_USE' && currentUser.active.id == '1'}">
->>>>>>> origin
+                <c:if test="${currentUser.userRole.role == 'ROLE_USER' && currentUser.active.id == 1}">
                     <li class="nav-item">
                         <a class="nav-link" href="<c:url value="#" />">Chi tiêu cá nhân</a>
                     </li>
@@ -88,18 +84,13 @@
                                 <img class="rounded-circle" src="<c:url value="/resources/images/none.png" />" width="40px;" height="40px;" />
                             </c:otherwise>
                         </c:choose>
-                                <span style="color: #fff; text-shadow: 2px 2px 10px white;">${currentUser.fullname}</span>
+                        <span style="color: #fff; text-shadow: 2px 2px 10px white;">${currentUser.fullname}</span>
                         <c:if test="${(currentUser.userRole.id == '3')}">
                             ${userService.getUserById(currentUser.id).name}
                         </c:if>
                         <c:if test="${!(currentUser.userRole.id == '3')}">
                             <span class="badge badge-secondary">${currentUser.userRole.role}</span>
                         </c:if>
-
-<<<<<<< HEAD
-<!--                        <span class="badge badge-secondary">${currentUser.userRole.role}</span>-->
-=======
->>>>>>> origin
                     </a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="<c:url value="/me/view"/>" >Thông tin tài khoản</a>

@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: spenddb
+-- Host: localhost    Database: spenddb
 -- ------------------------------------------------------
--- Server version	8.0.29
+-- Server version	8.0.32
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -111,18 +111,14 @@ DROP TABLE IF EXISTS `personal_transaction`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `personal_transaction` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `transaction_type` int DEFAULT NULL,
+  `name` varchar(45) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `type` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `purpose` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `price` double DEFAULT NULL,
   `date` datetime DEFAULT NULL,
-  `user_id` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_personal_user_idx` (`user_id`),
-  KEY `fk_personal_type_idx` (`transaction_type`),
-  CONSTRAINT `fk_personal_type` FOREIGN KEY (`transaction_type`) REFERENCES `transaction_type` (`id`),
-  CONSTRAINT `fk_personal_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,7 +127,7 @@ CREATE TABLE `personal_transaction` (
 
 LOCK TABLES `personal_transaction` WRITE;
 /*!40000 ALTER TABLE `personal_transaction` DISABLE KEYS */;
-INSERT INTO `personal_transaction` VALUES (1,2,'Áo thun','Shopee',200000,NULL,1),(13,1,'Đồ dùng cá nhân','Bàn chải đánh răng',30000,NULL,10),(15,3,'Ăn sáng','Phở bò',50000,NULL,14);
+INSERT INTO `personal_transaction` VALUES (1,NULL,'chi tiêu cá nhân','shoping','abc',2000000,NULL),(5,NULL,NULL,NULL,NULL,NULL,NULL),(6,NULL,NULL,NULL,NULL,NULL,NULL),(7,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `personal_transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,9 +140,9 @@ DROP TABLE IF EXISTS `status`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `status` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `statusName` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `statusName` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,30 +156,6 @@ INSERT INTO `status` VALUES (1,'Active'),(2,'Deleted'),(3,'Online'),(4,'Offline'
 UNLOCK TABLES;
 
 --
--- Table structure for table `transaction_type`
---
-
-DROP TABLE IF EXISTS `transaction_type`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `transaction_type` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `typename` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_general_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `transaction_type`
---
-
-LOCK TABLES `transaction_type` WRITE;
-/*!40000 ALTER TABLE `transaction_type` DISABLE KEYS */;
-INSERT INTO `transaction_type` VALUES (1,'Thanh toán trực tiếp'),(2,'Thanh toán trực tuyến'),(3,'Nợ'),(4,'Khác');
-/*!40000 ALTER TABLE `transaction_type` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `user`
 --
 
@@ -192,21 +164,24 @@ DROP TABLE IF EXISTS `user`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `fullname` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8_general_ci DEFAULT NULL,
-  `email` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_general_ci DEFAULT NULL,
+  `fullname` varchar(45) COLLATE utf8mb4_vi_0900_ai_ci DEFAULT NULL,
+  `email` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `phone` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
-  `username` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `username` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `password` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `active` int NOT NULL DEFAULT '1',
   `user_role` int NOT NULL DEFAULT '3',
-  `avatar` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_general_ci DEFAULT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `joined_date` datetime DEFAULT NULL,
+  `personal_transaction_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
+  KEY `user_personal_fk_idx` (`personal_transaction_id`),
   KEY `fk_user_status` (`active`),
   KEY `fk_user_role_idx` (`user_role`),
   CONSTRAINT `fk_user_role` FOREIGN KEY (`user_role`) REFERENCES `user_role` (`id`),
-  CONSTRAINT `fk_user_status` FOREIGN KEY (`active`) REFERENCES `status` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  CONSTRAINT `fk_user_status` FOREIGN KEY (`active`) REFERENCES `status` (`id`),
+  CONSTRAINT `user_personal_fk` FOREIGN KEY (`personal_transaction_id`) REFERENCES `personal_transaction` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vi_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -215,7 +190,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'A D M I N P R O','admin@admin.com','039474635','admin','$2a$10$fWian9UMAPSCAoAwMMu2COxlLkkBZdeWMGiKNVlF9q0YwXjRN/9Yi',1,1,'https://res.cloudinary.com/cloudybeauty/image/upload/v1681897192/bdzttxwrqd2napm65g6j.jpg',NULL),(9,'T Ấ N Đ Ạ T','admin1@admin.com','0394746355','tandat1234','$2a$10$Yw8pbRGyy5eRQ8Q.iKO05e5OzHJh03z9yl7ZrOnhipoUyZYvtk.QC',4,3,'https://res.cloudinary.com/cloudybeauty/image/upload/v1681891959/fr6cnyhmp4lnjaiffnbe.jpg',NULL),(10,'Đ Ư Ờ N G T A M','admin@admin.com','0941622670','user1','$2a$10$MhllHe8ixAkWz8MbZ3VlY.86Th/ydVNmi4Zk0IDr38xtfzKNaid3G',5,2,'https://res.cloudinary.com/cloudybeauty/image/upload/v1681981934/y6bpyheb8hvybdkfqb1j.jpg',NULL),(14,'N G U Y Ễ N P H Ú A N','1951052003an@ou.edu.vn','0941622670','ngphuan2023','$2a$10$qOo1CYEGEhzx6YClueYHP.Jin0qrVziuUt/dnQPnOhymyqPCHEtGi',5,3,'https://res.cloudinary.com/cloudybeauty/image/upload/v1681982876/lutwhpduk7rcpffhnpky.jpg',NULL);
+INSERT INTO `user` VALUES (1,'A D M I N P R O','admin@admin.com','039474635','admin','$2a$10$ghpu43NmiiRN1TQM4e4lqONVBN7TPnYP/7JHjzN/HoKmPhkGTP6xW',2,1,'https://res.cloudinary.com/cloudybeauty/image/upload/v1681897192/bdzttxwrqd2napm65g6j.jpg',NULL,NULL),(9,'T Ấ N Đ Ạ T',NULL,NULL,'tandat1234','$2a$10$d1NaYoRYAm7yT3D.5LsQEODn/nbJwKwQb14.QT0c/1UVbMlyPCr2O',4,3,'https://res.cloudinary.com/cloudybeauty/image/upload/v1681891959/fr6cnyhmp4lnjaiffnbe.jpg',NULL,NULL),(10,'doreamon','doremon@doremon.com','0394843635','doremon','123456',5,3,'https://res.cloudinary.com/cloudybeauty/image/upload/v1681900980/cll7cfmerxstfzqnzd9d.jpg',NULL,NULL),(14,'T Ấ N Đ Ạ T','abc@abc.com','0393844637','tandat123','$2a$10$lMUnRZOMaE0KMMC7ZZX4Vudz9Vh/T8rELuTexE3Td/SVz.jrs1vii',1,3,'https://res.cloudinary.com/cloudybeauty/image/upload/v1682273121/idnynhwlsxb24w6mtvcc.jpg','2023-04-24 01:05:15',6),(15,'T Ấ N Đ Ạ T','user111@gmail.com','0393610575','admin123','$2a$10$15GHSU/Bw5V5WwHHqqtTTeptrU0bMGdvPUwtBjUlO9O5gfUKVkQa2',1,3,'https://res.cloudinary.com/cloudybeauty/image/upload/v1682273871/w5pmuomrhqjawbxa9ljx.png','2023-04-24 01:17:45',7);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,7 +203,7 @@ DROP TABLE IF EXISTS `user_role`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_role` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `role` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `role_UNIQUE` (`role`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -253,4 +228,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-24 11:04:03
+-- Dump completed on 2023-04-25 17:02:17

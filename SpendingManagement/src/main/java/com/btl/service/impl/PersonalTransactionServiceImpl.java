@@ -49,4 +49,9 @@ public class PersonalTransactionServiceImpl implements PersonalTransactionServic
         return this.personalTransaction.getAllTransactionType(params);
     }
 
+    @Override
+    public int getMaxItemsInPage() {
+        return this.personalTransaction.getMaxItemsInPage();
+    }
+
 }
