@@ -32,7 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
- * @author phuan
+ * @author trant
  */
 @Entity
 @Table(name = "user")
@@ -49,16 +49,13 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByJoinedDate", query = "SELECT u FROM User u WHERE u.joinedDate = :joinedDate")})
 public class User implements Serializable {
 
-    public static final String ADMIN = "ROLE_ADMIN";
-    public static final String USER = "ROLE_USER";
-    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 50)
+    @Size(max = 45)
     @Column(name = "fullname")
     private String fullname;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
@@ -86,14 +83,21 @@ public class User implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date joinedDate;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Set<PersonalTransaction> personalTransactionSet;
+    private Set<Notification> notificationSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    private Set<GroupUsers> groupUsersSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "creatorId")
+    private Set<GroupTransaction> groupTransactionSet;
+    @JoinColumn(name = "personal_transaction_id", referencedColumnName = "id")
+    @ManyToOne
+    private PersonalTransaction personalTransactionId;
     @JoinColumn(name = "active", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Status active;
     @JoinColumn(name = "user_role", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private UserRole userRole;
-
+    
     @Transient
     @JsonIgnore
     private int day;
@@ -109,12 +113,7 @@ public class User implements Serializable {
     @Transient
     @JsonIgnore
     private MultipartFile file;
-    
-//    {
-//        active = new Status(1);
-//        userRole = new UserRole(3);
-//    }
-    
+
     public User() {
     }
 
@@ -193,12 +192,38 @@ public class User implements Serializable {
     }
 
     @XmlTransient
-    public Set<PersonalTransaction> getPersonalTransactionSet() {
-        return personalTransactionSet;
+    public Set<Notification> getNotificationSet() {
+        return notificationSet;
     }
 
-    public void setPersonalTransactionSet(Set<PersonalTransaction> personalTransactionSet) {
-        this.personalTransactionSet = personalTransactionSet;
+    public void setNotificationSet(Set<Notification> notificationSet) {
+        this.notificationSet = notificationSet;
+    }
+
+    @XmlTransient
+    public Set<GroupUsers> getGroupUsersSet() {
+        return groupUsersSet;
+    }
+
+    public void setGroupUsersSet(Set<GroupUsers> groupUsersSet) {
+        this.groupUsersSet = groupUsersSet;
+    }
+
+    @XmlTransient
+    public Set<GroupTransaction> getGroupTransactionSet() {
+        return groupTransactionSet;
+    }
+
+    public void setGroupTransactionSet(Set<GroupTransaction> groupTransactionSet) {
+        this.groupTransactionSet = groupTransactionSet;
+    }
+
+    public PersonalTransaction getPersonalTransactionId() {
+        return personalTransactionId;
+    }
+
+    public void setPersonalTransactionId(PersonalTransaction personalTransactionId) {
+        this.personalTransactionId = personalTransactionId;
     }
 
     public Status getActive() {
@@ -241,7 +266,7 @@ public class User implements Serializable {
     public String toString() {
         return "com.btl.pojo.User[ id=" + id + " ]";
     }
-    
+
     /**
      * @return the day
      */

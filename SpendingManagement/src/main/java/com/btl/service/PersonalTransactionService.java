@@ -23,4 +23,6 @@ public interface PersonalTransactionService {
     List<PersonalTransaction> getAllPersonalTransaction(Map<String, String> params);
     
     List<TransactionType> getAllTransactionType(Map<String, String> params);
+    
+    int getMaxItemsInPage();
 }
