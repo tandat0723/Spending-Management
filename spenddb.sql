@@ -41,7 +41,7 @@ CREATE TABLE `group_transaction` (
 
 LOCK TABLES `group_transaction` WRITE;
 /*!40000 ALTER TABLE `group_transaction` DISABLE KEYS */;
-INSERT INTO `group_transaction` VALUES (1,'Nhóm 1','arp',10,10000000,0),(2,'Nhóm 2','arp',9,5000030,0);
+INSERT INTO `group_transaction` VALUES (1,'Nhóm 1','arp',1,10000000,0),(2,'Nhóm 2','arp',9,5000030,0);
 /*!40000 ALTER TABLE `group_transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +70,7 @@ CREATE TABLE `group_users` (
 
 LOCK TABLES `group_users` WRITE;
 /*!40000 ALTER TABLE `group_users` DISABLE KEYS */;
-INSERT INTO `group_users` VALUES (1,1,10),(2,1,9);
+INSERT INTO `group_users` VALUES (1,1,1),(2,1,9);
 /*!40000 ALTER TABLE `group_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,8 +117,14 @@ CREATE TABLE `personal_transaction` (
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
   `price` double DEFAULT NULL,
   `date` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+  `user_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_personal_user_idx` (`user_id`),
+  KEY `fk_personal_type_idx` (`transaction_type`),
+  CONSTRAINT `fk_personal_type` FOREIGN KEY (`transaction_type`) REFERENCES `transaction_type` (`id`),
+  CONSTRAINT `fk_personal_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,7 +133,7 @@ CREATE TABLE `personal_transaction` (
 
 LOCK TABLES `personal_transaction` WRITE;
 /*!40000 ALTER TABLE `personal_transaction` DISABLE KEYS */;
-INSERT INTO `personal_transaction` VALUES (1,NULL,'chi tiêu cá nhân','shoping','abc',2000000,NULL),(5,NULL,NULL,NULL,NULL,NULL,NULL),(6,NULL,NULL,NULL,NULL,NULL,NULL),(7,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `personal_transaction` VALUES (1,2,'Áo thun','Shopee',200000,NULL,1),(13,1,'Đồ dùng cá nhân','Bàn chải đánh răng',30000,NULL,9);
 /*!40000 ALTER TABLE `personal_transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,7 +196,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'A D M I N P R O','admin@admin.com','039474635','admin','$2a$10$ghpu43NmiiRN1TQM4e4lqONVBN7TPnYP/7JHjzN/HoKmPhkGTP6xW',2,1,'https://res.cloudinary.com/cloudybeauty/image/upload/v1681897192/bdzttxwrqd2napm65g6j.jpg',NULL,NULL),(9,'T Ấ N Đ Ạ T',NULL,NULL,'tandat1234','$2a$10$d1NaYoRYAm7yT3D.5LsQEODn/nbJwKwQb14.QT0c/1UVbMlyPCr2O',4,3,'https://res.cloudinary.com/cloudybeauty/image/upload/v1681891959/fr6cnyhmp4lnjaiffnbe.jpg',NULL,NULL),(10,'doreamon','doremon@doremon.com','0394843635','doremon','123456',5,3,'https://res.cloudinary.com/cloudybeauty/image/upload/v1681900980/cll7cfmerxstfzqnzd9d.jpg',NULL,NULL),(14,'T Ấ N Đ Ạ T','abc@abc.com','0393844637','tandat123','$2a$10$lMUnRZOMaE0KMMC7ZZX4Vudz9Vh/T8rELuTexE3Td/SVz.jrs1vii',1,3,'https://res.cloudinary.com/cloudybeauty/image/upload/v1682273121/idnynhwlsxb24w6mtvcc.jpg','2023-04-24 01:05:15',6),(15,'T Ấ N Đ Ạ T','user111@gmail.com','0393610575','admin123','$2a$10$15GHSU/Bw5V5WwHHqqtTTeptrU0bMGdvPUwtBjUlO9O5gfUKVkQa2',1,3,'https://res.cloudinary.com/cloudybeauty/image/upload/v1682273871/w5pmuomrhqjawbxa9ljx.png','2023-04-24 01:17:45',7);
+INSERT INTO `user` VALUES (1,'A D M I N P R O','admin@admin.com','039474635','admin','$2a$10$fWian9UMAPSCAoAwMMu2COxlLkkBZdeWMGiKNVlF9q0YwXjRN/9Yi',1,1,'https://res.cloudinary.com/cloudybeauty/image/upload/v1681897192/bdzttxwrqd2napm65g6j.jpg',NULL),(9,'T Ấ N Đ Ạ T','admin1@admin.com','0394746355','tandat1234','$2a$10$Yw8pbRGyy5eRQ8Q.iKO05e5OzHJh03z9yl7ZrOnhipoUyZYvtk.QC',4,3,'https://res.cloudinary.com/cloudybeauty/image/upload/v1681891959/fr6cnyhmp4lnjaiffnbe.jpg',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,4 +234,5 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-25 17:02:17
+-- Dump completed on 2023-04-25 17:18:26
+
