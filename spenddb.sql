@@ -41,7 +41,7 @@ CREATE TABLE `group_transaction` (
 
 LOCK TABLES `group_transaction` WRITE;
 /*!40000 ALTER TABLE `group_transaction` DISABLE KEYS */;
-INSERT INTO `group_transaction` VALUES (1,'Nhóm 1','arp',10,10000000,0),(2,'Nhóm 2','arp',9,5000030,0);
+INSERT INTO `group_transaction` VALUES (1,'Nhóm 1','arp',1,10000000,0),(2,'Nhóm 2','arp',9,5000030,0);
 /*!40000 ALTER TABLE `group_transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +70,7 @@ CREATE TABLE `group_users` (
 
 LOCK TABLES `group_users` WRITE;
 /*!40000 ALTER TABLE `group_users` DISABLE KEYS */;
-INSERT INTO `group_users` VALUES (1,1,10),(2,1,9);
+INSERT INTO `group_users` VALUES (1,1,1),(2,1,9);
 /*!40000 ALTER TABLE `group_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,7 +122,7 @@ CREATE TABLE `personal_transaction` (
   KEY `fk_personal_type_idx` (`transaction_type`),
   CONSTRAINT `fk_personal_type` FOREIGN KEY (`transaction_type`) REFERENCES `transaction_type` (`id`),
   CONSTRAINT `fk_personal_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,7 +131,7 @@ CREATE TABLE `personal_transaction` (
 
 LOCK TABLES `personal_transaction` WRITE;
 /*!40000 ALTER TABLE `personal_transaction` DISABLE KEYS */;
-INSERT INTO `personal_transaction` VALUES (1,2,'Áo thun','Shopee',200000,NULL,1),(13,1,'Đồ dùng cá nhân','Bàn chải đánh răng',30000,NULL,10),(15,3,'Ăn sáng','Phở bò',50000,NULL,14);
+INSERT INTO `personal_transaction` VALUES (1,2,'Áo thun','Shopee',200000,NULL,1),(13,1,'Đồ dùng cá nhân','Bàn chải đánh răng',30000,NULL,9);
 /*!40000 ALTER TABLE `personal_transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,7 +215,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'A D M I N P R O','admin@admin.com','039474635','admin','$2a$10$fWian9UMAPSCAoAwMMu2COxlLkkBZdeWMGiKNVlF9q0YwXjRN/9Yi',1,1,'https://res.cloudinary.com/cloudybeauty/image/upload/v1681897192/bdzttxwrqd2napm65g6j.jpg',NULL),(9,'T Ấ N Đ Ạ T','admin1@admin.com','0394746355','tandat1234','$2a$10$Yw8pbRGyy5eRQ8Q.iKO05e5OzHJh03z9yl7ZrOnhipoUyZYvtk.QC',4,3,'https://res.cloudinary.com/cloudybeauty/image/upload/v1681891959/fr6cnyhmp4lnjaiffnbe.jpg',NULL),(10,'Đ Ư Ờ N G T A M','admin@admin.com','0941622670','user1','$2a$10$MhllHe8ixAkWz8MbZ3VlY.86Th/ydVNmi4Zk0IDr38xtfzKNaid3G',5,2,'https://res.cloudinary.com/cloudybeauty/image/upload/v1681981934/y6bpyheb8hvybdkfqb1j.jpg',NULL),(14,'N G U Y Ễ N P H Ú A N','1951052003an@ou.edu.vn','0941622670','ngphuan2023','$2a$10$qOo1CYEGEhzx6YClueYHP.Jin0qrVziuUt/dnQPnOhymyqPCHEtGi',5,3,'https://res.cloudinary.com/cloudybeauty/image/upload/v1681982876/lutwhpduk7rcpffhnpky.jpg',NULL);
+INSERT INTO `user` VALUES (1,'A D M I N P R O','admin@admin.com','039474635','admin','$2a$10$fWian9UMAPSCAoAwMMu2COxlLkkBZdeWMGiKNVlF9q0YwXjRN/9Yi',1,1,'https://res.cloudinary.com/cloudybeauty/image/upload/v1681897192/bdzttxwrqd2napm65g6j.jpg',NULL),(9,'T Ấ N Đ Ạ T','admin1@admin.com','0394746355','tandat1234','$2a$10$Yw8pbRGyy5eRQ8Q.iKO05e5OzHJh03z9yl7ZrOnhipoUyZYvtk.QC',4,3,'https://res.cloudinary.com/cloudybeauty/image/upload/v1681891959/fr6cnyhmp4lnjaiffnbe.jpg',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -253,4 +253,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-24 11:04:03
+-- Dump completed on 2023-04-25 17:18:26
