@@ -57,14 +57,12 @@ public class UserServiceImpl implements UserService {
                         ObjectUtils.asMap("resource_type", "auto"));
                 user.setAvatar(res.get("secure_url").toString());
             } catch (IOException ex) {
-                Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
-
             if (res != null)
                 user.setAvatar((String) res.get("secure_url"));
             else
                 user.setAvatar(avatar);
-            
         }
         
         if(user.getId() == 0) 
