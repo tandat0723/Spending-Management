@@ -55,7 +55,7 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 45)
+    @Size(max = 50)
     @Column(name = "fullname")
     private String fullname;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
@@ -82,15 +82,14 @@ public class User implements Serializable {
     @Column(name = "joined_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date joinedDate;
+    @OneToMany(mappedBy = "userId")
+    private Set<PersonalTransaction> personalTransactionSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<Notification> notificationSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Set<GroupUsers> groupUsersSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "creatorId")
     private Set<GroupTransaction> groupTransactionSet;
-    @JoinColumn(name = "personal_transaction_id", referencedColumnName = "id")
-    @ManyToOne
-    private PersonalTransaction personalTransactionId;
     @JoinColumn(name = "active", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Status active;
@@ -113,6 +112,7 @@ public class User implements Serializable {
     @Transient
     @JsonIgnore
     private MultipartFile file;
+
 
     public User() {
     }
@@ -192,6 +192,15 @@ public class User implements Serializable {
     }
 
     @XmlTransient
+    public Set<PersonalTransaction> getPersonalTransactionSet() {
+        return personalTransactionSet;
+    }
+
+    public void setPersonalTransactionSet(Set<PersonalTransaction> personalTransactionSet) {
+        this.personalTransactionSet = personalTransactionSet;
+    }
+
+    @XmlTransient
     public Set<Notification> getNotificationSet() {
         return notificationSet;
     }
@@ -216,14 +225,6 @@ public class User implements Serializable {
 
     public void setGroupTransactionSet(Set<GroupTransaction> groupTransactionSet) {
         this.groupTransactionSet = groupTransactionSet;
-    }
-
-    public PersonalTransaction getPersonalTransactionId() {
-        return personalTransactionId;
-    }
-
-    public void setPersonalTransactionId(PersonalTransaction personalTransactionId) {
-        this.personalTransactionId = personalTransactionId;
     }
 
     public Status getActive() {

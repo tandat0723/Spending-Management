@@ -25,9 +25,17 @@
     
     
     <!--PAGE ACCESS-->
-    <definition name="user" extends="baseLayout">
+    <definition name="home" extends="baseLayout">
         <put-attribute name="title" value="Trang chủ người dùng"/>
-        <put-attribute name="content" value="/WEB-INF/pages/user.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/pages/home.jsp"/>
+    </definition>
+    <definition name="personal-transaction" extends="baseLayout">
+        <put-attribute name="title" value="Trang chức năng chỉ tiêu cá nhân"/>
+        <put-attribute name="content" value="/WEB-INF/pages/personal-transaction.jsp"/>
+    </definition>
+    <definition name="group-transaction" extends="baseLayout">
+        <put-attribute name="title" value="Trang chức năng chỉ tiêu cá nhân"/>
+        <put-attribute name="content" value="/WEB-INF/pages/group-transaction.jsp"/>
     </definition>
     
     

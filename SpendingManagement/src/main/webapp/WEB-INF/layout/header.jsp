@@ -53,10 +53,10 @@
                 </c:if>
                 <c:if test="${currentUser.userRole.role == 'ROLE_USER' && currentUser.active.id == 1}">
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="#" />">Chi tiêu cá nhân</a>
+                        <a class="nav-link" href="<c:url value="/user/personal-transaction" />">Chi tiêu cá nhân</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="#" />">Chi tiêu nhóm</a>
+                        <a class="nav-link" href="<c:url value="/user/group-transaction" />">Chi tiêu nhóm</a>
                     </li>
                 </c:if>
             </ul>

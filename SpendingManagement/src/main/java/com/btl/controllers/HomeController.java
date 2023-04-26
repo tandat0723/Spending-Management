@@ -1,7 +1,6 @@
 package com.btl.controllers;
 
 import com.btl.pojo.User;
-import com.btl.service.PersonalTransactionService;
 import com.btl.service.UserService;
 import javax.persistence.NoResultException;
 import org.springframework.beans.factory.annotation.Autowired;

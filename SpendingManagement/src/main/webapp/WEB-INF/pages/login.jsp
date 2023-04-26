@@ -25,14 +25,14 @@
                                     </div>
                                     <form class="user" method="post" action="${action}">
                                         <div class="form-group">
-                                            <input type="username" name="username" style="font-size: 16px"
+                                            <input type="username" name="username" style="font-size: 16px" id="username"
                                                    class="form-control form-control-user"
-                                                   placeholder="Tên đăng nhập" autofocus="autofocus">
+                                                   placeholder="Tên đăng nhập..." autofocus="autofocus">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" name="password" style="font-size: 16px"
+                                            <input type="password" name="password" style="font-size: 16px" id="password"
                                                    class="form-control form-control-user"
-                                                   placeholder="Nhập mật khẩu">
+                                                   placeholder="Nhập mật khẩu...">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -65,10 +65,8 @@
     </div>
 </div>
 
-<!-- Bootstrap core JavaScript-->
 <script src="<c:url value="/resources/vendor/jquery/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
-<!-- Core plugin JavaScript-->
 <script src="<c:url value="/resources/vendor/jquery-easing/jquery.easing.min.js"/>"></script>
-
 <script src="<c:url value="/resources/js/sb-admin-2.min.js"/>"></script>
+<script src="<c:url value="/resources/js/login.js" />"></script>

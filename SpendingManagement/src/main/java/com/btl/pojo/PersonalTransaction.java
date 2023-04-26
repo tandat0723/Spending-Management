@@ -6,22 +6,21 @@ package com.btl.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -34,7 +33,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "PersonalTransaction.findAll", query = "SELECT p FROM PersonalTransaction p"),
     @NamedQuery(name = "PersonalTransaction.findById", query = "SELECT p FROM PersonalTransaction p WHERE p.id = :id"),
     @NamedQuery(name = "PersonalTransaction.findByName", query = "SELECT p FROM PersonalTransaction p WHERE p.name = :name"),
-    @NamedQuery(name = "PersonalTransaction.findByType", query = "SELECT p FROM PersonalTransaction p WHERE p.type = :type"),
     @NamedQuery(name = "PersonalTransaction.findByPurpose", query = "SELECT p FROM PersonalTransaction p WHERE p.purpose = :purpose"),
     @NamedQuery(name = "PersonalTransaction.findByDescription", query = "SELECT p FROM PersonalTransaction p WHERE p.description = :description"),
     @NamedQuery(name = "PersonalTransaction.findByPrice", query = "SELECT p FROM PersonalTransaction p WHERE p.price = :price"),
@@ -51,9 +49,6 @@ public class PersonalTransaction implements Serializable {
     @Column(name = "name")
     private String name;
     @Size(max = 45)
-    @Column(name = "type")
-    private String type;
-    @Size(max = 45)
     @Column(name = "purpose")
     private String purpose;
     @Size(max = 255)
@@ -65,8 +60,12 @@ public class PersonalTransaction implements Serializable {
     @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
-    @OneToMany(mappedBy = "personalTransactionId")
-    private Set<User> userSet;
+    @JoinColumn(name = "transaction_type", referencedColumnName = "id")
+    @ManyToOne
+    private TransactionType transactionType;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ManyToOne
+    private User userId;
 
     public PersonalTransaction() {
     }
@@ -89,14 +88,6 @@ public class PersonalTransaction implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getPurpose() {
@@ -131,13 +122,20 @@ public class PersonalTransaction implements Serializable {
         this.date = date;
     }
 
-    @XmlTransient
-    public Set<User> getUserSet() {
-        return userSet;
+    public TransactionType getTransactionType() {
+        return transactionType;
     }
 
-    public void setUserSet(Set<User> userSet) {
-        this.userSet = userSet;
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
+    }
+
+    public User getUserId() {
+        return userId;
+    }
+
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
     @Override
