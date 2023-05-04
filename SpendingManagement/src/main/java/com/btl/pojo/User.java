@@ -9,10 +9,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,7 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
- * @author trant
+ * @author phuan
  */
 @Entity
 @Table(name = "user")
@@ -56,7 +54,7 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 45)
+    @Size(max = 50)
     @Column(name = "fullname")
     private String fullname;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
@@ -83,20 +81,8 @@ public class User implements Serializable {
     @Column(name = "joined_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date joinedDate;
-<<<<<<< HEAD
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "userId")
     private Set<PersonalTransaction> personalTransactionSet;
-=======
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Set<Notification> notificationSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Set<GroupUsers> groupUsersSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "creatorId")
-    private Set<GroupTransaction> groupTransactionSet;
-    @JoinColumn(name = "personal_transaction_id", referencedColumnName = "id")
-    @ManyToOne
-    private PersonalTransaction personalTransactionId;
->>>>>>> 913c752cfa06884f930cf1c0f939867b4c937bcf
     @JoinColumn(name = "active", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Status active;
@@ -198,38 +184,12 @@ public class User implements Serializable {
     }
 
     @XmlTransient
-    public Set<Notification> getNotificationSet() {
-        return notificationSet;
+    public Set<PersonalTransaction> getPersonalTransactionSet() {
+        return personalTransactionSet;
     }
 
-    public void setNotificationSet(Set<Notification> notificationSet) {
-        this.notificationSet = notificationSet;
-    }
-
-    @XmlTransient
-    public Set<GroupUsers> getGroupUsersSet() {
-        return groupUsersSet;
-    }
-
-    public void setGroupUsersSet(Set<GroupUsers> groupUsersSet) {
-        this.groupUsersSet = groupUsersSet;
-    }
-
-    @XmlTransient
-    public Set<GroupTransaction> getGroupTransactionSet() {
-        return groupTransactionSet;
-    }
-
-    public void setGroupTransactionSet(Set<GroupTransaction> groupTransactionSet) {
-        this.groupTransactionSet = groupTransactionSet;
-    }
-
-    public PersonalTransaction getPersonalTransactionId() {
-        return personalTransactionId;
-    }
-
-    public void setPersonalTransactionId(PersonalTransaction personalTransactionId) {
-        this.personalTransactionId = personalTransactionId;
+    public void setPersonalTransactionSet(Set<PersonalTransaction> personalTransactionSet) {
+        this.personalTransactionSet = personalTransactionSet;
     }
 
     public Status getActive() {
@@ -272,10 +232,7 @@ public class User implements Serializable {
     public String toString() {
         return "com.btl.pojo.User[ id=" + id + " ]";
     }
-
-    /**
-     * @return the day
-     */
+    
     public int getDay() {
         return day;
     }
@@ -343,5 +300,4 @@ public class User implements Serializable {
     public void setFile(MultipartFile file) {
         this.file = file;
     }
-    
 }

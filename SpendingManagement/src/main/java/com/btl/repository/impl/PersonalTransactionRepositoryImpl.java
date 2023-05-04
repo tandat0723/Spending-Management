@@ -123,7 +123,6 @@ public class PersonalTransactionRepositoryImpl implements PersonalTransactionRep
     }
 
     @Override
-<<<<<<< HEAD
     public boolean deleteSpending(int id) {
         PersonalTransaction p = this.getById(id);
         Session s = this.factory.getObject().getCurrentSession();
@@ -133,10 +132,10 @@ public class PersonalTransactionRepositoryImpl implements PersonalTransactionRep
         } catch (HibernateException ex) {
             return false;
         }
-=======
+    }
+    @Override
     public int getMaxItemsInPage() {
         return maxItemsInPage;
->>>>>>> 913c752cfa06884f930cf1c0f939867b4c937bcf
     }
 
 }

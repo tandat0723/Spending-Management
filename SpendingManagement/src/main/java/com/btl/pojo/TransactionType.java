@@ -7,7 +7,6 @@ package com.btl.pojo;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +16,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -27,13 +25,13 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author phuan
  */
 @Entity
-@Table(name = "status")
+@Table(name = "transaction_type")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Status.findAll", query = "SELECT s FROM Status s"),
-    @NamedQuery(name = "Status.findById", query = "SELECT s FROM Status s WHERE s.id = :id"),
-    @NamedQuery(name = "Status.findByStatusName", query = "SELECT s FROM Status s WHERE s.statusName = :statusName")})
-public class Status implements Serializable {
+    @NamedQuery(name = "TransactionType.findAll", query = "SELECT t FROM TransactionType t"),
+    @NamedQuery(name = "TransactionType.findById", query = "SELECT t FROM TransactionType t WHERE t.id = :id"),
+    @NamedQuery(name = "TransactionType.findByTypename", query = "SELECT t FROM TransactionType t WHERE t.typename = :typename")})
+public class TransactionType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,24 +39,17 @@ public class Status implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "statusName")
-    private String statusName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "active")
-    private Set<User> userSet;
+    @Size(max = 45)
+    @Column(name = "typename")
+    private String typename;
+    @OneToMany(mappedBy = "transactionType")
+    private Set<PersonalTransaction> personalTransactionSet;
 
-    public Status() {
+    public TransactionType() {
     }
 
-    public Status(Integer id) {
+    public TransactionType(Integer id) {
         this.id = id;
-    }
-
-    public Status(Integer id, String statusName) {
-        this.id = id;
-        this.statusName = statusName;
     }
 
     public Integer getId() {
@@ -69,21 +60,21 @@ public class Status implements Serializable {
         this.id = id;
     }
 
-    public String getStatusName() {
-        return statusName;
+    public String getTypename() {
+        return typename;
     }
 
-    public void setStatusName(String statusName) {
-        this.statusName = statusName;
+    public void setTypename(String typename) {
+        this.typename = typename;
     }
 
     @XmlTransient
-    public Set<User> getUserSet() {
-        return userSet;
+    public Set<PersonalTransaction> getPersonalTransactionSet() {
+        return personalTransactionSet;
     }
 
-    public void setUserSet(Set<User> userSet) {
-        this.userSet = userSet;
+    public void setPersonalTransactionSet(Set<PersonalTransaction> personalTransactionSet) {
+        this.personalTransactionSet = personalTransactionSet;
     }
 
     @Override
@@ -96,10 +87,10 @@ public class Status implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Status)) {
+        if (!(object instanceof TransactionType)) {
             return false;
         }
-        Status other = (Status) object;
+        TransactionType other = (TransactionType) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -108,7 +99,7 @@ public class Status implements Serializable {
 
     @Override
     public String toString() {
-        return "com.btl.pojo.Status[ id=" + id + " ]";
+        return "com.btl.pojo.TransactionType[ id=" + id + " ]";
     }
     
 }
