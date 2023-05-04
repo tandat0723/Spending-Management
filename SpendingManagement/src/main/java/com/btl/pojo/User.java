@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -85,7 +86,7 @@ public class User implements Serializable {
     @Column(name = "joined_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date joinedDate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", fetch = FetchType.EAGER)
     private Set<PersonalTransaction> personalTransactionSet;
     @JoinColumn(name = "active", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -301,6 +302,7 @@ public class User implements Serializable {
     /**
      * @return the file
      */
+    @XmlTransient
     public MultipartFile getFile() {
         return file;
     }

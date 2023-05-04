@@ -33,23 +33,17 @@
                 <td class="overflow-hidden">${p.price} VND</td>
                 <td class="overflow-hidden">${p.date}</td>
                 <td>
-                    <a href="<c:url value="/admin/spending-admin/view/${p.id}" />" style="color: blue; margin-right: 5px;"><i class="fas fa-eye"></i></a>
-                    <a href="<c:url value="/admin/spending-admin/${p.id}" />" style="color: #00bbb3; margin-right: 5px;"><i class="fas fa-pen"></i></a>
+                    <c:url value="/api/spending-admin/view/${p.id}" var="endpointview" />
+                    <a href="javascript:;" onclick="adminSpendingView('${endpointview}')" style="color: blue; margin-right: 5px;"><i class="fas fa-eye"></i></a>
+                    <a href="<c:url value="/admin/spending-admin/${p.id}" />" class="btn-spending js-edit-spending" style="color: #00bbb3; margin-right: 5px;"><i class="fas fa-pen"></i></a>
                     <div id="spinner${p.id}" style="display:none" class="spinner-border spinner-border-sm"></div>
                     <c:url value="/api/spending/${p.id}" var="endpoint" />
-                    <a id="delete${u.id}" href="javascript:;" style="color: red;" onclick="deleteSpending('${endpoint}', ${p.id})"><i class="fas fa-trash"></i></a>
+                    <a id="delete${p.id}" href="javascript:;" style="color: red;" onclick="deleteSpending('${endpoint}', ${p.id})"><i class="fas fa-trash"></i></a>
                 </td>
             </tr>
         </c:forEach>
     </tbody>
 </table>
-<hr/>
-<c:if test="${errMsg != null}">
-    <div class="alert alert-danger">${errMsg}</div>
-</c:if>
-<c:if test="${sucMsg != null}">
-    <div class="alert alert-success">${sucMsg}</div>
-</c:if>
 
 <c:url value="/admin/spending-admin" var="action" />
 <form:form method="POST" action="${action}"
@@ -125,3 +119,23 @@
 
     </div>
 </form:form>
+
+<div class="js-modal-view">
+    <div class="modal-view-container js-modal-view-container">
+        <div class="js-modal-view-close">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+        <header class="modal-view-header">
+            <h1 class="text-center" style="padding: 20px 30px">THÔNG TIN CHI TIÊU</h1>
+        </header>
+        <div class="modal-view-body">
+            <section class="section about-section gray-bg" id="about">
+                <div class="container m-0">
+                    <div class="row flex-row-reverse"  id="js-modal-view">
+                        
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

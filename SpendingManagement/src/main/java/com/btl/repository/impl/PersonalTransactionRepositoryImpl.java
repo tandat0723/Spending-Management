@@ -120,4 +120,16 @@ public class PersonalTransactionRepositoryImpl implements PersonalTransactionRep
         return transactionTypes;
     }
 
+    @Override
+    public boolean deleteSpending(int id) {
+        PersonalTransaction p = this.getById(id);
+        Session s = this.factory.getObject().getCurrentSession();
+        try {
+            s.delete(p);
+            return true;
+        } catch (HibernateException ex) {
+            return false;
+        }
+    }
+
 }

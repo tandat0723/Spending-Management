@@ -49,4 +49,9 @@ public class PersonalTransactionServiceImpl implements PersonalTransactionServic
         return this.personalTransaction.getAllTransactionType(params);
     }
 
+    @Override
+    public boolean deleteSpending(int id) {
+        return this.personalTransaction.deleteSpending(id);
+    }
+
 }
