@@ -41,7 +41,7 @@ CREATE TABLE `group_transaction` (
 
 LOCK TABLES `group_transaction` WRITE;
 /*!40000 ALTER TABLE `group_transaction` DISABLE KEYS */;
-INSERT INTO `group_transaction` VALUES (1,'Nhóm 1','arp',1,10000000,0),(2,'Nhóm 2','arp',9,5000030,0);
+INSERT INTO `group_transaction` VALUES (1,'Nhóm 1','arp',1,10000000,0);
 /*!40000 ALTER TABLE `group_transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +70,7 @@ CREATE TABLE `group_users` (
 
 LOCK TABLES `group_users` WRITE;
 /*!40000 ALTER TABLE `group_users` DISABLE KEYS */;
-INSERT INTO `group_users` VALUES (1,1,1),(2,1,9);
+INSERT INTO `group_users` VALUES (1,1,1);
 /*!40000 ALTER TABLE `group_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -132,7 +132,7 @@ CREATE TABLE `personal_transaction` (
 
 LOCK TABLES `personal_transaction` WRITE;
 /*!40000 ALTER TABLE `personal_transaction` DISABLE KEYS */;
-INSERT INTO `personal_transaction` VALUES (1,NULL,2,'Áo thun','Shopee',200000,NULL,1),(13,NULL,1,'Đồ dùng cá nhân','Bàn chải đánh răng',30000,NULL,9),(23,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `personal_transaction` VALUES (1,NULL,2,'Áo thun','Shopee',200000,NULL,1),(13,'chi tiêu cá nhân',1,'Đồ dùng cá nhân','Bàn chải đánh răng',30000,NULL,21),(23,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `personal_transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,7 +216,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'A D M I N P R O','admin@admin.com','039474635','admin','$2a$10$fWian9UMAPSCAoAwMMu2COxlLkkBZdeWMGiKNVlF9q0YwXjRN/9Yi',1,1,'https://res.cloudinary.com/cloudybeauty/image/upload/v1681897192/bdzttxwrqd2napm65g6j.jpg',NULL),(9,'T Ấ N Đ Ạ T','admin1@admin.com','0394746355','tandat1234','$2a$10$Yw8pbRGyy5eRQ8Q.iKO05e5OzHJh03z9yl7ZrOnhipoUyZYvtk.QC',4,3,'https://res.cloudinary.com/cloudybeauty/image/upload/v1681891959/fr6cnyhmp4lnjaiffnbe.jpg',NULL),(21,'N G U O I D U N G','thanhthan@gmail.com','0393610575','admin123','$2a$10$koi687TvIU1j7LoOzFv35OFN2KSBH8TaG.khmL2syGUSSwzZo2pCW',1,3,'https://res.cloudinary.com/cloudybeauty/image/upload/v1682515382/ap0vffwk6pmq6oet6nn7.jpg','2023-04-26 20:23:01');
+INSERT INTO `user` VALUES (1,'A D M I N P R O','admin@admin.com','039474635','admin','$2a$10$fWian9UMAPSCAoAwMMu2COxlLkkBZdeWMGiKNVlF9q0YwXjRN/9Yi',1,1,'https://res.cloudinary.com/cloudybeauty/image/upload/v1681897192/bdzttxwrqd2napm65g6j.jpg',NULL),(21,'N G U O I D U N G','thanhthan@gmail.com','0393610575','admin123','$2a$10$koi687TvIU1j7LoOzFv35OFN2KSBH8TaG.khmL2syGUSSwzZo2pCW',1,3,'https://res.cloudinary.com/cloudybeauty/image/upload/v1682515382/ap0vffwk6pmq6oet6nn7.jpg','2023-04-26 20:23:01');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -254,4 +254,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-27  0:03:12
+-- Dump completed on 2023-05-04 16:20:43

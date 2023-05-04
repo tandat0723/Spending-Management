@@ -96,7 +96,7 @@ public class User implements Serializable {
     @JoinColumn(name = "user_role", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private UserRole userRole;
-    
+
     @Transient
     @JsonIgnore
     private int day;
@@ -112,7 +112,6 @@ public class User implements Serializable {
     @Transient
     @JsonIgnore
     private MultipartFile file;
-
 
     public User() {
     }
@@ -337,5 +336,5 @@ public class User implements Serializable {
     public void setFile(MultipartFile file) {
         this.file = file;
     }
-    
+
 }

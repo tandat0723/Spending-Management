@@ -4,7 +4,7 @@
     Author     : trant
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -35,7 +35,7 @@
                             <div class="col-md-7">
                                 <p>${currentUser.phone}</p>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-4">

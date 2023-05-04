@@ -21,37 +21,37 @@ import org.springframework.transaction.annotation.Transactional;
 public class PersonalTransactionServiceImpl implements PersonalTransactionService {
 
     @Autowired
-    private PersonalTransactionRepository personalTransaction;
+    private PersonalTransactionRepository personalTransactionRepository;
 
     @Override
     public PersonalTransaction getById(int id) {
-        return this.personalTransaction.getById(id);
+        return this.personalTransactionRepository.getById(id);
     }
 
     @Override
     @Transactional
     public boolean addOrUpdate(PersonalTransaction personalTransaction) {
-        return this.personalTransaction.addOrUpdate(personalTransaction);
-    }
-
-    @Override
-    public PersonalTransaction getByUserId(int id) {
-        return this.personalTransaction.getByUserId(id);
+        return this.personalTransactionRepository.addOrUpdate(personalTransaction);
     }
 
     @Override
     public List<PersonalTransaction> getAllPersonalTransaction(Map<String, String> params) {
-        return this.personalTransaction.getAllPersonalTransaction(params);
+        return this.personalTransactionRepository.getAllPersonalTransaction(params);
     }
 
     @Override
     public List<TransactionType> getAllTransactionType(Map<String, String> params) {
-        return this.personalTransaction.getAllTransactionType(params);
+        return this.personalTransactionRepository.getAllTransactionType(params);
     }
 
     @Override
     public int getMaxItemsInPage() {
-        return this.personalTransaction.getMaxItemsInPage();
+        return this.personalTransactionRepository.getMaxItemsInPage();
+    }
+
+    @Override
+    public List<PersonalTransaction> getPersonalTransaction(Map<String, String> params, int page, int maxItems) {
+        return this.personalTransactionRepository.getPersonalTransaction(params, page, maxItems);
     }
 
 }

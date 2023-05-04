@@ -33,6 +33,10 @@
         <put-attribute name="title" value="Trang chức năng chỉ tiêu cá nhân"/>
         <put-attribute name="content" value="/WEB-INF/pages/personal-transaction.jsp"/>
     </definition>
+    <definition name="personal-transaction-view" extends="baseLayout">
+        <put-attribute name="title" value="Trang chi tiêu cá nhân"/>
+        <put-attribute name="content" value="/WEB-INF/pages/personal-transaction-view.jsp"/>
+    </definition>
     <definition name="group-transaction" extends="baseLayout">
         <put-attribute name="title" value="Trang chức năng chỉ tiêu cá nhân"/>
         <put-attribute name="content" value="/WEB-INF/pages/group-transaction.jsp"/>
