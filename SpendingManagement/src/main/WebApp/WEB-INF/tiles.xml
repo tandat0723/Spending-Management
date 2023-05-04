@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tiles-definitions PUBLIC "-//ApacheSoftware Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <!--LAYOUT PAGE-->
+    <definition name="baseLayout" template="/WEB-INF/layout/base.jsp">
+        <put-attribute name="title" value=""/>
+        <put-attribute name="header" value="/WEB-INF/layout/header.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp"/>
+        <put-attribute name="content" value=""/>
+    </definition>
+    <definition name="adminLayout" template="/WEB-INF/layout/admin-base.jsp">
+        <put-attribute name="title" value=""/>
+        <put-attribute name="sidebar" value="/WEB-INF/layout/admin-sidebar.jsp"/>
+        <put-attribute name="topbar" value="/WEB-INF/layout/admin-topbar.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/layout/admin-footer.jsp"/>
+        <put-attribute name="content" value=""/>
+    </definition>
+    <definition name="blankLayout" template="/WEB-INF/layout/blank-base.jsp">
+        <put-attribute name="title" value=""/>
+        <put-attribute name="content" value=""/>
+    </definition>
+    
+    
+    <!--PAGE ACCESS-->
+    <definition name="user" extends="baseLayout">
+        <put-attribute name="title" value="Trang chủ người dùng"/>
+        <put-attribute name="content" value="/WEB-INF/pages/user.jsp"/>
+    </definition>
+    
+    
+    <!--PAGE ADMINISTRARTOR-->
+    <definition name="admin" extends="adminLayout">
+        <put-attribute name="title" value="Trang chủ quản trị" />
+        <put-attribute name="content" value="/WEB-INF/pages/admin/admin.jsp" />
+    </definition>
+    <definition name="account-admin" extends="adminLayout">
+        <put-attribute name="title" value="Quản lý tài khoản người dùng" />
+        <put-attribute name="content" value="/WEB-INF/pages/admin/account/account-admin.jsp" />
+    </definition>
+    <definition name="account-view" extends="adminLayout">
+        <put-attribute name="title" value="Thông tin tài khoản người dùng"/>
+        <put-attribute name="content" value="/WEB-INF/pages/admin/account/account-view.jsp"/>
+    </definition>
+    <definition name="spending-admin" extends="adminLayout">
+        <put-attribute name="title" value="Quản lý chi tiêu" />
+        <put-attribute name="content" value="/WEB-INF/pages/admin/spending/spending-admin.jsp" />
+    </definition>
+  
+    
+    <!--PAGE LOGIN-->
+    <definition name="login" extends="blankLayout">
+        <put-attribute name="title" value="Đăng nhập"/>
+        <put-attribute name="content" value="/WEB-INF/pages/login.jsp"/>
+    </definition>
+    <definition name="register" extends="blankLayout">
+        <put-attribute name="title" value="Đăng ký"/>
+        <put-attribute name="content" value="/WEB-INF/pages/register.jsp"/>
+    </definition>
+    <definition name="forgot-password" extends="blankLayout">
+        <put-attribute name="title" value="Quên mật khẩu"/>
+        <put-attribute name="content" value="/WEB-INF/pages/forgot-password.jsp"/>
+    </definition>
+    <definition name="change-password" extends="blankLayout">
+        <put-attribute name="title" value="Đổi mật khẩu"/>
+        <put-attribute name="content" value="/WEB-INF/pages/change-password.jsp"/>
+    </definition>
+    
+    
+    <!--PAGE DEFINE-->
+    <definition name="index" extends="baseLayout">
+        <put-attribute name="title" value="Trang chủ"/>
+        <put-attribute name="content" value="/WEB-INF/pages/index.jsp"/>
+    </definition>
+    <definition name="me-view" extends="baseLayout">
+        <put-attribute name="title" value="Thông tin tài khoản người dùng"/>
+        <put-attribute name="content" value="/WEB-INF/pages/me-view.jsp"/>
+    </definition>
+    <definition name="access-denied" extends="baseLayout">
+        <put-attribute name="title" value="Quyền truy cập bị từ chối"/>
+        <put-attribute name="content" value="/WEB-INF/pages/access-denied.jsp"/>
+    </definition>
+    
+      
+</tiles-definitions>
