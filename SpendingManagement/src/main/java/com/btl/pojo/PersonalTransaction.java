@@ -4,7 +4,6 @@
  */
 package com.btl.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -20,13 +19,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author trant
+ * @author phuan
  */
 @Entity
 @Table(name = "personal_transaction")
@@ -34,7 +32,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "PersonalTransaction.findAll", query = "SELECT p FROM PersonalTransaction p"),
     @NamedQuery(name = "PersonalTransaction.findById", query = "SELECT p FROM PersonalTransaction p WHERE p.id = :id"),
-    @NamedQuery(name = "PersonalTransaction.findByName", query = "SELECT p FROM PersonalTransaction p WHERE p.name = :name"),
     @NamedQuery(name = "PersonalTransaction.findByPurpose", query = "SELECT p FROM PersonalTransaction p WHERE p.purpose = :purpose"),
     @NamedQuery(name = "PersonalTransaction.findByDescription", query = "SELECT p FROM PersonalTransaction p WHERE p.description = :description"),
     @NamedQuery(name = "PersonalTransaction.findByPrice", query = "SELECT p FROM PersonalTransaction p WHERE p.price = :price"),
@@ -48,9 +45,6 @@ public class PersonalTransaction implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Size(max = 45)
-    @Column(name = "name")
-    private String name;
-    @Size(max = 45)
     @Column(name = "purpose")
     private String purpose;
     @Size(max = 255)
@@ -62,19 +56,9 @@ public class PersonalTransaction implements Serializable {
     @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
-    
-    @Transient
-    @JsonIgnore
-    private int transactionTypeId;
-    
     @JoinColumn(name = "transaction_type", referencedColumnName = "id")
     @ManyToOne
     private TransactionType transactionType;
-    
-    @Transient
-    @JsonIgnore
-    private int addPersonalTransactionUserId;
-    
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne
     private User userId;
@@ -92,14 +76,6 @@ public class PersonalTransaction implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getPurpose() {
@@ -173,34 +149,6 @@ public class PersonalTransaction implements Serializable {
     @Override
     public String toString() {
         return "com.btl.pojo.PersonalTransaction[ id=" + id + " ]";
-    }
-
-    /**
-     * @return the transactionTypeId
-     */
-    public int getTransactionTypeId() {
-        return transactionTypeId;
-    }
-
-    /**
-     * @param transactionTypeId the transactionTypeId to set
-     */
-    public void setTransactionTypeId(int transactionTypeId) {
-        this.transactionTypeId = transactionTypeId;
-    }
-
-    /**
-     * @return the addPersonalTransactionUserId
-     */
-    public int getAddPersonalTransactionUserId() {
-        return addPersonalTransactionUserId;
-    }
-
-    /**
-     * @param addPersonalTransactionUserId the addPersonalTransactionUserId to set
-     */
-    public void setAddPersonalTransactionUserId(int addPersonalTransactionUserId) {
-        this.addPersonalTransactionUserId = addPersonalTransactionUserId;
     }
     
 }

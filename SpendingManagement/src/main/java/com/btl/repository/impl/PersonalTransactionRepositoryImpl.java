@@ -114,6 +114,17 @@ public class PersonalTransactionRepositoryImpl implements PersonalTransactionRep
     }
 
     @Override
+    public boolean deleteSpending(int id) {
+        PersonalTransaction p = this.getById(id);
+        Session s = this.factory.getObject().getCurrentSession();
+        try {
+            s.delete(p);
+            return true;
+        } catch (HibernateException ex) {
+            return false;
+        }
+    }
+    @Override
     public int getMaxItemsInPage() {
         return maxItemsInPage;
     }

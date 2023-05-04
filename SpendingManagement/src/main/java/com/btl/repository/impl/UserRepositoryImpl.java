@@ -4,6 +4,7 @@
  */
 package com.btl.repository.impl;
 
+import com.btl.pojo.Status;
 import com.btl.pojo.User;
 import com.btl.repository.UserRepository;
 import java.util.ArrayList;
@@ -123,7 +124,8 @@ public class UserRepositoryImpl implements UserRepository {
         User u = this.getUserById(id);
         Session s = this.factory.getObject().getCurrentSession();
         try {
-            s.delete(u);
+            u.setActive(new Status(2));
+            s.update(u);
             return true;
         } catch (HibernateException ex) {
             return false;

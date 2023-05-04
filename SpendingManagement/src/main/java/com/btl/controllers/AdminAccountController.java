@@ -17,6 +17,8 @@ import java.util.Set;
 import javax.persistence.NoResultException;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -63,11 +65,6 @@ public class AdminAccountController {
 
             if (this.userService.addOrUpdateUser(user) == true) {
                 if (user.getUserRole().getId().equals(3)) {
-//                    PersonalTransaction personalTransaction = new PersonalTransaction();
-//                    personalTransaction.setId(0);
-//
-//                    personalTransactionService.addOrUpdate(personalTransaction);
-//                    personalTransaction.setUserId(user);
                     userService.addOrUpdateNoPassword(user);
                 }
                 sucMsg = String.format("Thêm tài khoản '%s' thành công", user.getUsername(),
@@ -98,14 +95,4 @@ public class AdminAccountController {
         return "account-admin";
     }
 
-    @GetMapping("/account-admin/view/{userId}")
-    public String aboutAccountView(Model model, @PathVariable(value = "userId") int id) {
-        try {
-            model.addAttribute("userDetail", this.userService.getUserById(id));
-        } catch (NoResultException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        return "account-view";
-    }
 }

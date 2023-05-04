@@ -45,6 +45,11 @@ public class PersonalTransactionServiceImpl implements PersonalTransactionServic
     }
 
     @Override
+    public boolean deleteSpending(int id) {
+        return this.personalTransactionRepository.deleteSpending(id);
+    }
+    
+    @Override
     public int getMaxItemsInPage() {
         return this.personalTransactionRepository.getMaxItemsInPage();
     }
