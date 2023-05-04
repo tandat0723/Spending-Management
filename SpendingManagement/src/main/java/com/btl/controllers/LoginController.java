@@ -10,7 +10,6 @@ import com.btl.pojo.User;
 import com.btl.service.PersonalTransactionService;
 import com.btl.service.UserService;
 import com.btl.validator.UserValidator;
-import java.util.Set;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -51,7 +50,7 @@ public class LoginController {
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
             return "login";
         }
-        return "redirect:/";
+        return "/";
     }
 
     @GetMapping(value = "/register")
@@ -73,7 +72,7 @@ public class LoginController {
         if (result.hasErrors()) {
             return "register";
         }
-        
+
         user.setActive(new Status(1));
 
         boolean addOrUpdates = this.userService.addOrUpdateUser(user);

@@ -38,11 +38,14 @@
             <span class="carousel-control-next-icon"></span>
         </a>
     </div>
-
-    <br/>
-    <a class="nav-link home-main" href="<c:url value="/login" />">
-        Đăng nhập ngay thôi!
-    </a>
+    <%--<c:if test="${sucMsg != null}">--%>
+        <!--<div class="alert alert-success my-0" role="alert">-->
+            <!--${sucMsg}-->
+            <br>
+            <a class="nav-link home-main" href="<c:url value="/login" />">
+                Đăng nhập ngay tại đây!
+            </a>
+        <!--</div>-->
+    <%--</c:if>--%>
 </div>
 
-<!--xem lại sucMsg-->

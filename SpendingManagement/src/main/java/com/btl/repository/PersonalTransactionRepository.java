@@ -18,11 +18,11 @@ public interface PersonalTransactionRepository {
 
     boolean addOrUpdate(PersonalTransaction personalTransaction);
     
-    PersonalTransaction getByUserId(int id);
-    
     List<PersonalTransaction> getAllPersonalTransaction(Map<String, String> params);
     
     List<TransactionType> getAllTransactionType(Map<String, String> params);
+    
+    List<PersonalTransaction> getPersonalTransaction(Map<String, String> params, int page, int maxItems);
     
     int getMaxItemsInPage();
 }

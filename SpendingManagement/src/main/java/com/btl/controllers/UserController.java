@@ -7,6 +7,7 @@ package com.btl.controllers;
 import com.btl.pojo.User;
 import com.btl.service.UserService;
 import javax.persistence.NoResultException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,25 +20,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class UserController {
-    private UserService UserService;
+    @Autowired
+    private UserService userService;
+
     @RequestMapping("/user")
-    public String index(Model model) {
-        model.addAttribute("errMsg", model.asMap().get("errMsg"));
-        model.addAttribute("sucMsg", model.asMap().get("sucMsg"));
-        return "user";
+    public String index() {
+        return "home";
     }
-    
+
     @GetMapping("/user/user-info/add-or-update")
-    public String updateUserView(Model model, Authentication authentication){
-        int id = this.UserService.getByUsername(authentication.getName()).getId();
+    public String updateUserView(Model model, Authentication authentication) {
+        int id = this.userService.getByUsername(authentication.getName()).getId();
         User user;
         try {
-            user = UserService.getUserById(id);
+            user = userService.getUserById(id);
         } catch (NoResultException e) {
             user = new User();
             user.setId(0);
         }
-        
+
         model.addAttribute("user", user);
         model.addAttribute("id", id);
         model.addAttribute("actionUrl", "/user/user-info/add-or-update");
