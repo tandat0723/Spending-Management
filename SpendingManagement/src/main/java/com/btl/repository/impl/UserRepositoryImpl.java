@@ -102,20 +102,20 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public boolean addOrUpdateUser(User u) {
+    public boolean addOrUpdateUser(User user) {
 
-        Session s = this.factory.getObject().getCurrentSession();
+        Session session = this.factory.getObject().getCurrentSession();
         try {
-            if (u.getId() > 0) {
-                s.update(u);
+            if (user.getId() != 0) {
+                session.update(user);
             } else {
-                s.save(u);
+                session.save(user);
             }
-
             return true;
         } catch (HibernateException ex) {
-            return false;
+            ex.printStackTrace();
         }
+        return false;
     }
 
     @Override
@@ -189,15 +189,10 @@ public class UserRepositoryImpl implements UserRepository {
 
         if (params != null) {
             List<Predicate> predicates = new ArrayList<>();
-            if (params.containsKey("firstname")) {
-                Predicate p1 = builder.like(root.get("firstName").as(String.class),
-                        String.format("%%%s%%", params.get("firstname")));
+            if (params.containsKey("fullname")) {
+                Predicate p1 = builder.like(root.get("fullname").as(String.class),
+                        String.format("%%%s%%", params.get("fullname")));
                 predicates.add(p1);
-            }
-            if (params.containsKey("lastname")) {
-                Predicate p2 = builder.like(root.get("lastName").as(String.class),
-                        String.format("%%%s%%", params.get("lastname")));
-                predicates.add(p2);
             }
             if (params.containsKey("userRole")) {
                 Predicate p3 = builder.equal(root.get("userRole").as(String.class), params.get("userRole"));
