@@ -22,6 +22,8 @@ public interface PersonalTransactionRepository {
     
     List<TransactionType> getAllTransactionType(Map<String, String> params);
     
+    boolean deleteSpending(int id);
+    
     List<PersonalTransaction> getPersonalTransaction(Map<String, String> params, int page, int maxItems);
     
     int getMaxItemsInPage();

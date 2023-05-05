@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author trant
+ * @author phuan
  */
 @Entity
 @Table(name = "group_users")
